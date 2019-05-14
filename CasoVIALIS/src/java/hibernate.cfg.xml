@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:ORCL</property>
+        <property name="hibernate.connection.username">SYSTEM</property>
+        <property name="hibernate.connection.password">Duocadmin2019</property>
+        <property name="connection.pool_size">10</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.current_session_context_class">managed</property>
+        <property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <mapping class="entidades.Cotizacion" /> 
+        <mapping class="entidades.Documento" /> 
+        <mapping class="entidades.Herramienta" /> 
+        <mapping class="entidades.HistoricoProyecto" /> 
+        <mapping class="entidades.Hitos" /> 
+        <mapping class="entidades.InspeccionProyecto" /> 
+        <mapping class="entidades.Maquinaria" /> 
+        <mapping class="entidades.Material" /> 
+        <mapping class="entidades.PedidoMaterial" /> 
+        <mapping class="entidades.Proyecto" /> 
+        <mapping class="entidades.Reunion" /> 
+        <mapping class="entidades.Seguimiento" /> 
+        <mapping class="entidades.Trabajador" /> 
+        <mapping class="entidades.Usuario" /> 
+    </session-factory>
+</hibernate-configuration>
