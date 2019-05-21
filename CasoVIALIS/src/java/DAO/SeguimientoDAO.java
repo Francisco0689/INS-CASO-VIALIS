@@ -5,17 +5,10 @@
  */
 package DAO;
 
-import entidades.Seguimiento;
-
 /**
  *
  * @author fmaldonc
  */
-public class SeguimientoDAO extends Modelo<Seguimiento>{
+public class SeguimientoDAO {
 
-    @Override
-    public String getNombreModelo() {
-        return "Seguimiento";
-    }
-    
 }

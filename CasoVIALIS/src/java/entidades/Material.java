@@ -3,65 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+package Entidades;
 
 /**
  *
  * @author fmaldonc
  */
-@Entity
-@Table(name = "MATERIAL")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Material.findAll", query = "SELECT m FROM Material m")})
-public class Material implements Serializable {
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private BigDecimal id;
-    @Column(name = "NOMBRE_MATERIAL")
+public class Material {
+    
+    private int idMaterial;
     private String nombreMaterial;
-    @Column(name = "TIPO_MATERIAL")
     private String tipoMaterial;
-    @Column(name = "COSTO_MATERIAL")
-    private BigInteger costoMaterial;
-    @Column(name = "ESTADO_MATERIAL")
+    private int costoMaterial;
     private String estadoMaterial;
-    @Column(name = "STOCK_MATERIAL")
-    private BigInteger stockMaterial;
-    @OneToMany(mappedBy = "material")
-    private Collection<PedidoMaterial> pedidoMaterialCollection;
+    private int stockMaterial;
+    private String codigoMaterial;
 
     public Material() {
     }
 
-    public Material(BigDecimal id) {
-        this.id = id;
+    public Material(int idMaterial, String nombreMaterial, String tipoMaterial, int costoMaterial, String estadoMaterial, int stockMaterial, String codigoMaterial) {
+        this.idMaterial = idMaterial;
+        this.nombreMaterial = nombreMaterial;
+        this.tipoMaterial = tipoMaterial;
+        this.costoMaterial = costoMaterial;
+        this.estadoMaterial = estadoMaterial;
+        this.stockMaterial = stockMaterial;
+        this.codigoMaterial = codigoMaterial;
     }
 
-    public BigDecimal getId() {
-        return id;
+    public int getIdMaterial() {
+        return idMaterial;
     }
 
-    public void setId(BigDecimal id) {
-        this.id = id;
+    public void setIdMaterial(int idMaterial) {
+        this.idMaterial = idMaterial;
     }
 
     public String getNombreMaterial() {
@@ -80,11 +56,11 @@ public class Material implements Serializable {
         this.tipoMaterial = tipoMaterial;
     }
 
-    public BigInteger getCostoMaterial() {
+    public int getCostoMaterial() {
         return costoMaterial;
     }
 
-    public void setCostoMaterial(BigInteger costoMaterial) {
+    public void setCostoMaterial(int costoMaterial) {
         this.costoMaterial = costoMaterial;
     }
 
@@ -96,46 +72,30 @@ public class Material implements Serializable {
         this.estadoMaterial = estadoMaterial;
     }
 
-    public BigInteger getStockMaterial() {
+    public int getStockMaterial() {
         return stockMaterial;
     }
 
-    public void setStockMaterial(BigInteger stockMaterial) {
+    public void setStockMaterial(int stockMaterial) {
         this.stockMaterial = stockMaterial;
     }
 
-    @XmlTransient
-    public Collection<PedidoMaterial> getPedidoMaterialCollection() {
-        return pedidoMaterialCollection;
+    public String getCodigoMaterial() {
+        return codigoMaterial;
     }
 
-    public void setPedidoMaterialCollection(Collection<PedidoMaterial> pedidoMaterialCollection) {
-        this.pedidoMaterialCollection = pedidoMaterialCollection;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Material)) {
-            return false;
-        }
-        Material other = (Material) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setCodigoMaterial(String codigoMaterial) {
+        this.codigoMaterial = codigoMaterial;
     }
 
     @Override
     public String toString() {
-        return "entidades.Material[ id=" + id + " ]";
+        return "Material{" + "idMaterial=" + idMaterial + ", nombreMaterial=" + 
+                nombreMaterial + ", tipoMaterial=" + tipoMaterial + ", costoMaterial=" 
+                + costoMaterial + ", estadoMaterial=" + estadoMaterial + ", stockMaterial="
+                + stockMaterial + ", codigoMaterial=" + codigoMaterial + '}';
     }
     
+    
+
 }

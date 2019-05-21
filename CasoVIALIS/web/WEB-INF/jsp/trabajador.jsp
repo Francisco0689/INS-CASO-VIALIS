@@ -68,7 +68,7 @@
                     <button type="submit" class="btn btn-primary">Agregar Trabajador</button>
                 </center>
         </form>
-        <table>
+        <!--<table>
             <tr>
                 <th>Código Trabajador</th>
                 <th>Nombre Trabajador</th>
@@ -85,7 +85,7 @@
                     <td><a href="eliminar-trabajador?id=${tra.id}">Eliminar</a></td>
                 </tr>
             </c:forEach>
-        </table>
+        </table> -->
 
         <hr>
         <hr>

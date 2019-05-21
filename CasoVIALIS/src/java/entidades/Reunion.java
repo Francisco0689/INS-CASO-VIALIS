@@ -3,61 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package Entidades;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.Date;
 
 /**
  *
  * @author fmaldonc
  */
-@Entity
-@Table(name = "REUNION")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Reunion.findAll", query = "SELECT r FROM Reunion r")})
-public class Reunion implements Serializable {
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private BigDecimal id;
-    @Column(name = "ESTADO_REUNION")
+public class Reunion {
+    
+    private int idReunion;
     private String estadoReunion;
-    @Column(name = "FECHA_REUNION")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaReunion;
-    @Column(name = "LUGAR_REUNION")
+    private Date fechaReunion; 
     private String lugarReunion;
-    @Column(name = "ENCARGADO_REUNION")
     private String encargadoReunion;
 
     public Reunion() {
     }
 
-    public Reunion(BigDecimal id) {
-        this.id = id;
+    public Reunion(int idReunion, String estadoReunion, Date fechaReunion, String lugarReunion, String encargadoReunion) {
+        this.idReunion = idReunion;
+        this.estadoReunion = estadoReunion;
+        this.fechaReunion = fechaReunion;
+        this.lugarReunion = lugarReunion;
+        this.encargadoReunion = encargadoReunion;
     }
 
-    public BigDecimal getId() {
-        return id;
+    public int getIdReunion() {
+        return idReunion;
     }
 
-    public void setId(BigDecimal id) {
-        this.id = id;
+    public void setIdReunion(int idReunion) {
+        this.idReunion = idReunion;
     }
 
     public String getEstadoReunion() {
@@ -93,28 +71,12 @@ public class Reunion implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Reunion)) {
-            return false;
-        }
-        Reunion other = (Reunion) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "entidades.Reunion[ id=" + id + " ]";
+        return "Reunion{" + "idReunion=" + idReunion + ", estadoReunion=" + 
+                estadoReunion + ", fechaReunion=" + fechaReunion + ", lugarReunion=" 
+                + lugarReunion + ", encargadoReunion=" + encargadoReunion + '}';
     }
+    
+    
     
 }

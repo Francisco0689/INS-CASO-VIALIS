@@ -5,18 +5,11 @@
  */
 package DAO;
 
-import entidades.Cotizacion;
 
 /**
  *
  * @author fmaldonc
  */
-public class CotizacionDAO extends Modelo<Cotizacion>{
-
-    @Override
-    public String getNombreModelo() {
-        return "Cotizacion";
-    }
-    
+public class CotizacionDAO{
     
 }

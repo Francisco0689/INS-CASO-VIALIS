@@ -3,107 +3,68 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+package Entidades;
 
 /**
  *
  * @author fmaldonc
  */
-@Entity
-@Table(name = "INSPECCION_PROYECTO")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "InspeccionProyecto.findAll", query = "SELECT i FROM InspeccionProyecto i")})
-public class InspeccionProyecto implements Serializable {
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private BigDecimal id;
-    @Column(name = "ESTADO")
-    private String estado;
-    @Column(name = "ENCARGADO")
-    private String encargado;
-    @JoinColumn(name = "ID_PROYECTO", referencedColumnName = "ID")
-    @ManyToOne
-    private Proyecto proyecto;
+public class InspeccionProyecto {
+    
+    private int idInspeccion;
+    private String estadoProyecto;
+    private String encargadoInspeccion;
+    private int idProyecto;
 
     public InspeccionProyecto() {
     }
 
-    public InspeccionProyecto(BigDecimal id) {
-        this.id = id;
+    public InspeccionProyecto(int idInspeccion, String estadoProyecto, String encargadoInspeccion, int idProyecto) {
+        this.idInspeccion = idInspeccion;
+        this.estadoProyecto = estadoProyecto;
+        this.encargadoInspeccion = encargadoInspeccion;
+        this.idProyecto = idProyecto;
     }
 
-    public BigDecimal getId() {
-        return id;
+    public int getIdInspeccion() {
+        return idInspeccion;
     }
 
-    public void setId(BigDecimal id) {
-        this.id = id;
+    public void setIdInspeccion(int idInspeccion) {
+        this.idInspeccion = idInspeccion;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEstadoProyecto() {
+        return estadoProyecto;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstadoProyecto(String estadoProyecto) {
+        this.estadoProyecto = estadoProyecto;
     }
 
-    public String getEncargado() {
-        return encargado;
+    public String getEncargadoInspeccion() {
+        return encargadoInspeccion;
     }
 
-    public void setEncargado(String encargado) {
-        this.encargado = encargado;
+    public void setEncargadoInspeccion(String encargadoInspeccion) {
+        this.encargadoInspeccion = encargadoInspeccion;
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
+    public int getIdProyecto() {
+        return idProyecto;
     }
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InspeccionProyecto)) {
-            return false;
-        }
-        InspeccionProyecto other = (InspeccionProyecto) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     @Override
     public String toString() {
-        return "entidades.InspeccionProyecto[ id=" + id + " ]";
+        return "InspeccionProyecto{" + "idInspeccion=" + idInspeccion + ", "
+                + "estadoProyecto=" + estadoProyecto + ", encargadoInspeccion=" 
+                + encargadoInspeccion + ", idProyecto=" + idProyecto + '}';
     }
+    
+    
     
 }

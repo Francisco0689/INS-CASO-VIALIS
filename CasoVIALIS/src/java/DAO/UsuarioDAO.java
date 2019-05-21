@@ -5,19 +5,12 @@
  */
 package DAO;
 
-import entidades.Usuario;
 
 /**
  *
  * @author fmaldonc
  */
-public class UsuarioDAO extends Modelo<Usuario>{
-
-    @Override
-    public String getNombreModelo() {
-        return "Usuario"; 
-    }
-    
+public class UsuarioDAO {
     
     
 }

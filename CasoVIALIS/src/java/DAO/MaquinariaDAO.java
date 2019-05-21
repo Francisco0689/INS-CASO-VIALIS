@@ -5,17 +5,11 @@
  */
 package DAO;
 
-import entidades.Maquinaria;
 
 /**
  *
  * @author fmaldonc
  */
-public class MaquinariaDAO extends Modelo<Maquinaria>{
+public class MaquinariaDAO{
 
-    @Override
-    public String getNombreModelo() {
-        return "Maquinaria";
-    }
-    
 }

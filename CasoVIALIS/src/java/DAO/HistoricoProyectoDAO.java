@@ -5,17 +5,10 @@
  */
 package DAO;
 
-import entidades.HistoricoProyecto;
-
 /**
  *
  * @author fmaldonc
  */
-public class HistoricoProyectoDAO extends Modelo<HistoricoProyecto>{
+public class HistoricoProyectoDAO {
 
-    @Override
-    public String getNombreModelo() {
-        return "HistoricoProyecto";
-    }
-    
 }

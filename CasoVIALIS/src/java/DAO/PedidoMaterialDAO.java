@@ -5,17 +5,10 @@
  */
 package DAO;
 
-import entidades.PedidoMaterial;
-
 /**
  *
  * @author fmaldonc
  */
-public class PedidoMaterialDAO extends Modelo<PedidoMaterial>{
+public class PedidoMaterialDAO {
 
-    @Override
-    public String getNombreModelo() {
-        return "PedidoMaterial";
-    }
-    
 }

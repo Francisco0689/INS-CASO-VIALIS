@@ -6,10 +6,8 @@
 package controller;
 
 import DAO.TrabajadorDAO;
-import entidades.Trabajador;
-import java.util.ArrayList;
+import Entidades.Trabajador;
 import java.util.List;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +26,9 @@ public class TrabajadorController {
     private TrabajadorDAO traDAO = new TrabajadorDAO();
 
     @RequestMapping(value = "/trabajador", method = RequestMethod.GET)
-    public String trabajador(Model model, RedirectAttributes ra) {
+    public String trabajador(Model model) {
         
-        List<Trabajador> trabajadores = traDAO.listar();
+        List<Trabajador> trabajadores = traDAO.ListarTrabajadores();
         model.addAttribute("trabajadores", trabajadores);
 
         return "trabajador";
@@ -50,7 +48,7 @@ public class TrabajadorController {
             @RequestParam("txtEspecialidad") String especialidad,
             HttpServletRequest request) {
 
-        Trabajador trabajadorExistente = traDAO.buscarPorRutTrabajador(rut);
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rut);
         if (trabajadorExistente != null) {
             ra.addFlashAttribute("mensaje", "Trabajador Ya Exite en la Base de Datos");
             return "redirect:trabajador";
@@ -68,8 +66,8 @@ public class TrabajadorController {
         trabajadorNuevo.setEstadoTrabajador(estadoExtranjero);
         trabajadorNuevo.setEspecialidadTrabajador(especialidad);
 
-        boolean agregado = traDAO.agregar(trabajadorNuevo);
-        if (!agregado) {
+        String agregado = traDAO.agregarTrabajador(trabajadorNuevo);
+        if (agregado == null) {
             ra.addFlashAttribute("mensaje", "No se ah podido agregar Trabajador");
             return "redirect:trabajador";
         } else {
@@ -79,11 +77,12 @@ public class TrabajadorController {
         return "redirect:trabajador";
     }
     
+    /*
     @RequestMapping(value="/eliminar-trabajador", method = RequestMethod.GET)
     public String eliminarProducto(Model model, RedirectAttributes re, HttpServletRequest request,
             @RequestParam("id") int id){
         
-        Trabajador trabajadorExistente = traDAO.buscarPorId(id);
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(id);
         
         if(trabajadorExistente==null){
             re.addFlashAttribute("mensaje", "El Trabajador no Existe");
@@ -99,7 +98,7 @@ public class TrabajadorController {
         
         return "redirect:trabajador";
     }
-    
+    */
     
     
 }

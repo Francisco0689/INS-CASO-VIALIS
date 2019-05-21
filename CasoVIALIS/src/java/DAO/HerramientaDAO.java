@@ -5,17 +5,10 @@
  */
 package DAO;
 
-import entidades.Herramienta;
-
 /**
  *
  * @author fmaldonc
  */
-public class HerramientaDAO extends Modelo<Herramienta>{
+public class HerramientaDAO{
 
-    @Override
-    public String getNombreModelo() {
-        return "Herramienta";
-    }
-    
 }

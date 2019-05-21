@@ -5,17 +5,11 @@
  */
 package DAO;
 
-import entidades.InspeccionProyecto;
-
 /**
  *
  * @author fmaldonc
  */
-public class InspeccionProyectoDAO extends Modelo<InspeccionProyecto>{
+public class InspeccionProyectoDAO {
 
-    @Override
-    public String getNombreModelo() {
-        return "InspeccionProyecto";
-    }
     
 }

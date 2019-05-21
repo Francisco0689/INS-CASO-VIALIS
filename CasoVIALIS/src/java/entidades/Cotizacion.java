@@ -3,59 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+package Entidades;
 
 /**
  *
  * @author fmaldonc
  */
-@Entity
-@Table(name = "COTIZACION")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Cotizacion.findAll", query = "SELECT c FROM Cotizacion c")})
-public class Cotizacion implements Serializable {
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private BigDecimal id;
-    @Column(name = "TIPO_COTIZACION")
+public class Cotizacion {
+    
+    private int idCotizacion;
     private String tipoCotizacion;
-    @Column(name = "TOTAL_COTIZACION")
-    private BigInteger totalCotizacion;
-    @JoinColumn(name = "ID_PROYECTO", referencedColumnName = "ID")
-    @ManyToOne
-    private Proyecto proyecto;
+    private int totalCotizacion;
+    private int idProyecto;
 
     public Cotizacion() {
     }
 
-    public Cotizacion(BigDecimal id) {
-        this.id = id;
+    public Cotizacion(int idCotizacion, String tipoCotizacion, int totalCotizacion, int idProyecto) {
+        this.idCotizacion = idCotizacion;
+        this.tipoCotizacion = tipoCotizacion;
+        this.totalCotizacion = totalCotizacion;
+        this.idProyecto = idProyecto;
     }
 
-    public BigDecimal getId() {
-        return id;
+    public int getIdCotizacion() {
+        return idCotizacion;
     }
 
-    public void setId(BigDecimal id) {
-        this.id = id;
+    public void setIdCotizacion(int idCotizacion) {
+        this.idCotizacion = idCotizacion;
     }
 
     public String getTipoCotizacion() {
@@ -66,45 +42,29 @@ public class Cotizacion implements Serializable {
         this.tipoCotizacion = tipoCotizacion;
     }
 
-    public BigInteger getTotalCotizacion() {
+    public int getTotalCotizacion() {
         return totalCotizacion;
     }
 
-    public void setTotalCotizacion(BigInteger totalCotizacion) {
+    public void setTotalCotizacion(int totalCotizacion) {
         this.totalCotizacion = totalCotizacion;
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
+    public int getIdProyecto() {
+        return idProyecto;
     }
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cotizacion)) {
-            return false;
-        }
-        Cotizacion other = (Cotizacion) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     @Override
     public String toString() {
-        return "entidades.Cotizacion[ id=" + id + " ]";
+        return "Cotizacion{" + "idCotizacion=" + idCotizacion + ", tipoCotizacion=" 
+                + tipoCotizacion + ", totalCotizacion=" + totalCotizacion + ", idProyecto=" 
+                + idProyecto + '}';
     }
+    
+    
     
 }

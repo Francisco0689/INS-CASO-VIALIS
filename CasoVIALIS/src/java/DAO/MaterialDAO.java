@@ -5,17 +5,11 @@
  */
 package DAO;
 
-import entidades.Material;
 
 /**
  *
  * @author fmaldonc
  */
-public class MaterialDAO extends Modelo<Material>{
+public class MaterialDAO{
 
-    @Override
-    public String getNombreModelo() {
-        return "Material";
-    }
-    
 }

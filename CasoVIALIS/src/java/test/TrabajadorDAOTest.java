@@ -7,8 +7,8 @@ package test;
 
 import DAO.TrabajadorDAO;
 import DAO.UsuarioDAO;
-import entidades.Trabajador;
-import entidades.Usuario;
+import Entidades.Trabajador;
+import Entidades.Usuario;
 
 /**
  *
@@ -20,14 +20,8 @@ public class TrabajadorDAOTest {
     
         TrabajadorDAO tDAO = new TrabajadorDAO();
         
-        for(Trabajador t: tDAO.listar()){
+        for(Trabajador t: tDAO.ListarTrabajadores()){
             System.out.println(t.getNombreTrabajador());
-        }
-        
-        UsuarioDAO uDAO = new UsuarioDAO();
-        
-        for(Usuario u: uDAO.listar()){
-            System.out.println(u.getNombreUsuario());
         }
     }
     

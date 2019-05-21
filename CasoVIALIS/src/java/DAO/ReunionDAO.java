@@ -5,17 +5,10 @@
  */
 package DAO;
 
-import entidades.Reunion;
-
 /**
  *
  * @author fmaldonc
  */
-public class ReunionDAO extends Modelo<Reunion>{
+public class ReunionDAO{
 
-    @Override
-    public String getNombreModelo() {
-        return "Reunion";
-    }
-    
 }

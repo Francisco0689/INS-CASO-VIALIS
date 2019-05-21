@@ -5,18 +5,11 @@
  */
 package DAO;
 
-import entidades.Documento;
 
 /**
  *
  * @author fmaldonc
  */
-public class DocumentoDAO extends Modelo<Documento>{
+public class DocumentoDAO {
 
-    @Override
-    public String getNombreModelo() {
-        return "Documento";
-    }
-    
-    
 }
