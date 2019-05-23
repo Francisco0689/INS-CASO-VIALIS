@@ -68,7 +68,7 @@ public class TrabajadorDAO {
     }
 
     public Trabajador mostrarTrabajador(int rut) {
-        Trabajador trabajador = new Trabajador();
+        Trabajador trabajador = null;
         Connection acceso = conn.getCnn();
 
         try {
@@ -77,6 +77,7 @@ public class TrabajadorDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                trabajador = new Trabajador();
                 trabajador.setIdTrabajador(rs.getInt("ID"));
                 trabajador.setNombreTrabajador(rs.getString("NOMBRE_TRABAJADOR"));
                 trabajador.setApellidoTrabajador(rs.getString("APELLIDO_TRABAJADOR"));
@@ -107,7 +108,7 @@ public class TrabajadorDAO {
         Connection acceso = conn.getCnn();
 
         try {
-            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM TRABAJADOR");
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM TRABAJADOR WHERE ESTADO_TRABAJADOR = 'ACTIVO'");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -143,7 +144,7 @@ public class TrabajadorDAO {
         try {
 
             PreparedStatement ps = acceso.prepareStatement(""
-                    + "UPDATE EMPLEADO SET NOMBRE_TRABAJADOR=?, APELLIDO_TRABAJADOR=?, "
+                    + "UPDATE TRABAJADOR SET NOMBRE_TRABAJADOR=?, APELLIDO_TRABAJADOR=?, "
                     + "ESTADO_CIVIL_TRABAJADOR=?, DIRECCION_TRABAJADOR=?, TELEFONO_TRABAJADOR=?,"
                     + "ESTADO_TRABAJADOR=?, NACIONALIDAD_TRABAJADOR=?, CONDICION_EXTRANJERO_TRAB=?,"
                     + "ESPECIALIDAD_TRABAJADOR=?"
@@ -170,4 +171,33 @@ public class TrabajadorDAO {
 
         return respuesta;
     }
+
+    public String eliminarTrabajador(Trabajador emp) {
+
+        //Abrir Conexion
+        Connection acceso = conn.getCnn();
+        String respuesta = null;
+
+        try {
+
+            PreparedStatement ps = acceso.prepareStatement(""
+                    + "UPDATE TRABAJADOR SET "
+                    + "ESTADO_TRABAJADOR= 'NOACTIVO' "
+                    + " WHERE RUT_TRABAJADOR = ?");
+            ps.setInt(1, emp.getRutTrabajador());
+
+            int rs = ps.executeUpdate();
+            if (rs > 0) {
+                respuesta = "Empleado Eliminado Correctamente";
+            }
+
+        } catch (SQLException ex) {
+            respuesta = "Error al MODIFICAR EMPLEADO" + ex.getMessage();
+        }
+
+        return respuesta;
+    }
+    
+    
+    
 }

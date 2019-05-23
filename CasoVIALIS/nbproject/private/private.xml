@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fmaldonc/Desktop/Caso%20Constructora/CasoVIALIS/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/Users/fmaldonc/Desktop/Caso%20Constructora/CasoVIALIS/web/WEB-INF/css/bootstrap.min_1.css</file>
-            <file>file:/C:/Users/fmaldonc/Desktop/Caso%20Constructora/CasoVIALIS/src/java/controller/HomeController.java</file>
-            <file>file:/C:/Users/fmaldonc/Desktop/Caso%20Constructora/CasoVIALIS/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/Users/fmaldonc/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/DAO/TrabajadorDAO.java</file>
+            <file>file:/C:/Users/fmaldonc/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/web/WEB-INF/jsp/trabajador.jsp</file>
+            <file>file:/C:/Users/fmaldonc/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/fmaldonc/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/Controller/TrabajadorController.java</file>
         </group>
     </open-files>
 </project-private>

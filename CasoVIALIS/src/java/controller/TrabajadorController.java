@@ -63,7 +63,8 @@ public class TrabajadorController {
         trabajadorNuevo.setDireccionTrabajador(direccion);
         trabajadorNuevo.setTelefonoTrabajador(telefono);
         trabajadorNuevo.setNacionalidadTrabajador(nacionalidad);
-        trabajadorNuevo.setEstadoTrabajador(estadoExtranjero);
+        trabajadorNuevo.setEstadoTrabajador("ACTIVO");
+        trabajadorNuevo.setCondicionExtranjeroTrabajador(estadoExtranjero);
         trabajadorNuevo.setEspecialidadTrabajador(especialidad);
 
         String agregado = traDAO.agregarTrabajador(trabajadorNuevo);
@@ -77,28 +78,25 @@ public class TrabajadorController {
         return "redirect:trabajador";
     }
     
-    /*
+    
     @RequestMapping(value="/eliminar-trabajador", method = RequestMethod.GET)
     public String eliminarProducto(Model model, RedirectAttributes re, HttpServletRequest request,
-            @RequestParam("id") int id){
+            @RequestParam("rutTrabajador") int rutTrabajador){
         
-        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(id);
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
         
         if(trabajadorExistente==null){
             re.addFlashAttribute("mensaje", "El Trabajador no Existe");
             return "redirect:trabajador";
         }
         
-        String mensaje = "No se pudo Eliminar al Trabajador Seleccionado";
-        if(traDAO.eliminar(trabajadorExistente)){
-            mensaje = "Trabajador Eliminado Correctamente";
-        }
+        String mensaje = traDAO.eliminarTrabajador(trabajadorExistente);
         
         re.addFlashAttribute("mensaje", mensaje);
         
         return "redirect:trabajador";
     }
-    */
+    
     
     
 }

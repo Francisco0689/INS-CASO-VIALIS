@@ -19,56 +19,78 @@
             ${mensaje}
         </div>
         <form action="agregar-trabajador" method="POST">
-            <table>
-                <div class="form-group" align="center">
-                    <label for="txtNombre">Nombres Trabajador</label>
-                    <input type="text" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombres">
+            <div class="container col-11">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="txtNombre">Nombres Trabajador</label>
+                        <input type="text" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombres Trabajador">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtApellido">Apellidos Trabajador</label>
+                        <input type="text" name="txtApellido" id="txtApellido" class="form-control" placeholder="Apellidos Trabajador">
+                    </div>
                 </div>
-                <div class="form-group" align="center">
-                    <label for="txtApellido">Apellidos Trabajador</label>
-                    <input type="text" name="txtApellido" id="txtApellido" class="form-control" placeholder="Apellidos">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="txtRut">Rut Trabajador</label>
+                        <input type="text" name="txtRut" id="txtRut" class="form-control" placeholder="Rut Trabajador">
+                    </div>
+                    <div class="col-6">
+                        <label for="txtDv">-</label>
+                        <input type="text" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador">
+                    </div>
                 </div>
-                <div class="form-group" align="center">
-                    <label for="txtRut">Rut Trabajador</label>
-                    <input type="text" name="txtRut" id="txtRut" class="form-control" placeholder="Rut">
-                    <label for="txtDv">-</label>
-                    <input type="text" name="txtDv" id="txtDv" class="form-control" placeholder="DV">
+                <br>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <div class="container">
+                            <div class="row">
+                                <label for="cboEstadoCivil">Estado Civil Trabajador</label>
+                                <select class="form-control" id="cboEstadoCivil">
+                                    <option value="">Seleccionar</option>
+                                    <option value="SOLTERO">Soltero</option>
+                                    <option value="CASADO">Casado</option>
+                                    <option value="VIUDO">Viudo</option>
+                                    <option value="SEPARADO">Separado</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtDireccion">Direccion Trabajador</label>
+                        <input type="text" name="txtDireccion" id="txtDireccion" class="form-control" placeholder="Direccion Trabajador">
+                    </div>
                 </div>
-                <div class="form-group" align="center">
-                    <label for="cboEstadoCivil">Estado Civil Trabajador</label>
-                    <select name="cboEstadoCivil" id="cboEstadoCivil" class="selectpicker">
-                        <option value="">Seleccionar</option>
-                        <option value="SOLTERO">Soltero</option>
-                        <option value="CASADO">Casado</option>
-                        <option value="VIUDO">Viudo</option>
-                        <option value="SEPARADO">Separado</option>
-                    </select>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="txtTelefono">Telefono Trabajador</label>
+                        <input type="text" name="txtTelefono" id="txtTelefono" class="form-control" placeholder="Telefono Trabajador">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtNacionalidad">Nacionalidad Trabajador</label>
+                        <input type="text" name="txtNacionalidad" id="txtNacionalidad" class="form-control" placeholder="Nacionalidad Trabajador">
+                    </div>
                 </div>
-                <div class="form-group" align="center">
-                    <label for="txtDireccion">Direccion Trabajador</label>
-                    <input type="text" name="txtDireccion" id="txtDireccion" class="form-control" placeholder="Direccion">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="txtEstadoExtranjero">Estado Trabajador Extranjero</label>
+                        <input type="text" name="txtEstadoExtranjero" id="txtEstadoExtranjero" class="form-control" placeholder="Estado Extranjero">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtEspecialidad">Especialidad Trabajador</label>
+                        <input type="text" name="txtEspecialidad" id="txtEspecialidad" class="form-control" placeholder="Especialidad Trabajador">
+                    </div>
                 </div>
-                <div class="form-group" align="center">
-                    <label for="txtTelefono">Telefono Trabajador</label>
-                    <input type="text" name="txtTelefono" id="txtTelefono" class="form-control" placeholder="Telefono">
+                <div class="form-group">
+                    <center>
+                        <button type="submit" class="btn btn-primary btn-block">Agregar Trabajador</button>
+                    </center>
                 </div>
-                <div class="form-group" align="center">
-                    <label for="txtNacionalidad">Nacionalidad Trabajador</label>
-                    <input type="text" name="txtNacionalidad" id="txtNacionalidad" class="form-control" placeholder="Nacionalidad">
-                </div>
-                <div class="form-group" align="center">
-                    <label for="txtEstadoExtranjero">Estado Trabajador Extranjero</label>
-                    <input type="text" name="txtEstadoExtranjero" id="txtEstadoExtranjero" class="form-control" placeholder="Estado Extranjero">
-                </div>
-                <div class="form-group" align="center">
-                    <label for="txtEspecialidad">Especialidad Trabajador</label>
-                    <input type="text" name="txtEspecialidad" id="txtEspecialidad" class="form-control" placeholder="Especialidad">
-                </div>
-                <center>
-                    <button type="submit" class="btn btn-primary">Agregar Trabajador</button>
-                </center>
+
+            </div>
         </form>
-        <!--<table>
+        <table>
             <tr>
                 <th>Código Trabajador</th>
                 <th>Nombre Trabajador</th>
@@ -79,13 +101,13 @@
                        items="${trabajadores}"
                        varStatus="status">
                 <tr>
-                    <td><b>${tra.id}</b></td>
+                    <td><b>${tra.idTrabajador}</b></td>
                     <td>${tra.nombreTrabajador}</td>
                     <td>${tra.apellidoTrabajador}</td>
-                    <td><a href="eliminar-trabajador?id=${tra.id}">Eliminar</a></td>
+                    <td><a href="eliminar-trabajador?rutTrabajador=${tra.rutTrabajador}">Eliminar</a></td>
                 </tr>
             </c:forEach>
-        </table> -->
+        </table> 
 
         <hr>
         <hr>
