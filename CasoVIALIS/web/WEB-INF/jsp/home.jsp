@@ -27,16 +27,13 @@
                     <a href="#">Gestión de Trabajadores</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Trabajadores</a>
+                            <a href="/CasoVIALIS/listaTrabajador">Lista de Trabajadores</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/trabajador">Agregar Trabajador</a>
                         </li>
                         <li>
-                            <a href="#">Modificar Trabajador</a>
-                        </li>
-                        <li>
-                            <a href="#">Eliminar Trabajador</a>
+                            <a href="/CasoVIALIS/modificarTrabajador">Modificar Trabajador</a>
                         </li>
                     </ul>
                 </li>

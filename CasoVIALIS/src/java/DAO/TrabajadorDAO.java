@@ -108,7 +108,7 @@ public class TrabajadorDAO {
         Connection acceso = conn.getCnn();
 
         try {
-            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM TRABAJADOR WHERE ESTADO_TRABAJADOR = 'ACTIVO'");
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM TRABAJADOR WHERE ESTADO_TRABAJADOR = 'ACTIVO' ORDER BY ID ASC");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -197,7 +197,5 @@ public class TrabajadorDAO {
 
         return respuesta;
     }
-    
-    
-    
+
 }

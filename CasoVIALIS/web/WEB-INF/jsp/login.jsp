@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,50 +16,30 @@
     <body style="background-image: url(img/street.jpg)">
         <div class="login-wrap">
             <div class="login-html">
-                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Ingresar VIALIS</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
                 <div class="login-form">
-                    <div class="sign-in-htm">
-                        <div class="group">
-                            <label for="user" class="label">Usuario</label>
-                            <input id="user" type="text" class="input">
+                    <form action="entrar" method="POST">
+                        <div class="sign-in-htm">
+                            <div class="group">
+                                <label for="txtUser" class="label">Usuario</label>
+                                <input id="txtUser" name="txtUser" type="text" class="input" required="true">
+                            </div>
+                            <div class="group">
+                                <label for="txtPass" class="label">Contraseña</label>
+                                <input id="txtPass" name="txtPass" type="password" class="input" data-type="password" required="true">
+                            </div>
+                            <div class="group">
+                                <label><span></span> </label>
+                            </div>
+                            <div class="hr"></div>
+                            <div class="group">
+                                <input type="submit" class="button" value="Ingresar">
+                            </div>
+                            <div class="hr"></div>
+                            <h4 Style="color: white;">${mensaje}</h4>
                         </div>
-                        <div class="group">
-                            <label for="pass" class="label">Contraseña</label>
-                            <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                            <label><span></span> </label>
-                        </div>
-                        <div class="hr"></div>
-                        <div class="group">
-                            <a href="/CasoVIALIS/">
-                            <input type="submit" class="button" value="Ingresar">
-                            </a>
-                        </div>
-                        <div class="hr"></div>
-                    </div>
-                    <div class="sign-up-htm">
-                        <div class="group">
-                            <label for="user" class="label">Usuario</label>
-                            <input id="user" type="text" class="input">
-                        </div>
-                        <div class="group">
-                            <label for="pass" class="label">Contraseña</label>
-                            <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                            <label for="email" class="label">Email</label>
-                            <input id="email" type="email" class="input">
-                        </div>
-                        <div class="group">
-                            <input type="submit" class="button" value="Registrar">
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                            <label for="tab-1">Estas Registrado?</a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

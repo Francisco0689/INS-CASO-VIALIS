@@ -27,11 +27,40 @@ public class TrabajadorController {
 
     @RequestMapping(value = "/trabajador", method = RequestMethod.GET)
     public String trabajador(Model model) {
-        
-        List<Trabajador> trabajadores = traDAO.ListarTrabajadores();
-        model.addAttribute("trabajadores", trabajadores);
 
         return "trabajador";
+    }
+
+    @RequestMapping(value = "/listaTrabajador", method = RequestMethod.GET)
+    public String listaTrabajador(Model model) {
+
+        List<Trabajador> trabajadores = traDAO.ListarTrabajadores();
+
+        model.addAttribute("trabajadores", trabajadores);
+
+        return "listaTrabajador";
+    }
+
+    @RequestMapping(value = "/modificarTrabajador", method = RequestMethod.GET)
+    public String modificarTrabajador(Model model) {
+
+        return "modificarTrabajador";
+    }
+
+    @RequestMapping(value = "/buscar-trabajador", method = RequestMethod.POST)
+    public String buscarTrabajador(Model model, RedirectAttributes ra, HttpServletRequest request,
+            @RequestParam("txtBuscarRut") int rutTrabajador) {
+
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
+
+        if (trabajadorExistente == null) {
+            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            return "redirect:modificarTrabajador";
+        }
+
+        ra.addFlashAttribute("trabajador", trabajadorExistente);
+        
+        return "redirect:modificarTrabajador";
     }
 
     @RequestMapping(value = "/agregar-trabajador", method = RequestMethod.POST)
@@ -77,26 +106,67 @@ public class TrabajadorController {
 
         return "redirect:trabajador";
     }
-    
-    
-    @RequestMapping(value="/eliminar-trabajador", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/eliminar-trabajador", method = RequestMethod.GET)
     public String eliminarProducto(Model model, RedirectAttributes re, HttpServletRequest request,
-            @RequestParam("rutTrabajador") int rutTrabajador){
-        
+            @RequestParam("rutTrabajador") int rutTrabajador) {
+
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
-        
-        if(trabajadorExistente==null){
+
+        if (trabajadorExistente == null) {
             re.addFlashAttribute("mensaje", "El Trabajador no Existe");
-            return "redirect:trabajador";
+            return "redirect:listarTrabajador";
         }
-        
+
         String mensaje = traDAO.eliminarTrabajador(trabajadorExistente);
-        
+
         re.addFlashAttribute("mensaje", mensaje);
-        
-        return "redirect:trabajador";
+
+        return "redirect:listaTrabajador";
     }
-    
-    
-    
+
+    @RequestMapping(value = "/modificar-trabajador", method = RequestMethod.POST)
+    public String modificarTrabajador(Model model, RedirectAttributes ra,
+            @RequestParam("txtNombre") String nombre,
+            @RequestParam("txtApellido") String apellido,
+            @RequestParam("txtRut") int rut,
+            @RequestParam("txtDv") int dv,
+            @RequestParam("cboEstadoCivil") String estadoCivil,
+            @RequestParam("txtDireccion") String direccion,
+            @RequestParam("txtTelefono") int telefono,
+            @RequestParam("txtNacionalidad") String nacionalidad,
+            @RequestParam("txtEstadoExtranjero") String estadoExtranjero,
+            @RequestParam("txtEspecialidad") String especialidad,
+            HttpServletRequest request) {
+
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rut);
+        if (trabajadorExistente == null) {
+            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            return "redirect:modificarTrabajador";
+        }
+
+        Trabajador trabajadorNuevo = new Trabajador();
+        trabajadorNuevo.setNombreTrabajador(nombre);
+        trabajadorNuevo.setApellidoTrabajador(apellido);
+        trabajadorNuevo.setRutTrabajador(rut);
+        trabajadorNuevo.setDvTrabajador(dv);
+        trabajadorNuevo.setEstadoCivilTrabajador(estadoCivil);
+        trabajadorNuevo.setDireccionTrabajador(direccion);
+        trabajadorNuevo.setTelefonoTrabajador(telefono);
+        trabajadorNuevo.setNacionalidadTrabajador(nacionalidad);
+        trabajadorNuevo.setEstadoTrabajador("ACTIVO");
+        trabajadorNuevo.setCondicionExtranjeroTrabajador(estadoExtranjero);
+        trabajadorNuevo.setEspecialidadTrabajador(especialidad);
+
+        String agregado = traDAO.modificarEmpleado(trabajadorNuevo);
+        if (agregado == null) {
+            ra.addFlashAttribute("mensaje", "No se ah podido modificar Trabajador");
+            return "redirect:trabajador";
+        } else {
+            ra.addFlashAttribute("mensaje", "Trabajador modificado Exitosamente");
+        }
+
+        return "redirect:modificarTrabajador";
+    }
+
 }
