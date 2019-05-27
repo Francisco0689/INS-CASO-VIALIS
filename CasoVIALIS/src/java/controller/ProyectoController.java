@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author fmaldonc
  */
 @Controller
-public class HomeController {
+public class ProyectoController {
     
-    @RequestMapping(value="/home", method = RequestMethod.GET)
+    @RequestMapping(value="/proyecto", method = RequestMethod.GET)
     public String home(Model model, HttpServletRequest request){
        
         HttpSession session = request.getSession();
@@ -29,7 +29,7 @@ public class HomeController {
             return "login";
         }
         
-        return "home";
+        return "proyecto";
     }
     
     

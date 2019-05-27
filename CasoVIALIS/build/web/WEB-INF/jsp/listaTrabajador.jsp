@@ -23,11 +23,65 @@
         <style type="text/css">
             #div1 {
                 overflow:scroll;
-                height:550px;
+                height:500px;
             }
         </style>
     </head>
-    <body style="background-image: url(img/street.jpg)">
+    <body style="background-image: url(img/street.jpg); font-weight: bold;">
+        <!-- ================Offcanvus Menu Area =================-->
+        <div class="side_menu">
+            <ul class="list menu_right">
+                <li>
+                    <a href="/CasoVIALIS/">Home</a>
+                </li>
+                <li>
+                    <a href="#">Gestión de Trabajadores</a>
+                    <ul class="list">
+                        <li>
+                            <a href="/CasoVIALIS/listaTrabajador">Lista de Trabajadores</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/trabajador">Agregar Trabajador</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/modificarTrabajador">Modificar Trabajador</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Gestión de Proyectos</a>
+                    <ul class="list">
+                        <li>
+                            <a href="#">Lista de Proyectos</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
+                        </li>
+                        <li>
+                            <a href="#">Modificar Proyecto</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Sobre Nosotros</a>
+                </li>
+                <li>
+                    <a href="/CasoVIALIS/login">Salir</a>
+                </li>
+            </ul>
+        </div>
+        <!--================End Offcanvus Menu Area =================-->
+        <!--================Canvus Menu Area =================-->
+        <div class="canvus_menu">
+            <div class="container">
+                <div class="float-right">
+                    <div class="toggle_icon" title="Menu Bar">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--================End Canvus Menu Area =================-->
         <div class="container col-12">
             <br/><br/><br/><br/><br/><br/><br/><br/><br/>
         </div>
@@ -68,12 +122,44 @@
                                 <td class="column100 column10" data-column="column10">${tra.condicionExtranjeroTrabajador}</td>
                                 <td class="column100 column11" data-column="column11">${tra.especialidadTrabajador}</td>
                                 <td class="column100 column12" data-column="column12"><a href="eliminar-trabajador?rutTrabajador=${tra.rutTrabajador}">Eliminar</a></td>
-                                <td class="column100 column13" data-column="column13"><a href="modificarTrabajador">Modificar</a></td>
+                                <td class="column100 column13" data-column="column13"><a href="modificarTrabajadorDesdeListar?txtBuscarRut=${tra.rutTrabajador}">Modificar</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <script src="js/jquery-3.2.1.min.js"></script>	
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+
+        <script>
+            var heroCarousel = $('.heroCarousel');
+            heroCarousel.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                startPosition: 1,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    }
+                }
+            });
+
+            var dropToggle = $('.menu_right > li').has('ul').children('a');
+            dropToggle.on('click', function () {
+                dropToggle.not(this).closest('li').find('ul').slideUp(200);
+                $(this).closest('li').children('ul').slideToggle(200);
+                return false;
+            });
+
+            $(".toggle_icon").on('click', function () {
+                $('body').toggleClass("open");
+            });
+
+        </script>
     </body>
 </html>

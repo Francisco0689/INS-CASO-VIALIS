@@ -38,7 +38,18 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Proyectos</a>
+                    <a href="#">Gestión de Proyectos</a>
+                    <ul class="list">
+                        <li>
+                            <a href="#">Lista de Proyectos</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
+                        </li>
+                        <li>
+                            <a href="#">Modificar Proyecto</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#">Sobre Nosotros</a>
@@ -49,7 +60,6 @@
             </ul>
         </div>
         <!--================End Offcanvus Menu Area =================-->
-
         <!--================Canvus Menu Area =================-->
         <div class="canvus_menu">
             <div class="container">
@@ -64,7 +74,7 @@
         <header>
             <div class="hero">
                 <a class="navbar-brand" href="/CasoVIALIS/">
-                    <img src="img/logo.png" alt="">
+                    <!--<img src="img/logo.png" alt="">-->
                 </a>
 
                 <div class="owl-carousel owl-theme heroCarousel">
@@ -86,7 +96,7 @@
                 </div>
             </div>
         </header>
-
+        
         <section class="about section-margin mb-5">
             <div class="container">
                 <div class="row align-items-center">
@@ -277,7 +287,6 @@
         <script src="js/jquery-3.2.1.min.js"></script>	
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
-
         <script>
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({

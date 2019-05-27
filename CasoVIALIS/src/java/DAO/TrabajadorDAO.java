@@ -35,7 +35,19 @@ public class TrabajadorDAO {
         String respuesta = null;
 
         try {
+            
+            /*String llamada = "{ call sp_agregar_trabajador(?, ?, ?, ?, ?) }";
+            CallableStatement cstmt = this.conexion.prepareCall(llamada);
 
+            cstmt.setString(1, emp.getNombreTrabajador());
+            cstmt.setString(2, emp.getApellidoTrabajador());
+            cstmt.setInt(3, emp.getRutTrabajador());
+            cstmt.setInt(4, emp.getDvTrabajador());
+
+            if (cstmt.executeUpdate() > 0) {
+                agregado = true;
+            }*/
+                      
             PreparedStatement ps
                     = acceso.prepareStatement("INSERT INTO TRABAJADOR"
                             + " (NOMBRE_TRABAJADOR, APELLIDO_TRABAJADOR, RUT_TRABAJADOR,"
@@ -46,7 +58,7 @@ public class TrabajadorDAO {
             ps.setString(1, emp.getNombreTrabajador());
             ps.setString(2, emp.getApellidoTrabajador());
             ps.setInt(3, emp.getRutTrabajador());
-            ps.setInt(4, emp.getDvTrabajador());
+            ps.setString(4, emp.getDvTrabajador());
             ps.setString(5, emp.getEstadoCivilTrabajador());
             ps.setString(6, emp.getDireccionTrabajador());
             ps.setInt(7, emp.getTelefonoTrabajador());
@@ -82,7 +94,7 @@ public class TrabajadorDAO {
                 trabajador.setNombreTrabajador(rs.getString("NOMBRE_TRABAJADOR"));
                 trabajador.setApellidoTrabajador(rs.getString("APELLIDO_TRABAJADOR"));
                 trabajador.setRutTrabajador(rs.getInt("RUT_TRABAJADOR"));
-                trabajador.setDvTrabajador(rs.getInt("DV_TRABAJADOR"));
+                trabajador.setDvTrabajador(rs.getString("DV_TRABAJADOR"));
                 trabajador.setEstadoCivilTrabajador(rs.getString("ESTADO_CIVIL_TRABAJADOR"));
                 trabajador.setDireccionTrabajador(rs.getString("DIRECCION_TRABAJADOR"));
                 trabajador.setTelefonoTrabajador(rs.getInt("TELEFONO_TRABAJADOR"));
@@ -117,7 +129,7 @@ public class TrabajadorDAO {
                 trabajador.setNombreTrabajador(rs.getString("NOMBRE_TRABAJADOR"));
                 trabajador.setApellidoTrabajador(rs.getString("APELLIDO_TRABAJADOR"));
                 trabajador.setRutTrabajador(rs.getInt("RUT_TRABAJADOR"));
-                trabajador.setDvTrabajador(rs.getInt("DV_TRABAJADOR"));
+                trabajador.setDvTrabajador(rs.getString("DV_TRABAJADOR"));
                 trabajador.setEstadoCivilTrabajador(rs.getString("ESTADO_CIVIL_TRABAJADOR"));
                 trabajador.setDireccionTrabajador(rs.getString("DIRECCION_TRABAJADOR"));
                 trabajador.setTelefonoTrabajador(rs.getInt("TELEFONO_TRABAJADOR"));

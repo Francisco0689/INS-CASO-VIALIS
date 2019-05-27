@@ -11,9 +11,65 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
         <title>Trabajador</title>
     </head>
-    <body Style="background-image: url(img/hero-2.png);">
+    <body Style="background-image: url(img/hero-2.png); color: black; font-weight: bold;">
+        <!-- ================Offcanvus Menu Area =================-->
+        <div class="side_menu">
+            <ul class="list menu_right">
+                <li>
+                    <a href="/CasoVIALIS/">Home</a>
+                </li>
+                <li>
+                    <a href="#">Gestión de Trabajadores</a>
+                    <ul class="list">
+                        <li>
+                            <a href="/CasoVIALIS/listaTrabajador">Lista de Trabajadores</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/trabajador">Agregar Trabajador</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/modificarTrabajador">Modificar Trabajador</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Gestión de Proyectos</a>
+                    <ul class="list">
+                        <li>
+                            <a href="#">Lista de Proyectos</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
+                        </li>
+                        <li>
+                            <a href="#">Modificar Proyecto</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Sobre Nosotros</a>
+                </li>
+                <li>
+                    <a href="/CasoVIALIS/login">Salir</a>
+                </li>
+            </ul>
+        </div>
+        <!--================End Offcanvus Menu Area =================-->
+        <!--================Canvus Menu Area =================-->
+        <div class="canvus_menu">
+            <div class="container">
+                <div class="float-right">
+                    <div class="toggle_icon" title="Menu Bar">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--================End Canvus Menu Area =================-->
         <h1>Trabajador AGREGAR</h1>
         ${mensaje}
         <form action="agregar-trabajador" method="POST">
@@ -38,7 +94,7 @@
                     </div>
                     <div class="col-6">
                         <label for="txtDv">-</label>
-                        <input type="number" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador" required="true">
+                        <input type="text" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador" required="true">
                     </div>
                 </div>
                 <br>
@@ -85,13 +141,41 @@
                 </div>
                 <div class="form-group">
                     <center>
-                        <button type="submit" class="btn btn-primary btn-block">Agregar Trabajador</button>
+                        <button type="submit" Style="background-color: #007bff; font-weight: bold;" class="btn btn-primary btn-block">Agregar Trabajador</button>
                     </center>
                 </div>
 
             </div>
         </form>
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>	
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script>
+            var heroCarousel = $('.heroCarousel');
+            heroCarousel.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                startPosition: 1,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    }
+                }
+            });
+
+            var dropToggle = $('.menu_right > li').has('ul').children('a');
+            dropToggle.on('click', function () {
+                dropToggle.not(this).closest('li').find('ul').slideUp(200);
+                $(this).closest('li').children('ul').slideToggle(200);
+                return false;
+            });
+
+            $(".toggle_icon").on('click', function () {
+                $('body').toggleClass("open");
+            });
+
+        </script>
     </body>
 </html>

@@ -7,8 +7,10 @@ package controller;
 
 import DAO.TrabajadorDAO;
 import Entidades.Trabajador;
+import Entidades.Usuario;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +28,26 @@ public class TrabajadorController {
     private TrabajadorDAO traDAO = new TrabajadorDAO();
 
     @RequestMapping(value = "/trabajador", method = RequestMethod.GET)
-    public String trabajador(Model model) {
+    public String trabajador(Model model, HttpServletRequest request) {
+        
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario)session.getAttribute("usu");
 
+        if(usu == null){
+            return "login";
+        }
         return "trabajador";
     }
 
     @RequestMapping(value = "/listaTrabajador", method = RequestMethod.GET)
-    public String listaTrabajador(Model model) {
+    public String listaTrabajador(Model model, HttpServletRequest request) {
+        
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario)session.getAttribute("usu");
+
+        if(usu == null){
+            return "login";
+        }
 
         List<Trabajador> trabajadores = traDAO.ListarTrabajadores();
 
@@ -42,9 +57,39 @@ public class TrabajadorController {
     }
 
     @RequestMapping(value = "/modificarTrabajador", method = RequestMethod.GET)
-    public String modificarTrabajador(Model model) {
+    public String modificarTrabajador(Model model, HttpServletRequest request) {
 
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario)session.getAttribute("usu");
+
+        if(usu == null){
+            return "login";
+        }
+        
         return "modificarTrabajador";
+    }
+    
+    @RequestMapping(value = "/modificarTrabajadorDesdeListar", method = RequestMethod.GET)
+    public String modificarTrabajadorDesdeListar(Model model, RedirectAttributes ra, HttpServletRequest request,
+            @RequestParam("txtBuscarRut") int rutTrabajador) {
+
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario)session.getAttribute("usu");
+
+        if(usu == null){
+            return "login";
+        }
+        
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
+
+        if (trabajadorExistente == null) {
+            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            return "redirect:modificarTrabajador";
+        }
+
+        ra.addFlashAttribute("trabajador", trabajadorExistente);
+        
+        return "redirect:modificarTrabajador";
     }
 
     @RequestMapping(value = "/buscar-trabajador", method = RequestMethod.POST)
@@ -68,7 +113,7 @@ public class TrabajadorController {
             @RequestParam("txtNombre") String nombre,
             @RequestParam("txtApellido") String apellido,
             @RequestParam("txtRut") int rut,
-            @RequestParam("txtDv") int dv,
+            @RequestParam("txtDv") String dv,
             @RequestParam("cboEstadoCivil") String estadoCivil,
             @RequestParam("txtDireccion") String direccion,
             @RequestParam("txtTelefono") int telefono,
@@ -130,7 +175,7 @@ public class TrabajadorController {
             @RequestParam("txtNombre") String nombre,
             @RequestParam("txtApellido") String apellido,
             @RequestParam("txtRut") int rut,
-            @RequestParam("txtDv") int dv,
+            @RequestParam("txtDv") String dv,
             @RequestParam("cboEstadoCivil") String estadoCivil,
             @RequestParam("txtDireccion") String direccion,
             @RequestParam("txtTelefono") int telefono,

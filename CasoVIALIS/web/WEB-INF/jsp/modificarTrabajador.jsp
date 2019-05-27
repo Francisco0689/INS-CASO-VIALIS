@@ -14,20 +14,74 @@
         <link rel="stylesheet" href="css/style.css">
         <title>Trabajador</title>
     </head>
-    <body Style="background: #fff; color:#000; background-image: url(img/hero-2.png);">
+    <body Style="font-weight: bold; background: #fff; color:#000; background-image: url(img/hero-2.png);">
+        <!-- ================Offcanvus Menu Area =================-->
+        <div class="side_menu">
+            <ul class="list menu_right">
+                <li>
+                    <a href="/CasoVIALIS/">Home</a>
+                </li>
+                <li>
+                    <a href="#">Gestión de Trabajadores</a>
+                    <ul class="list">
+                        <li>
+                            <a href="/CasoVIALIS/listaTrabajador">Lista de Trabajadores</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/trabajador">Agregar Trabajador</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/modificarTrabajador">Modificar Trabajador</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Gestión de Proyectos</a>
+                    <ul class="list">
+                        <li>
+                            <a href="#">Lista de Proyectos</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
+                        </li>
+                        <li>
+                            <a href="#">Modificar Proyecto</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Sobre Nosotros</a>
+                </li>
+                <li>
+                    <a href="/CasoVIALIS/login">Salir</a>
+                </li>
+            </ul>
+        </div>
+        <!--================End Offcanvus Menu Area =================-->
+        <!--================Canvus Menu Area =================-->
+        <div class="canvus_menu">
+            <div class="container">
+                <div class="float-right">
+                    <div class="toggle_icon" title="Menu Bar">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--================End Canvus Menu Area =================-->
         <h1>Trabajador MODIFICAR</h1>
         ${mensaje}
         <form action="buscar-trabajador" method="POST">
             <div class="container col-11">
                 <div class="row">
-                    <div class="form-group col-10">
+                    <div class="form-group col-4">
                         <center><label for="txtBuscarRut">Buscar Trabajador</label></center>
                         <input type="number" name="txtBuscarRut" id="txtBuscarRut" class="form-control" placeholder="Rut Trabajador sin DV" required="true">
                     </div>
                     <div class="form-group col-2">
                         <center>
                             <label for="btnBuscar">-</label>
-                            <button style="background: #ffc107" type="submit" name="btnBuscar" class="btn btn-primary btn-block">Buscar Trabajador</button>
+                            <button style="background: #ffc107; font-weight: bold;" type="submit" name="btnBuscar" class="btn btn-primary btn-block">Buscar Trabajador</button>
                         </center>
                     </div>
                 </div>
@@ -56,7 +110,7 @@
                     </div>
                     <div class="col-6">
                         <label for="txtDv">-</label>
-                        <input type="number" disabled="true" value="${trabajador.dvTrabajador}" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador">
+                        <input type="text" disabled="true" value="${trabajador.dvTrabajador}" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador">
                         <input type="hidden" value="${trabajador.dvTrabajador}" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador" required="true">
                     </div>
                 </div>
@@ -93,12 +147,40 @@
                 </div>
                 <div class="form-group">
                     <center>
-                        <button style="background: #ffc107" type="submit" class="btn btn-primary btn-block">Modificar Trabajador</button>
+                        <button style="background: #ffc107; font-weight: bold;" type="submit" class="btn btn-primary btn-block">Modificar Trabajador</button>
                     </center>
                 </div>
             </div>
         </form>
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>	
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script>
+            var heroCarousel = $('.heroCarousel');
+            heroCarousel.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                startPosition: 1,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    }
+                }
+            });
+
+            var dropToggle = $('.menu_right > li').has('ul').children('a');
+            dropToggle.on('click', function () {
+                dropToggle.not(this).closest('li').find('ul').slideUp(200);
+                $(this).closest('li').children('ul').slideToggle(200);
+                return false;
+            });
+
+            $(".toggle_icon").on('click', function () {
+                $('body').toggleClass("open");
+            });
+
+        </script>
     </body>
 </html>

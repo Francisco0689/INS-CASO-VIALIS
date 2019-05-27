@@ -15,7 +15,7 @@ public class Trabajador {
     private String nombreTrabajador;
     private String apellidoTrabajador;
     private int rutTrabajador;
-    private int dvTrabajador;
+    private String dvTrabajador;
     private String estadoCivilTrabajador;
     private String direccionTrabajador;
     private int telefonoTrabajador;
@@ -27,7 +27,7 @@ public class Trabajador {
     public Trabajador() {
     }
 
-    public Trabajador(int idTrabajador, String nombreTrabajador, String apellidoTrabajador, int rutTrabajador, int dvTrabajador, String estadoCivilTrabajador, String direccionTrabajador, int telefonoTrabajador, String estadoTrabajador, String nacionalidadTrabajador, String condicionExtranjeroTrabajador, String especialidadTrabajador) {
+    public Trabajador(int idTrabajador, String nombreTrabajador, String apellidoTrabajador, int rutTrabajador, String dvTrabajador, String estadoCivilTrabajador, String direccionTrabajador, int telefonoTrabajador, String estadoTrabajador, String nacionalidadTrabajador, String condicionExtranjeroTrabajador, String especialidadTrabajador) {
         this.idTrabajador = idTrabajador;
         this.nombreTrabajador = nombreTrabajador;
         this.apellidoTrabajador = apellidoTrabajador;
@@ -74,11 +74,11 @@ public class Trabajador {
         this.rutTrabajador = rutTrabajador;
     }
 
-    public int getDvTrabajador() {
+    public String getDvTrabajador() {
         return dvTrabajador;
     }
 
-    public void setDvTrabajador(int dvTrabajador) {
+    public void setDvTrabajador(String dvTrabajador) {
         this.dvTrabajador = dvTrabajador;
     }
 

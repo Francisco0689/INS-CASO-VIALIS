@@ -8,6 +8,7 @@ package controller;
 import DAO.UsuarioDAO;
 import Entidades.Usuario;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +26,10 @@ public class LoginController {
     UsuarioDAO usuDAO = new UsuarioDAO();
     
     @RequestMapping(value="/login", method = RequestMethod.GET)
-    public String login(Model model){
+    public String login(Model model, HttpServletRequest request){
     
+        HttpSession session = request.getSession();
+        session.setAttribute("usu", null);
         return "login";
     }
     
@@ -35,9 +38,12 @@ public class LoginController {
             @RequestParam("txtUser") String user,
             @RequestParam("txtPass") String pass){
         
+        HttpSession session = request.getSession();
         Usuario usuarioExistente = usuDAO.mostrarUsuario(user, pass);
         String mensaje = "Credenciales Incorrectas";
+        
         if (usuarioExistente != null) {
+            session.setAttribute("usu", usuarioExistente);
             return "redirect:home";
         }
 
