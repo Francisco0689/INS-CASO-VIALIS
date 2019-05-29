@@ -5,11 +5,13 @@
  */
 package Entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author fmaldonc
  */
-public class PedidoMaterial {
+public class PedidoMaterial implements Serializable{
     
     private int idPedidoMaterial;
     private int idMaterial;

@@ -44,7 +44,7 @@ public class LoginController {
         
         if (usuarioExistente != null) {
             session.setAttribute("usu", usuarioExistente);
-            return "redirect:home";
+            return "redirect:/";
         }
 
         ra.addFlashAttribute("mensaje", mensaje);

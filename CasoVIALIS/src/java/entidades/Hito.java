@@ -5,13 +5,14 @@
  */
 package Entidades;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  *
  * @author fmaldonc
  */
-public class Hito {
+public class Hito implements Serializable{
     
     private int idHito;
     private String nombreHito;

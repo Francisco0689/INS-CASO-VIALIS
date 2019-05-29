@@ -5,11 +5,13 @@
  */
 package Entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author fmaldonc
  */
-public class Seguimiento {
+public class Seguimiento implements Serializable {
     
     private int idSeguimiento;
     private String estadoSeguimientoProyecto;
