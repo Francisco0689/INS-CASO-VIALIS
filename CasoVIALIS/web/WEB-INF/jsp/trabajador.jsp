@@ -51,7 +51,21 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Sobre Nosotros</a>
+                    <a href="#">Gestión de Reuniones</a>
+                    <ul class="list">
+                        <li>
+                            <a href="#">Lista de Reuniones</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/reunion">Agendar Reunión</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/modificarReunion">Modificar Reunión</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Sobre Nosotros</a>Pan 
                 </li>
                 <li>
                     <a href="/CasoVIALIS/login">Salir</a>
