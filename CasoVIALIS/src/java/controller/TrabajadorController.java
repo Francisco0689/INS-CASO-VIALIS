@@ -153,14 +153,14 @@ public class TrabajadorController {
     }
 
     @RequestMapping(value = "/eliminar-trabajador", method = RequestMethod.GET)
-    public String eliminarProducto(Model model, RedirectAttributes re, HttpServletRequest request,
+    public String eliminarTrabajador(Model model, RedirectAttributes re, HttpServletRequest request,
             @RequestParam("rutTrabajador") int rutTrabajador) {
 
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
 
         if (trabajadorExistente == null) {
             re.addFlashAttribute("mensaje", "El Trabajador no Existe");
-            return "redirect:listarTrabajador";
+            return "redirect:listaTrabajador";
         }
 
         String mensaje = traDAO.eliminarTrabajador(trabajadorExistente);

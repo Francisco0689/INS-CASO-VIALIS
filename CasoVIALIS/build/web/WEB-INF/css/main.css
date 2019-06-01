@@ -11,12 +11,12 @@ and open the template in the editor.
 
 @font-face {
   font-family: Montserrat-Regular;
-  src: url('../fonts/montserrat/Montserrat-Regular.ttf'); 
+  src: url('Montserrat-Regular.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-Medium;
-  src: url('../fonts/montserrat/Montserrat-Medium.ttf'); 
+  src: url('Montserrat-Medium.ttf'); 
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -139,8 +139,18 @@ th, td {
 }
 
 .column100.column1 {
-  width: 265px;
-  padding-left: 42px;
+  width: 5px;
+  padding-left: 15px;
+  padding-right: 0px;
+}
+.column100.column1 {
+  width: 5px;
+  padding-left: 15px;
+  padding-right: 0px;
+}
+.column100.column2 {
+  width: 100px;
+  padding-left: 0px;
 }
 
 .row100.head th {

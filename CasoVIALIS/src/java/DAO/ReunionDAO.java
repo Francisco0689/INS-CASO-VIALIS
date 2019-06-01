@@ -8,9 +8,12 @@ package DAO;
 import Entidades.Reunion;
 import Modelo.Conexion;
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,8 +69,8 @@ public class ReunionDAO {
         Connection acceso = conn.getCnn();
 
         try {
-            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM REUNION REU JOIN \n" +
-                                                            "PROYECTO PRO ON (REU.ID_PROYECTO = PRO.ID) WHERE REU.ID = ?");
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM REUNION REU JOIN \n"
+                    + "PROYECTO PRO ON (REU.ID_PROYECTO = PRO.ID) WHERE REU.ID = ?");
             ps.setInt(1, codigoReunion);
 
             ResultSet rs = ps.executeQuery();
@@ -94,7 +97,7 @@ public class ReunionDAO {
 
         return reunion;
     }
-    
+
     public String modificarReunion(Reunion reu) {
 
         //Abrir Conexion
@@ -128,5 +131,106 @@ public class ReunionDAO {
         return respuesta;
     }
 
+    public List<Reunion> ListarReuniones() {
+        Reunion reunion = null;
+        List<Reunion> listaReunion = new ArrayList();
+
+        Connection acceso = conn.getCnn();
+
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM REUNION REU "
+                    + "JOIN PROYECTO PRO ON "
+                    + "(REU.ID_PROYECTO = PRO.ID) WHERE REU.ESTADO_REUNION != 'NOACTIVO' "
+                    + "ORDER BY REU.ID ASC");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                reunion = new Reunion();
+                reunion.setIdReunion(rs.getInt("ID"));
+                reunion.setEstadoReunion(rs.getString("ESTADO_REUNION"));
+                reunion.setFechaReunion(rs.getDate("FECHA_REUNION"));
+                reunion.setLugarReunion(rs.getString("LUGAR_REUNION"));
+                reunion.setEncargadoReunion(rs.getString("ENCARGADO_REUNION"));
+                reunion.setIdProyecto(rs.getInt("ID_PROYECTO"));
+                reunion.setDescripcionInicial(rs.getString("DESCRIPCION_INICIAL"));
+                reunion.setDescripcionFinal(rs.getString("DESCRIPCION_FINAL"));
+                reunion.setHora(rs.getInt("HORA"));
+                reunion.setMin(rs.getInt("MINUTO"));
+                reunion.setNombreProyecto(rs.getString("NOMBRE_PROYECTO"));
+
+                listaReunion.add(reunion);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listaReunion;
+    }
+
+    public String eliminarReunion(int codigoReunion) {
+
+        //Abrir Conexion
+        Connection acceso = conn.getCnn();
+        String respuesta = null;
+
+        try {
+
+            PreparedStatement ps = acceso.prepareStatement(""
+                    + "UPDATE REUNION SET "
+                    + "ESTADO_REUNION= 'NOACTIVO' "
+                    + " WHERE ID = ?");
+            ps.setInt(1, codigoReunion);
+
+            int rs = ps.executeUpdate();
+            if (rs > 0) {
+                respuesta = "Reunión Anulada Correctamente";
+            }
+
+        } catch (SQLException ex) {
+            respuesta = "Error al ANULAR REUNION" + ex.getMessage();
+        }
+
+        return respuesta;
+    }
+
+    public List<Reunion> buscarReunionesPorProyecto(int codigoProyecto) {
+        
+        List<Reunion> listaReunion = new ArrayList();
+        listaReunion = null;
+        Reunion reunion = null;
+        Connection acceso = conn.getCnn();
+
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM REUNION REU "
+                    + "JOIN PROYECTO PRO ON "
+                    + "(REU.ID_PROYECTO = PRO.ID) WHERE REU.ESTADO_REUNION != 'NOACTIVO' AND ID_PROYECTO = ? "
+                    + "ORDER BY REU.ID ASC");
+            ps.setInt(1, codigoProyecto);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                reunion = new Reunion();
+                reunion.setIdReunion(rs.getInt("ID"));
+                reunion.setEstadoReunion(rs.getString("ESTADO_REUNION"));
+                reunion.setFechaReunion(rs.getDate("FECHA_REUNION"));
+                reunion.setLugarReunion(rs.getString("LUGAR_REUNION"));
+                reunion.setEncargadoReunion(rs.getString("ENCARGADO_REUNION"));
+                reunion.setIdProyecto(rs.getInt("ID_PROYECTO"));
+                reunion.setDescripcionInicial(rs.getString("DESCRIPCION_INICIAL"));
+                reunion.setDescripcionFinal(rs.getString("DESCRIPCION_FINAL"));
+                reunion.setHora(rs.getInt("HORA"));
+                reunion.setMin(rs.getInt("MINUTO"));
+                reunion.setNombreProyecto(rs.getString("NOMBRE_PROYECTO"));
+
+                listaReunion.add(reunion);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listaReunion;
+    }
 
 }

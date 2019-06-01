@@ -48,7 +48,7 @@
                     <a href="#">Gestión de Reuniones</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Reuniones</a>
+                            <a href="/CasoVIALIS/listaReunion">Lista de Reuniones</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/reunion">Agendar Reunión</a>

@@ -11,15 +11,12 @@ import DAO.UsuarioDAO;
 import Entidades.Proyecto;
 import Entidades.Reunion;
 import Entidades.Usuario;
-import java.awt.SystemColor;
-import java.awt.Window;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.hibernate.hql.internal.ast.SqlASTFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -124,11 +121,11 @@ public class ReunionController {
 
         return "modificarReunion";
     }
-    
+
     @RequestMapping(value = "/buscar-reunion", method = RequestMethod.POST)
     public String buscarReunion(Model model, RedirectAttributes ra, HttpServletRequest request,
             @RequestParam("txtBuscarReunion") int codigoReunion) {
-        
+
         ReunionDAO reuDAO = new ReunionDAO();
         Reunion reunionAgendada = reuDAO.buscarReunion(codigoReunion);
 
@@ -138,10 +135,10 @@ public class ReunionController {
         }
 
         ra.addFlashAttribute("reunion", reunionAgendada);
-        
+
         return "redirect:modificarReunion";
     }
-    
+
     @RequestMapping(value = "/modificar-reunion", method = RequestMethod.POST)
     public String modificarReunionPOST(Model model, RedirectAttributes ra, HttpServletRequest request,
             @RequestParam("txtEstadoReunion") String estadoReunion,
@@ -174,10 +171,87 @@ public class ReunionController {
         if (mensaje == null) {
             mensaje = "No se ah podido MODIFICAR Reunión.";
         }
-        
+
         model.addAttribute("mensaje", mensaje);
-        
+
         return "modificarReunion";
+    }
+
+    @RequestMapping(value = "/listaReunion", method = RequestMethod.GET)
+    public String listaReunion(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario) session.getAttribute("usu");
+        if (usu == null) {
+            return "login";
+        }
+
+        ReunionDAO reuDAO = new ReunionDAO();
+        List<Reunion> reuniones = reuDAO.ListarReuniones();
+
+        model.addAttribute("reuniones", reuniones);
+
+        return "listaReunion";
+    }
+
+    @RequestMapping(value = "/eliminar-reunion", method = RequestMethod.GET)
+    public String eliminaReunion(Model model, RedirectAttributes re, HttpServletRequest request,
+            @RequestParam("idReunion") int idReunion) {
+        ReunionDAO reuDAO = new ReunionDAO();
+        Reunion reunionExistente = reuDAO.buscarReunion(idReunion);
+
+        if (reunionExistente == null) {
+            re.addFlashAttribute("mensaje", "Reunión no Existe");
+            return "redirect:listaReunion";
+        }
+
+        String mensaje = reuDAO.eliminarReunion(idReunion);
+
+        re.addFlashAttribute("mensaje", mensaje);
+
+        return "redirect:listaReunion";
+    }
+
+    @RequestMapping(value = "/modificarReunionDesdeListar", method = RequestMethod.GET)
+    public String modificarReunionDesdeListar(Model model, RedirectAttributes ra, HttpServletRequest request,
+            @RequestParam("txtBuscarReunion") int codigoReunion) {
+
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario) session.getAttribute("usu");
+
+        if (usu == null) {
+            return "login";
+        }
+        ReunionDAO reuDAO = new ReunionDAO();
+        Reunion reunionExistente = reuDAO.buscarReunion(codigoReunion);
+
+        if (reunionExistente == null) {
+            ra.addFlashAttribute("mensaje", "Reunión NO Exite en la Base de Datos");
+            return "redirect:modificarReunion";
+        }
+
+        ra.addFlashAttribute("reunion", reunionExistente);
+
+        return "redirect:modificarReunion";
+    }
+
+    @RequestMapping(value = "/buscar-reuniones-por-proyecto", method = RequestMethod.POST)
+    public String buscarReunionesPorProyecto(Model model, RedirectAttributes ra, HttpServletRequest request,
+            @RequestParam("txtBuscarReunion") int codigoProyecto) {
+
+        ReunionDAO reuDAO = new ReunionDAO();
+        List<Reunion> reunionesAgendadas = reuDAO.buscarReunionesPorProyecto(codigoProyecto);
+
+        if (reunionesAgendadas == null) {
+            ra.addFlashAttribute("mensaje", "NO Exiten reuniones con ese código en la Base de Datos");
+            List<Reunion> reuniones = reuDAO.ListarReuniones();
+            model.addAttribute("reuniones", reuniones);
+            return "listaReunion";
+        }
+
+        ra.addFlashAttribute("reuniones", reunionesAgendadas);
+
+        return "listaReunion";
     }
 
 }
