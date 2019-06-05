@@ -197,7 +197,6 @@ public class ReunionDAO {
     public List<Reunion> buscarReunionesPorProyecto(int codigoProyecto) {
         
         List<Reunion> listaReunion = new ArrayList();
-        listaReunion = null;
         Reunion reunion = null;
         Connection acceso = conn.getCnn();
 

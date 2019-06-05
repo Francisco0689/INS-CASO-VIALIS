@@ -1,15 +1,32 @@
+<%-- 
+    Document   : trabajador
+    Created on : 09-05-2019, 16:21:53
+    Author     : fmaldonc
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>VIALIS</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <title>Ingresar Proyecto</title>
+        <style type="text/css">
+            h1 {
+                font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+                font-size: 45px;
+                padding-top: 25px;
+                text-align: center;
+                text-transform: uppercase;
+                text-rendering: optimizeLegibility; 
+                color: steelblue;
+            }
+        </style>
     </head>
-    <body>
+    <body Style="background-image: url(img/hero-2.png); color: black; font-weight: bold;">
         <!-- ================Offcanvus Menu Area =================-->
         <div class="side_menu">
             <ul class="list menu_right">
@@ -17,7 +34,7 @@
                     <a href="/CasoVIALIS/">Home</a>
                 </li>
                 <li>
-                    <a href="#">Gesti髇 de Trabajadores</a>
+                    <a href="#">Gesti贸n de Trabajadores</a>
                     <ul class="list">
                         <li>
                             <a href="/CasoVIALIS/listaTrabajador">Lista de Trabajadores</a>
@@ -31,35 +48,35 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Gesti髇 de Proyectos</a>
+                    <a href="#">Gesti贸n de Proyectos</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Proyectos</a>
+                            <a href="/CasoVIALIS/listaProyecto">Lista de Proyectos</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
                         </li>
                         <li>
-                            <a href="#">Modificar Proyecto</a>
+                            <a href="/CasoVIALIS/modificarProyecto">Modificar Proyecto</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Gesti髇 de Reuniones</a>
+                    <a href="#">Gesti贸n de Reuniones</a>
                     <ul class="list">
                         <li>
                             <a href="/CasoVIALIS/listaReunion">Lista de Reuniones</a>
                         </li>
                         <li>
-                            <a href="/CasoVIALIS/reunion">Agendar Reuni髇</a>
+                            <a href="/CasoVIALIS/reunion">Agendar Reuni贸n</a>
                         </li>
                         <li>
-                            <a href="/CasoVIALIS/modificarReunion">Modificar Reuni髇</a>
+                            <a href="/CasoVIALIS/modificarReunion">Modificar Reuni贸n</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Sobre Nosotros</a>
+                    <a href="#">Sobre Nosotros</a> 
                 </li>
                 <li>
                     <a href="/CasoVIALIS/login">Salir</a>
@@ -78,8 +95,57 @@
             </div>
         </div>
         <!--================End Canvus Menu Area =================-->
-        <h1>Agregar Proyecto</h1>
+        <h1>INGRESAR PROYECTO</h1>
+        ${mensaje}
+        <form action="agregar-proyecto" method="POST">
+            <div class="container col-12">
+                <br/><br/><br/>
+            </div>
+            <div class="container col-11">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="txtNombreProyecto">Nombre Proyecto</label>
+                        <input type="text" name="txtNombreProyecto" id="txtNombreProyecto" class="form-control" placeholder="Nombre Proyecto" required="true">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtTipoProyecto">Tipo de Proyecto</label>
+                        <select class="form-control" name="txtTipoProyecto" id="txtTipoProyecto" required="true">
+                            <option value="URBANO">URBANO</option>
+                            <option value="RURAL">RURAL</option>
+                            <option value="AUTOPISTA">AUTOPISTA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="txtEstadoProyecto">Estado de Proyecto</label>
+                        <select class="form-control" name="txtEstadoProyecto" id="txtEstadoProyecto" required="true">
+                            <option value="ACTIVO">ACTIVO</option>
+                            <option value="NOACTIVO">NO ACTIVO</option>
+                            <option value="ENESPERA">EN ESPERA</option>
+                            <option value="RECHAZADO">RECHAZADO</option>
+                            <option value="FINALIZADO">FINALIZADO</option>
+                        </select></div>
+                    <div class="col-6">
+                        <label for="txtEncargadoProyecto">Encargado de Proyecto</label>
+                        <input type="text" name="txtEncargadoProyecto" id="txtEncargadoProyecto" class="form-control" placeholder="Encargado de Proyecto" required="true">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="txtDireccionProyecto">Direccion Proyecto</label>
+                        <input type="text" name="txtDireccionProyecto" id="txtDireccionProyecto" class="form-control" placeholder="Direccion Proyecto" required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <center>
+                        <button type="submit" Style="background-color: #007bff; font-weight: bold;" class="btn btn-primary btn-block">Ingresar Proyecto</button>
+                    </center>
+                </div>
 
+            </div>
+        </form>
         <script src="js/jquery-3.2.1.min.js"></script>	
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>

@@ -41,7 +41,6 @@ public class ReunionController {
         Usuario usu = (Usuario) session.getAttribute("usu");
         ProyectoDAO proDAO = new ProyectoDAO();
         Date objDate = new Date();
-
         String strDateFormat = "yyyy-MM-dd";
         SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
         LocalDateTime locaDate = LocalDateTime.now();
@@ -242,14 +241,14 @@ public class ReunionController {
         ReunionDAO reuDAO = new ReunionDAO();
         List<Reunion> reunionesAgendadas = reuDAO.buscarReunionesPorProyecto(codigoProyecto);
 
-        if (reunionesAgendadas == null) {
-            ra.addFlashAttribute("mensaje", "NO Exiten reuniones con ese código en la Base de Datos");
+        if (reunionesAgendadas.size()< 1) {
+            model.addAttribute("mensaje", "NO Exiten reuniones con ese código en la Base de Datos");
             List<Reunion> reuniones = reuDAO.ListarReuniones();
             model.addAttribute("reuniones", reuniones);
             return "listaReunion";
         }
 
-        ra.addFlashAttribute("reuniones", reunionesAgendadas);
+        model.addAttribute("reuniones", reunionesAgendadas);
 
         return "listaReunion";
     }

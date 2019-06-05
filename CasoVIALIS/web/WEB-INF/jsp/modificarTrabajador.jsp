@@ -12,7 +12,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/style.css">
-        <title>Trabajador</title>
+        <title>Modificar Trabajador</title>
+        <style type="text/css">
+            h1 {
+                font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+                font-size: 45px;
+                padding-top: 25px;
+                text-align: center;
+                text-transform: uppercase;
+                text-rendering: optimizeLegibility; 
+                color: steelblue;
+            }
+        </style>
     </head>
     <body Style="font-weight: bold; background: #fff; color:#000; background-image: url(img/hero-2.png);">
         <!-- ================Offcanvus Menu Area =================-->
@@ -39,13 +50,13 @@
                     <a href="#">Gestión de Proyectos</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Proyectos</a>
+                            <a href="/CasoVIALIS/listaProyecto">Lista de Proyectos</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
                         </li>
                         <li>
-                            <a href="#">Modificar Proyecto</a>
+                            <a href="/CasoVIALIS/modificarProyecto">Modificar Proyecto</a>
                         </li>
                     </ul>
                 </li>
@@ -83,7 +94,7 @@
             </div>
         </div>
         <!--================End Canvus Menu Area =================-->
-        <h1>Trabajador MODIFICAR</h1>
+        <h1>GESTIONAR TRABAJADOR</h1>
         ${mensaje}
         <form action="buscar-trabajador" method="POST">
             <div class="container col-11">
@@ -102,7 +113,7 @@
             </div>
         </form>
         <div class="container col-12">
-            <br/><br/><br/><br/><br/>
+            <br/><br/>
         </div>
         <form action="modificar-trabajador" method="POST">
             <div class="container col-11">
@@ -165,30 +176,32 @@
                     </center>
                 </div>
             </div>
+            <div class="container col-12">
+                <br/><br/>
+            </div>
         </form>
         <script src="js/jquery-3.2.1.min.js"></script>	
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script>
-            var heroCarousel = $('.heroCarousel');
-            heroCarousel.owlCarousel({
+                var heroCarousel = $('.heroCarousel');
+                heroCarousel.owlCarousel({
                 loop: true,
                 margin: 10,
                 nav: false,
-                startPosition: 1,
-                responsiveClass: true,
+                    startPosition: 1,
+                    responsiveClass: true,
                 responsive: {
-                    0: {
-                        items: 1
+            0: {
+            items: 1
                     }
                 }
             });
 
-            var dropToggle = $('.menu_right > li').has('ul').children('a');
-            dropToggle.on('click', function () {
+                var dropToggle = $('.menu_right > li').has('ul').children('a');
+                dropToggle.on('click', function () {
                 dropToggle.not(this).closest('li').find('ul').slideUp(200);
-                $(this).closest('li').children('ul').slideToggle(200);
-                return false;
+                $(this).closest('li').children('ul').slideToggle(200);                 return false;
             });
 
             $(".toggle_icon").on('click', function () {

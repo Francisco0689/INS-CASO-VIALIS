@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista</title>
+        <title>Lista de Trabajadores</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -24,6 +24,15 @@
             #div1 {
                 overflow:scroll;
                 height:500px;
+            }
+            h1 {
+                font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+                font-size: 45px;
+                padding-top: 25px;
+                text-align: center;
+                text-transform: uppercase;
+                text-rendering: optimizeLegibility; 
+                color: linen;
             }
         </style>
     </head>
@@ -52,13 +61,13 @@
                     <a href="#">Gestión de Proyectos</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Proyectos</a>
+                            <a href="/CasoVIALIS/listaProyecto">Lista de Proyectos</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
                         </li>
                         <li>
-                            <a href="#">Modificar Proyecto</a>
+                            <a href="/CasoVIALIS/modificarProyecto">Modificar Proyecto</a>
                         </li>
                     </ul>
                 </li>
@@ -96,8 +105,9 @@
             </div>
         </div>
         <!--================End Canvus Menu Area =================-->
+        <h1>TRABAJADORES REGISTRADOS</h1>
         <div class="container col-12">
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <br/><br/><br/>
         </div>
         <div class="container col-11">
             <div id="div1" class="table100 ver5 m-b-110">
@@ -105,7 +115,7 @@
                     <thead>
                         <tr class="row100 head">
                             <th Style="background-color: #167890;" class="column100 column1" data-column="column1">Código Interno</th>
-                            <th Style="background-color: #167890;" class="column100 column2" data-column="column2">Nombres</th>
+                            <th Style="background-color: #167890;" class="column100 column2" data-column="column2"> Nombres</th>
                             <th Style="background-color: #167890;" class="column100 column3" data-column="column3">Apellidos</th>
                             <th Style="background-color: #167890;" class="column100 column4" data-column="column4">Rut</th>
                             <th Style="background-color: #167890;" class="column100 column5" data-column="column5">Estado Civil</th>
@@ -151,17 +161,17 @@
         <script>
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
-                loop: true,
+            loop: true,
                 margin: 10,
                 nav: false,
                 startPosition: 1,
                 responsiveClass: true,
                 responsive: {
-                    0: {
-                        items: 1
+                0: {
+            items: 1
                     }
                 }
-            });
+                });
 
             var dropToggle = $('.menu_right > li').has('ul').children('a');
             dropToggle.on('click', function () {

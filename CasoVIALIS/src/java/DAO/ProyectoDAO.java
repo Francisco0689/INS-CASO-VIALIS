@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Entidades.Hito;
 import Entidades.Proyecto;
 import Modelo.Conexion;
 import java.sql.Connection;
@@ -21,15 +22,14 @@ import java.util.logging.Logger;
  * @author fmaldonc
  */
 public class ProyectoDAO {
-    
-    
+
     private Conexion conn;
 
     public ProyectoDAO() {
         conn = new Conexion();
     }
 
-    public String agregarTrabajador(Proyecto proyec) {
+    public String agregarProyecto(Proyecto proyec) {
 
         //Abrir Conexion
         Connection acceso = conn.getCnn();
@@ -49,18 +49,20 @@ public class ProyectoDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Proyecto Agregado Correctamente";
+                respuesta = " *Proyecto Agregado Correctamente ";
+            } else {
+                respuesta = " *No se pudo agregar Hito ";
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al INGRESAR Proyecto" + ex.getMessage();
+            System.out.println("Error al INGRESAR Proyecto" + ex.getMessage());
         }
 
         return respuesta;
     }
 
-    public Proyecto mostrarProyecto(int codigoProyecto) {
-        Proyecto proyecto = new Proyecto();
+    public Proyecto mostrarProyectoPorCodigo(int codigoProyecto) {
+        Proyecto proyecto = null;
         Connection acceso = conn.getCnn();
 
         try {
@@ -69,6 +71,35 @@ public class ProyectoDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                proyecto = new Proyecto();
+                proyecto.setIdProyecto(rs.getInt("ID"));
+                proyecto.setNombreProyecto(rs.getString("NOMBRE_PROYECTO"));
+                proyecto.setTipoProyecto(rs.getString("TIPO_PROYECTO"));
+                proyecto.setEstadoProyecto(rs.getString("ESTADO_PROYECTO"));
+                proyecto.setEncargadoProyecto(rs.getString("ENCARGADO_PROYECTO"));
+                proyecto.setDireccionProyecto(rs.getString("DIRECCION_PROYECTO"));
+
+                return proyecto;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return proyecto;
+    }
+
+    public Proyecto mostrarProyectoPorNombre(String nombreProyecto) {
+        Proyecto proyecto = null;
+        Connection acceso = conn.getCnn();
+
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM PROYECTO WHERE NOMBRE_PROYECTO = ?");
+            ps.setString(1, nombreProyecto);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                proyecto = new Proyecto();
                 proyecto.setIdProyecto(rs.getInt("ID"));
                 proyecto.setNombreProyecto(rs.getString("NOMBRE_PROYECTO"));
                 proyecto.setTipoProyecto(rs.getString("TIPO_PROYECTO"));
@@ -87,13 +118,15 @@ public class ProyectoDAO {
     }
 
     public List<Proyecto> ListarProyectos() {
-        Proyecto proyecto = null;
+        Proyecto proyecto;
+        Hito hito;
         List<Proyecto> listaProyectos = new ArrayList();
+        List<Hito> listaHitos;
 
         Connection acceso = conn.getCnn();
 
         try {
-            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM PROYECTO");
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM PROYECTO ORDER BY ID");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -104,6 +137,23 @@ public class ProyectoDAO {
                 proyecto.setEstadoProyecto(rs.getString("ESTADO_PROYECTO"));
                 proyecto.setEncargadoProyecto(rs.getString("ENCARGADO_PROYECTO"));
                 proyecto.setDireccionProyecto(rs.getString("DIRECCION_PROYECTO"));
+
+                PreparedStatement ps2 = acceso.prepareStatement("SELECT * FROM HITO WHERE ID_PROYECTO = ?");
+                ps2.setInt(1, proyecto.getIdProyecto());
+                ResultSet rs2 = ps2.executeQuery();
+                listaHitos = new ArrayList();
+
+                    while (rs2.next()) {
+                        hito = new Hito();
+                        hito.setIdHito(rs2.getInt("ID"));
+                        hito.setNombreHito(rs2.getString("NOMBRE_HITO"));
+                        hito.setFechaHito(rs2.getDate("FECHA_HITO"));
+                        hito.setIdProyecto(rs2.getInt("ID_PROYECTO"));
+
+                        listaHitos.add(hito);
+                    }
+                    
+                proyecto.setHitos(listaHitos);
                 
                 listaProyectos.add(proyecto);
             }
@@ -132,7 +182,7 @@ public class ProyectoDAO {
             ps.setString(3, proyect.getEstadoProyecto());
             ps.setString(4, proyect.getEncargadoProyecto());
             ps.setString(5, proyect.getDireccionProyecto());
-            ps.setInt(5, proyect.getIdProyecto());
+            ps.setInt(6, proyect.getIdProyecto());
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
@@ -140,10 +190,33 @@ public class ProyectoDAO {
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al MODIFICAR PROYECTO" + ex.getMessage();
+            String error = ex.getMessage();
+            System.out.println(error);
         }
 
         return respuesta;
     }
-    
+
+    public int obtenerIdUltimoProyectoAgregado() {
+        Proyecto proyecto = null;
+        Connection acceso = conn.getCnn();
+        int codigoUltimoProyecto = 0;
+
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT MAX(ID) AS ID FROM PROYECTO");
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                codigoUltimoProyecto = rs.getInt("ID");
+
+                return codigoUltimoProyecto;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return codigoUltimoProyecto;
+    }
+
 }

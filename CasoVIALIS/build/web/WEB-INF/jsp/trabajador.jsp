@@ -13,7 +13,18 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
-        <title>Trabajador</title>
+        <title>Ingresar Trabajador</title>
+        <style type="text/css">
+            h1 {
+                font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+                font-size: 45px;
+                padding-top: 25px;
+                text-align: center;
+                text-transform: uppercase;
+                text-rendering: optimizeLegibility; 
+                color: steelblue;
+            }
+        </style>
     </head>
     <body Style="background-image: url(img/hero-2.png); color: black; font-weight: bold;">
         <!-- ================Offcanvus Menu Area =================-->
@@ -40,13 +51,13 @@
                     <a href="#">Gestión de Proyectos</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Proyectos</a>
+                            <a href="/CasoVIALIS/listaProyecto">Lista de Proyectos</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
                         </li>
                         <li>
-                            <a href="#">Modificar Proyecto</a>
+                            <a href="/CasoVIALIS/modificarProyecto">Modificar Proyecto</a>
                         </li>
                     </ul>
                 </li>
@@ -84,11 +95,11 @@
             </div>
         </div>
         <!--================End Canvus Menu Area =================-->
-        <h1>Trabajador AGREGAR</h1>
+        <h1>INGRESAR TRABAJADOR</h1>
         ${mensaje}
         <form action="agregar-trabajador" method="POST">
             <div class="container col-12">
-                <br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/>
             </div>
             <div class="container col-11">
                 <div class="row">
@@ -158,7 +169,9 @@
                         <button type="submit" Style="background-color: #007bff; font-weight: bold;" class="btn btn-primary btn-block">Agregar Trabajador</button>
                     </center>
                 </div>
-
+            </div>
+            <div class="container col-12">
+                <br/><br/><br/>
             </div>
         </form>
         <script src="js/jquery-3.2.1.min.js"></script>	

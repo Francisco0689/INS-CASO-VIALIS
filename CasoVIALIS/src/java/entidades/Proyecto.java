@@ -7,6 +7,7 @@
     package Entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -20,17 +21,19 @@ public class Proyecto implements Serializable{
     private String estadoProyecto;
     private String encargadoProyecto;
     private String direccionProyecto;
+    private List<Hito> hitos;
 
     public Proyecto() {
     }
 
-    public Proyecto(int idProyecto, String nombreProyecto, String tipoProyecto, String estadoProyecto, String encargadoProyecto, String direccionProyecto) {
+    public Proyecto(int idProyecto, String nombreProyecto, String tipoProyecto, String estadoProyecto, String encargadoProyecto, String direccionProyecto, List<Hito> hitos) {
         this.idProyecto = idProyecto;
         this.nombreProyecto = nombreProyecto;
         this.tipoProyecto = tipoProyecto;
         this.estadoProyecto = estadoProyecto;
         this.encargadoProyecto = encargadoProyecto;
         this.direccionProyecto = direccionProyecto;
+        this.hitos = hitos;
     }
 
     public int getIdProyecto() {
@@ -81,13 +84,24 @@ public class Proyecto implements Serializable{
         this.direccionProyecto = direccionProyecto;
     }
 
+    public List<Hito> getHitos() {
+        return hitos;
+    }
+
+    public void setHitos(List<Hito> hitos) {
+        this.hitos = hitos;
+    }
+
     @Override
     public String toString() {
-        return "Proyecto{" + "idProyecto=" + idProyecto + ", nombreProyecto="
-                + nombreProyecto + ", tipoProyecto=" + tipoProyecto + ", "
-                + "estadoProyecto=" + estadoProyecto + ", encargadoProyecto=" 
-                + encargadoProyecto + ", direccionProyecto=" + direccionProyecto + '}';
+        return "Proyecto{" + "idProyecto=" + idProyecto + ", nombreProyecto=" + 
+                nombreProyecto + ", tipoProyecto=" + tipoProyecto + ", "
+                + "estadoProyecto=" + estadoProyecto + ", encargadoProyecto=" +
+                encargadoProyecto + ", direccionProyecto=" + direccionProyecto + 
+                ", hitos=" + hitos + '}';
     }
+
+    
     
 }
     

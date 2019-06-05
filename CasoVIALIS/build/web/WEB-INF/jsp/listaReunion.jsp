@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista</title>
+        <title>Lista de Reuniones</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -23,7 +23,16 @@
         <style type="text/css">
             #div1 {
                 overflow:scroll;
-                height:500px;
+                height:480px;
+            }
+            h1 {
+                font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+                font-size: 45px;
+                padding-top: 25px;
+                text-align: center;
+                text-transform: uppercase;
+                text-rendering: optimizeLegibility; 
+                color: linen;
             }
         </style>
     </head>
@@ -52,13 +61,13 @@
                     <a href="#">Gestión de Proyectos</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Proyectos</a>
+                            <a href="/CasoVIALIS/listaProyecto">Lista de Proyectos</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/proyecto">Agregar Proyecto</a>
                         </li>
                         <li>
-                            <a href="#">Modificar Proyecto</a>
+                            <a href="/CasoVIALIS/modificarProyecto">Modificar Proyecto</a>
                         </li>
                     </ul>
                 </li>
@@ -66,7 +75,7 @@
                     <a href="#">Gestión de Reuniones</a>
                     <ul class="list">
                         <li>
-                            <a href="#">Lista de Reuniones</a>
+                            <a href="/CasoVIALIS/listaReunion">Lista de Reuniones</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/reunion">Agendar Reunión</a>
@@ -96,13 +105,14 @@
             </div>
         </div>
         <!--================End Canvus Menu Area =================-->
-        <br/><br/><br/>
-        ${mensaje}
+        <h1>REUNIONES AGENDADAS</h1>
+        <br/>
+
         <form action="buscar-reuniones-por-proyecto" method="POST">
             <div class="container col-11">
                 <div class="row">
-                    <div class="form-group col-3">
-                        <center><h4 for="txtBuscarReunion"><b>Buscar Reunión Agendada Por Código de Proyecto</b></h4></center>
+                    <div class="form-group col-4">
+                        <center><h4 for="txtBuscarReunion" style="color: black;">Buscar Reunión Por Código de Proyecto</h4></center>
                         <input type="number" name="txtBuscarReunion" id="txtBuscarReunion" class="form-control" placeholder="Código de Proyecto Relacionado" required="true">
                     </div>
                     <div class="form-group col-3">
@@ -111,11 +121,17 @@
                             <button style="background: #ffc107; font-weight: bold;" type="submit" name="btnBuscar" class="btn btn-primary btn-block">Buscar Reunión Agendada</button>
                         </center>
                     </div>
+                    <div class="form-group col-4">
+                        <center>
+                            <label for="">-</label>
+                            <h5><b Style="color: black;">${mensaje}</b></h5>
+                        </center>
+                    </div>
                 </div>
             </div>
         </form>
         <div class="container col-12">
-            <br/><br/>
+            <br/>
         </div>
         <div class="container col-11">
             <div id="div1" class="table100 ver5 m-b-110">
@@ -125,10 +141,15 @@
                             <th Style="background-color: #167890;" class="column100 column1" data-column="column1">Código Interno</th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Estado Reunión</th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Fecha Agendada</th>
+                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9"></th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Lugar</th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Encargado</th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Tema</th>
-                            <th Style="background-color: #167890;" class="column100 column2" data-column="column2">Acuerdos</th>
+                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9"></th>
+                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9"></th>
+                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Acuerdos</th>
+                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9"></th>
+                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9"></th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Proyecto Asociado</th>
                             <th Style="background-color: #167890;" class="column100 column4" data-column="column4">Código Proyecto Asociado</th>
                             <th Style="background-color: #167890;" class="column100 column4" data-column="column4"></th>
@@ -140,17 +161,17 @@
                                    items="${reuniones}"
                                    varStatus="status">
                             <tr class="row100">
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column1" data-column="column1">${reu.idReunion}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column9" data-column="column9">${reu.estadoReunion}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column9" data-column="column9">${reu.fechaReunion} ${reu.hora}:${reu.min} Hrs</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column9" data-column="column9">${reu.lugarReunion}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column9" data-column="column9">${reu.encargadoReunion}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column9" data-column="column9">${reu.descripcionInicial}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column2" data-column="column2">${reu.descripcionFinal}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column9" data-column="column9">${reu.nombreProyecto}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column4" data-column="column4">${reu.idProyecto}</td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column4" data-column="column4"><a href="eliminar-reunion?idReunion=${reu.idReunion}">Anular Reunión</a></td>
-                                <td style="font-size: 13px;padding-top: 0px;padding-bottom: 0px;" class="column100 column4" data-column="column4"><a href="modificarReunionDesdeListar?txtBuscarReunion=${reu.idReunion}">Modificar Reunión</a></td>
+                                <td style="font-size: 13px;" class="column100 column1" data-column="column1">${reu.idReunion}</td>
+                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${reu.estadoReunion}</td>
+                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${reu.fechaReunion} ${reu.hora}:${reu.min} Hrs</td>
+                                <td style="font-size: 13px;" class="column100 column9" data-column="column9" colspan="2">${reu.lugarReunion}</td>
+                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${reu.encargadoReunion}</td>
+                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${reu.descripcionInicial}</td>
+                                <td style="font-size: 13px;" class="column100 column9" data-column="column9" colspan="5">${reu.descripcionFinal}</td>
+                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${reu.nombreProyecto}</td>
+                                <td style="font-size: 13px;" class="column100 column4" data-column="column4">${reu.idProyecto}</td>
+                                <td style="font-size: 13px;" class="column100 column4" data-column="column4"><a href="eliminar-reunion?idReunion=${reu.idReunion}">Anular Reunión</a></td>
+                                <td style="font-size: 13px;" class="column100 column4" data-column="column4"><a href="modificarReunionDesdeListar?txtBuscarReunion=${reu.idReunion}">Modificar Reunión</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -165,17 +186,17 @@
         <script>
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
-                loop: true,
+            loop: true,
                 margin: 10,
                 nav: false,
                 startPosition: 1,
                 responsiveClass: true,
                 responsive: {
-                    0: {
-                        items: 1
+                0: {
+            items: 1
                     }
                 }
-            });
+                });
 
             var dropToggle = $('.menu_right > li').has('ul').children('a');
             dropToggle.on('click', function () {
