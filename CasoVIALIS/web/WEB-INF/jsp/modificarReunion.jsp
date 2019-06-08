@@ -45,6 +45,9 @@
                         <li>
                             <a href="/CasoVIALIS/modificarTrabajador">Modificar Trabajador</a>
                         </li>
+                        <li>
+                            <a href="/CasoVIALIS/gestionarContrato">Gestionar Contrato Laboral</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

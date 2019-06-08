@@ -36,7 +36,8 @@ public class TrabajadorDAO {
 
         try {
             
-            /*String llamada = "{ call sp_agregar_trabajador(?, ?, ?, ?, ?) }";
+            /*BLOB - CLOB
+            String llamada = "{ call sp_agregar_trabajador(?, ?, ?, ?, ?) }";
             CallableStatement cstmt = this.conexion.prepareCall(llamada);
 
             cstmt.setString(1, emp.getNombreTrabajador());
