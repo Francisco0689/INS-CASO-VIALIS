@@ -11,9 +11,7 @@ import Entidades.Hito;
 import Entidades.Proyecto;
 import Entidades.Usuario;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -175,13 +173,19 @@ public class ProyectoController {
             @RequestParam("txtNombreHito") String nombreHito,
             @RequestParam("txtFechaHito") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date fechaHito) {
         
+        Proyecto pro = proDAO.mostrarProyectoPorCodigo(codigoProyecto);
+        if(pro == null){
+        model.addAttribute("mensaje", "Debe ingresar un código de proyecto válido");
+        return "modificarProyecto";
+        }
+
         Hito hito = new Hito();
-        HitoDAO hitoDAO = new HitoDAO(); 
-        
+        HitoDAO hitoDAO = new HitoDAO();
+
         hito.setIdProyecto(codigoProyecto);
         hito.setNombreHito(nombreHito);
         hito.setFechaHito(new java.sql.Date(fechaHito.getTime()));
-        
+
         String respuesta = hitoDAO.agregarHito(hito);
 
         model.addAttribute("mensaje", respuesta);

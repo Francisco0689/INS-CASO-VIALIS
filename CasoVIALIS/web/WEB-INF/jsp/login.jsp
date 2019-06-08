@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/login.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
         <title>Login</title>
     </head>
     <body style="background-image: url(img/street.jpg)">

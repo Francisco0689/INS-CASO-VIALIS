@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link href="css/themify-icons.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
     </head>
     <body>
         <!-- ================Offcanvus Menu Area =================-->
@@ -34,6 +35,9 @@
                         </li>
                         <li>
                             <a href="/CasoVIALIS/modificarTrabajador">Modificar Trabajador</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/gestionarContrato">Gestionar Contrato Laboral</a>
                         </li>
                     </ul>
                 </li>
@@ -66,7 +70,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Sobre Nosotros</a>
+                    <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>
                     <a href="/CasoVIALIS/login">Salir</a>
@@ -87,9 +91,9 @@
         <!--================End Canvus Menu Area =================-->
         <header>
             <div class="hero">
-                <a class="navbar-brand" href="/CasoVIALIS/">
-                    <!--<img src="img/logo.png" alt="">-->
-                </a>
+                <!--<a class="navbar-brand" href="/CasoVIALIS/">
+                    <img src="img/logo.ico" alt="">
+                </a>-->
 
                 <div class="owl-carousel owl-theme heroCarousel">
                     <div class="item">

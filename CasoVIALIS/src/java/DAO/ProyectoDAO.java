@@ -138,7 +138,7 @@ public class ProyectoDAO {
                 proyecto.setEncargadoProyecto(rs.getString("ENCARGADO_PROYECTO"));
                 proyecto.setDireccionProyecto(rs.getString("DIRECCION_PROYECTO"));
 
-                PreparedStatement ps2 = acceso.prepareStatement("SELECT * FROM HITO WHERE ID_PROYECTO = ?");
+                PreparedStatement ps2 = acceso.prepareStatement("SELECT * FROM HITO WHERE ID_PROYECTO = ? ORDER BY ID");
                 ps2.setInt(1, proyecto.getIdProyecto());
                 ResultSet rs2 = ps2.executeQuery();
                 listaHitos = new ArrayList();

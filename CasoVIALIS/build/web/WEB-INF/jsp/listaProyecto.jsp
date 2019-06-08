@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/select2.min.css">
         <link rel="stylesheet" href="css/perfect-scrollbar.css">
+        <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
 
         <style type="text/css">
             #div1 {
@@ -86,7 +87,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Sobre Nosotros</a>
+                    <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>
                     <a href="/CasoVIALIS/login">Salir</a>

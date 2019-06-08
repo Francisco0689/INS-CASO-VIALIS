@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
         <title>Modificar Proyecto</title>
         <style type="text/css">
             h1 {
@@ -75,7 +76,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Sobre Nosotros</a>
+                    <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>
                     <a href="/CasoVIALIS/login">Salir</a>
@@ -105,12 +106,13 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">Agregar Hito A Proyecto: ${proyecto.getNombreProyecto()}</h5>
-                            <input type="hidden" value="${proyecto.getIdProyecto()}" name="txtIdProyecto" id="txtIdProyecto" class="form-control">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
+                            <label for="txtIdProyecto">Código Interno de Proyecto</label>
+                            <input type="number" value="${proyecto.getIdProyecto()}" name="txtIdProyecto" id="txtIdProyecto" class="form-control" required="true">
                             <label for="txtNombreHito">Nombre de Hito</label>
                             <input type="text" name="txtNombreHito" id="txtNombreHito" placeholder="Nombre de Hito" class="form-control" required="true">
                             <label for="txtFechaHito">Fecha de Hito</label>

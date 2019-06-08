@@ -29,23 +29,35 @@ public class TrabajadorController {
 
     @RequestMapping(value = "/trabajador", method = RequestMethod.GET)
     public String trabajador(Model model, HttpServletRequest request) {
-        
-        HttpSession session = request.getSession();
-        Usuario usu = (Usuario)session.getAttribute("usu");
 
-        if(usu == null){
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario) session.getAttribute("usu");
+
+        if (usu == null) {
             return "login";
         }
         return "trabajador";
     }
 
+    @RequestMapping(value = "/gestionarContrato", method = RequestMethod.GET)
+    public String gestionarContrato(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario) session.getAttribute("usu");
+
+        if (usu == null) {
+            return "login";
+        }
+        return "gestionarContrato";
+    }
+
     @RequestMapping(value = "/listaTrabajador", method = RequestMethod.GET)
     public String listaTrabajador(Model model, HttpServletRequest request) {
-        
-        HttpSession session = request.getSession();
-        Usuario usu = (Usuario)session.getAttribute("usu");
 
-        if(usu == null){
+        HttpSession session = request.getSession();
+        Usuario usu = (Usuario) session.getAttribute("usu");
+
+        if (usu == null) {
             return "login";
         }
 
@@ -60,26 +72,26 @@ public class TrabajadorController {
     public String modificarTrabajador(Model model, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        Usuario usu = (Usuario)session.getAttribute("usu");
+        Usuario usu = (Usuario) session.getAttribute("usu");
 
-        if(usu == null){
+        if (usu == null) {
             return "login";
         }
-        
+
         return "modificarTrabajador";
     }
-    
+
     @RequestMapping(value = "/modificarTrabajadorDesdeListar", method = RequestMethod.GET)
     public String modificarTrabajadorDesdeListar(Model model, RedirectAttributes ra, HttpServletRequest request,
             @RequestParam("txtBuscarRut") int rutTrabajador) {
 
         HttpSession session = request.getSession();
-        Usuario usu = (Usuario)session.getAttribute("usu");
+        Usuario usu = (Usuario) session.getAttribute("usu");
 
-        if(usu == null){
+        if (usu == null) {
             return "login";
         }
-        
+
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
 
         if (trabajadorExistente == null) {
@@ -88,7 +100,7 @@ public class TrabajadorController {
         }
 
         ra.addFlashAttribute("trabajador", trabajadorExistente);
-        
+
         return "redirect:modificarTrabajador";
     }
 
@@ -104,8 +116,24 @@ public class TrabajadorController {
         }
 
         ra.addFlashAttribute("trabajador", trabajadorExistente);
-        
+
         return "redirect:modificarTrabajador";
+    }
+
+    @RequestMapping(value = "/buscar-trabajador-contrato", method = RequestMethod.POST)
+    public String buscarTrabajadorContrato(Model model, RedirectAttributes ra, HttpServletRequest request,
+            @RequestParam("txtBuscarRut") int rutTrabajador) {
+
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
+
+        if (trabajadorExistente == null) {
+            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            return "redirect:gestionarContrato";
+        }
+
+        ra.addFlashAttribute("trabajador", trabajadorExistente);
+
+        return "redirect:gestionarContrato";
     }
 
     @RequestMapping(value = "/agregar-trabajador", method = RequestMethod.POST)

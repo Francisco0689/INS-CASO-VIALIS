@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
         <title>Modificar Reunion</title>
         <style type="text/css">
             h1 {
@@ -75,7 +76,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Sobre Nosotros</a>
+                    <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>
                     <a href="/CasoVIALIS/login">Salir</a>
