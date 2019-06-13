@@ -99,10 +99,20 @@
         </div>
         <!--================End Canvus Menu Area =================-->
         <h1>Agendar Reunion</h1>
-        ${mensaje}
         <div class="container col-12">
             <br/><br/><br/><br/><br/>
         </div>
+        <c:if test="${not empty mensaje}">
+            <div class="container col-12">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
+            </div>
+        </c:if>
         <form action="agendar-reunion" method="POST">
             <div class="container col-11">
                 <div class="row">
@@ -158,13 +168,19 @@
                         <button style="background: #218838; font-weight: bold;" type="submit" class="btn btn-success btn-block">Agendar Reunión</button>
                     </center>
                 </div>
-                
+
             </div>
         </form>
         <script src="js/jquery-3.2.1.min.js"></script>	
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
                 loop: true,

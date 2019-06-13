@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Administrador/Desktop/CasoVIALIS/src/java/Controller/LoginController.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/CasoVIALIS/src/java/Controller/HomeController.java</file>
+            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/DAO/DocumentoDAO.java</file>
+            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/web/WEB-INF/jsp/gestionarContrato.jsp</file>
+            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/Controller/TrabajadorController.java</file>
+            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/Entidades/Documento.java</file>
         </group>
     </open-files>
 </project-private>

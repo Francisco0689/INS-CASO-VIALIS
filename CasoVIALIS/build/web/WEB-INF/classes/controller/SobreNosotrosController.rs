@@ -1,2 +1,1 @@
-controller.HomeController
 controller.SobreNosotrosController

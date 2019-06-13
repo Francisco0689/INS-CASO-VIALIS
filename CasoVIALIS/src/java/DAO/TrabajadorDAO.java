@@ -35,20 +35,19 @@ public class TrabajadorDAO {
         String respuesta = null;
 
         try {
-            
+
             /*BLOB - CLOB
-            String llamada = "{ call sp_agregar_trabajador(?, ?, ?, ?, ?) }";
-            CallableStatement cstmt = this.conexion.prepareCall(llamada);
+             String llamada = "{ call sp_agregar_trabajador(?, ?, ?, ?, ?) }";
+             CallableStatement cstmt = this.conexion.prepareCall(llamada);
 
-            cstmt.setString(1, emp.getNombreTrabajador());
-            cstmt.setString(2, emp.getApellidoTrabajador());
-            cstmt.setInt(3, emp.getRutTrabajador());
-            cstmt.setInt(4, emp.getDvTrabajador());
+             cstmt.setString(1, emp.getNombreTrabajador());
+             cstmt.setString(2, emp.getApellidoTrabajador());
+             cstmt.setInt(3, emp.getRutTrabajador());
+             cstmt.setInt(4, emp.getDvTrabajador());
 
-            if (cstmt.executeUpdate() > 0) {
-                agregado = true;
-            }*/
-                      
+             if (cstmt.executeUpdate() > 0) {
+             agregado = true;
+             }*/
             PreparedStatement ps
                     = acceso.prepareStatement("INSERT INTO TRABAJADOR"
                             + " (NOMBRE_TRABAJADOR, APELLIDO_TRABAJADOR, RUT_TRABAJADOR,"
@@ -70,11 +69,11 @@ public class TrabajadorDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Empleado Agregado Correctamente";
+                respuesta = "Trabajador Ingresado Correctamente al Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al INGRESAR EMPLEADO" + ex.getMessage();
+            System.out.println("Error al INGRESAR EMPLEADO" + ex.getMessage());
         }
 
         return respuesta;
@@ -87,6 +86,40 @@ public class TrabajadorDAO {
         try {
             PreparedStatement ps = acceso.prepareStatement("SELECT * FROM TRABAJADOR WHERE RUT_TRABAJADOR=?");
             ps.setInt(1, rut);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                trabajador = new Trabajador();
+                trabajador.setIdTrabajador(rs.getInt("ID"));
+                trabajador.setNombreTrabajador(rs.getString("NOMBRE_TRABAJADOR"));
+                trabajador.setApellidoTrabajador(rs.getString("APELLIDO_TRABAJADOR"));
+                trabajador.setRutTrabajador(rs.getInt("RUT_TRABAJADOR"));
+                trabajador.setDvTrabajador(rs.getString("DV_TRABAJADOR"));
+                trabajador.setEstadoCivilTrabajador(rs.getString("ESTADO_CIVIL_TRABAJADOR"));
+                trabajador.setDireccionTrabajador(rs.getString("DIRECCION_TRABAJADOR"));
+                trabajador.setTelefonoTrabajador(rs.getInt("TELEFONO_TRABAJADOR"));
+                trabajador.setEstadoTrabajador(rs.getString("ESTADO_TRABAJADOR"));
+                trabajador.setNacionalidadTrabajador(rs.getString("NACIONALIDAD_TRABAJADOR"));
+                trabajador.setCondicionExtranjeroTrabajador(rs.getString("CONDICION_EXTRANJERO_TRAB"));
+                trabajador.setEspecialidadTrabajador(rs.getString("ESPECIALIDAD_TRABAJADOR"));
+
+                return trabajador;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return trabajador;
+    }
+
+    public Trabajador mostrarTrabajadorPorCodigoInterno(int codigoTrabajador) {
+        Trabajador trabajador = null;
+        Connection acceso = conn.getCnn();
+
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM TRABAJADOR WHERE ID=?");
+            ps.setInt(1, codigoTrabajador);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -175,11 +208,11 @@ public class TrabajadorDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Empleado Modificado Correctamente";
+                respuesta = "Trabajador Modificado Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al MODIFICAR EMPLEADO" + ex.getMessage();
+            System.out.println("Error al MODIFICAR EMPLEADO" + ex.getMessage());
         }
 
         return respuesta;
@@ -201,11 +234,11 @@ public class TrabajadorDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Empleado Eliminado Correctamente";
+                respuesta = "Trabajador Eliminado Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al MODIFICAR EMPLEADO" + ex.getMessage();
+            System.out.println("Error al MODIFICAR EMPLEADO" + ex.getMessage());
         }
 
         return respuesta;

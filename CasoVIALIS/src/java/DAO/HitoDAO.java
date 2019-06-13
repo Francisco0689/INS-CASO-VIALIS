@@ -41,7 +41,7 @@ public class HitoDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = " *Hito Agregado Correctamente";
+                respuesta = " *Hito Agregado Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {

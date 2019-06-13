@@ -54,11 +54,11 @@ public class ReunionDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Reunión Agendada Correctamente";
+                respuesta = "Reunión Agendada Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al INGRESAR Reunión" + ex.getMessage();
+            System.out.println("Error al INGRESAR Reunión" + ex.getMessage());
         }
 
         return respuesta;
@@ -121,11 +121,11 @@ public class ReunionDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Reunión Modificado Correctamente";
+                respuesta = "Reunión Modificada Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al MODIFICAR REUNIÓN" + ex.getMessage();
+            System.out.println("Error al MODIFICAR REUNIÓN" + ex.getMessage());
         }
 
         return respuesta;
@@ -140,7 +140,7 @@ public class ReunionDAO {
         try {
             PreparedStatement ps = acceso.prepareStatement("SELECT * FROM REUNION REU "
                     + "JOIN PROYECTO PRO ON "
-                    + "(REU.ID_PROYECTO = PRO.ID) WHERE REU.ESTADO_REUNION != 'NOACTIVO' "
+                    + "(REU.ID_PROYECTO = PRO.ID)"
                     + "ORDER BY REU.ID ASC");
             ResultSet rs = ps.executeQuery();
 
@@ -178,17 +178,17 @@ public class ReunionDAO {
 
             PreparedStatement ps = acceso.prepareStatement(""
                     + "UPDATE REUNION SET "
-                    + "ESTADO_REUNION= 'NOACTIVO' "
+                    + "ESTADO_REUNION= 'ANULADA' "
                     + " WHERE ID = ?");
             ps.setInt(1, codigoReunion);
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Reunión Anulada Correctamente";
+                respuesta = "Reunión Anulada Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            respuesta = "Error al ANULAR REUNION" + ex.getMessage();
+            System.out.println("Error al ANULAR REUNION" + ex.getMessage());
         }
 
         return respuesta;

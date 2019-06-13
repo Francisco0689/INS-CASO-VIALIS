@@ -99,7 +99,20 @@
         </div>
         <!--================End Canvus Menu Area =================-->
         <h1>GESTIONAR REUNIÓN</h1>
-        ${mensaje}
+        <div class="container col-12">
+            <br/>
+        </div>
+        <c:if test="${not empty mensaje}">
+            <div class="container col-12">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
+            </div>
+        </c:if>
         <form action="buscar-reunion" method="POST">
             <div class="container col-11">
                 <div class="row">
@@ -119,73 +132,84 @@
         <div class="container col-12">
             <br/><br/><br/>
         </div>
-        <form action="modificar-reunion" method="POST">
-            <div class="container col-11">
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="txtEstadoReunion">Estado de Reunión</label>
-                        <input type="text" value="${reunion.getEstadoReunion()}" name="txtEstadoReunion" id="txtEstadoReunion" class="form-control" placeholder="Estado de Reunión" required="true">
-                        <input type="hidden" value="${reunion.getIdReunion()}" name="txtIdReunion" id="txtIdReunion">
+        <c:if test="${empty reunion.getIdReunion()}">
+            <h1>CONSTRUCTORA VIALIS</h1>
+        </c:if>
+        <c:if test="${not empty reunion.getIdReunion()}">
+            <form action="modificar-reunion" method="POST">
+                <div class="container col-11">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtEstadoReunion">Estado de Reunión</label>
+                            <input type="text" value="${reunion.getEstadoReunion()}" name="txtEstadoReunion" id="txtEstadoReunion" class="form-control" placeholder="Estado de Reunión" required="true">
+                            <input type="hidden" value="${reunion.getIdReunion()}" name="txtIdReunion" id="txtIdReunion">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtLugar">Lugar de Reunión</label>
+                            <input type="txtLugar" value="${reunion.getLugarReunion()}" name="txtLugar" id="txtLugar" class="form-control" placeholder="Lugar de Reunión" required="true">
+                        </div>
                     </div>
-                    <div class="form-group col-6">
-                        <label for="txtLugar">Lugar de Reunión</label>
-                        <input type="txtLugar" value="${reunion.getLugarReunion()}" name="txtLugar" id="txtLugar" class="form-control" placeholder="Lugar de Reunión" required="true">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaReunion">Fecha de Reunión</label>
+                            <input type="date" value="${reunion.getFechaReunion()}" min="${fechaActual}" name="txtFechaReunion" id="txtFechaReunion" class="form-control" placeholder="Fecha de Reunión">
+                        </div>
+                        <div class="col-3">
+                            <label for="txtHoraReunion">Hora de Reunión</label>
+                            <input type="number" value="${reunion.getHora()}" min="${hora}" max="24" name="txtHoraReunion" id="txtHoraReunion" class="form-control" placeholder="Hrs." required="true">
+                        </div>
+                        <div class="col-3">
+                            <label for="txtMinutoReunion">Min.</label>
+                            <input type="number" value="${reunion.getMin()}" min="00" max="59" name="txtMinutoReunion" id="txtMinutoReunion" class="form-control" placeholder="Min." required="true">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label for="txtFechaReunion">Fecha de Reunión</label>
-                        <input type="date" value="${reunion.getFechaReunion()}" min="${fechaActual}" name="txtFechaReunion" id="txtFechaReunion" class="form-control" placeholder="Fecha de Reunión">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtEncargado">Encargado de Reunión</label>
+                            <input type="text" value="${reunion.getEncargadoReunion()}" name="txtEncargado" id="txtEncargado" placeholder="Encargado de Reunión" class="form-control" required="true">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtTemaReunion">Tema de Reunión</label>
+                            <input disabled="true" type="txtTemaReunion" value="${reunion.getDescripcionInicial()}" name="txtTemaReunion" id="txtTemaReunion" class="form-control" placeholder="Tema de Reunión" required="true">
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <label for="txtHoraReunion">Hora de Reunión</label>
-                        <input type="number" value="${reunion.getHora()}" min="${hora}" max="24" name="txtHoraReunion" id="txtHoraReunion" class="form-control" placeholder="Hrs." required="true">
-                    </div>
-                    <div class="col-3">
-                        <label for="txtMinutoReunion">Min.</label>
-                        <input type="number" value="${reunion.getMin()}" min="00" max="59" name="txtMinutoReunion" id="txtMinutoReunion" class="form-control" placeholder="Min." required="true">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="txtEncargado">Encargado de Reunión</label>
-                        <input type="text" value="${reunion.getEncargadoReunion()}" name="txtEncargado" id="txtEncargado" placeholder="Encargado de Reunión" class="form-control" required="true">
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="txtTemaReunion">Tema de Reunión</label>
-                        <input disabled="true" type="txtTemaReunion" value="${reunion.getDescripcionInicial()}" name="txtTemaReunion" id="txtTemaReunion" class="form-control" placeholder="Tema de Reunión" required="true">
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label for="txtProyectoAsociado">Proyecto Asociado</label>
-                        <input type="txtProyectoAsociado" disabled="true" value="${reunion.getNombreProyecto()}" name="txtProyectoAsociado" id="txtProyectoAsociado" class="form-control" placeholder="Proyecto Relacionado">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="txtProyectoAsociado">Proyecto Asociado</label>
+                            <input type="txtProyectoAsociado" disabled="true" value="${reunion.getNombreProyecto()}" name="txtProyectoAsociado" id="txtProyectoAsociado" class="form-control" placeholder="Proyecto Relacionado">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label for="txtAcuerdo">Acuerdos de la Reunión</label>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="txtAcuerdo">Acuerdos de la Reunión</label>
+                        </div>
+                        <div class="form-group col-12">
+                            <textarea name="txtAcuerdo" id="txtAcuerdo" rows="5" cols="169" placeholder="Acuerdos de la reunión...">${reunion.getDescripcionFinal()}</textarea>
+                        </div>
                     </div>
-                    <div class="form-group col-12">
-                        <textarea name="txtAcuerdo" id="txtAcuerdo" rows="5" cols="169" placeholder="Acuerdos de la reunión...">${reunion.getDescripcionFinal()}</textarea>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <center>
-                        <button style="background: #218838; font-weight: bold;" type="submit" class="btn btn-success btn-block">Modificar Reunión</button>
-                    </center>
+                    <div class="form-group">
+                        <center>
+                            <button style="background: #218838; font-weight: bold;" type="submit" class="btn btn-success btn-block">Modificar Reunión</button>
+                        </center>
+                    </div>
+                    <div class="container col-12">
+                        <br/><br/><br/><br/><br/>
+                    </div>
                 </div>
-                <div class="container col-12">
-                    <br/><br/><br/><br/><br/>
-                </div>
-            </div>
-        </form>
+            </form>
+        </c:if>
         <script src="js/jquery-3.2.1.min.js"></script>	
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
                 loop: true,

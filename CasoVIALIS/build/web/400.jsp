@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/404.css" rel="stylesheet" type="text/css"/>
-        <title>404</title>
+        <title>400</title>
     </head>
     <body>
         <section id="not-found">

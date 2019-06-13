@@ -5,27 +5,32 @@
  */
 package Entidades;
 
+
 import java.io.Serializable;
 
 /**
  *
  * @author fmaldonc
  */
-public class Documento implements Serializable{
-    
+public class Documento implements Serializable {
+
     private int idDocumento;
     private String nombreDocumento;
     private String tipoDocumento;
-    private String codigoDocumento;
+    private String Rutadocumento;
+    private int idTrabajador;
+    private int idProyecto;
 
     public Documento() {
     }
 
-    public Documento(int idDocumento, String nombreDocumento, String tipoDocumento, String codigoDocumento) {
+    public Documento(int idDocumento, String nombreDocumento, String tipoDocumento, String Rutadocumento, int idTrabajador, int idProyecto) {
         this.idDocumento = idDocumento;
         this.nombreDocumento = nombreDocumento;
         this.tipoDocumento = tipoDocumento;
-        this.codigoDocumento = codigoDocumento;
+        this.Rutadocumento = Rutadocumento;
+        this.idTrabajador = idTrabajador;
+        this.idProyecto = idProyecto;
     }
 
     public int getIdDocumento() {
@@ -52,21 +57,39 @@ public class Documento implements Serializable{
         this.tipoDocumento = tipoDocumento;
     }
 
-    public String getCodigoDocumento() {
-        return codigoDocumento;
+    public String getRutadocumento() {
+        return Rutadocumento;
     }
 
-    public void setCodigoDocumento(String codigoDocumento) {
-        this.codigoDocumento = codigoDocumento;
+    public void setRutadocumento(String Rutadocumento) {
+        this.Rutadocumento = Rutadocumento;
+    }
+
+    public int getIdTrabajador() {
+        return idTrabajador;
+    }
+
+    public void setIdTrabajador(int idTrabajador) {
+        this.idTrabajador = idTrabajador;
+    }
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     @Override
     public String toString() {
-        return "Documento{" + "idDocumento=" + idDocumento + ", nombreDocumento=" 
-                + nombreDocumento + ", tipoDocumento=" + tipoDocumento + ", codigoDocumento="
-                + codigoDocumento + '}';
+        return "Documento{" + "idDocumento=" + idDocumento + ", nombreDocumento=" +
+                nombreDocumento + ", tipoDocumento=" + tipoDocumento + 
+                ", Rutadocumento=" + Rutadocumento + ", idTrabajador=" + 
+                idTrabajador + ", idProyecto=" + idProyecto + '}';
     }
-    
-    
-    
+
+   
+
+
 }

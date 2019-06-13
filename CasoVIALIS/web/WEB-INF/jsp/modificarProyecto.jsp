@@ -102,7 +102,18 @@
         <div class="container col-12">
             <br/><br/>
         </div>
-        ${mensaje}
+        <c:if test="${not empty mensaje}">
+            <div class="container col-12">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
+            </div>
+        </c:if>
+
         <form action="agregar-hito" method="POST">
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -115,7 +126,8 @@
                         </div>
                         <div class="modal-body">
                             <label for="txtIdProyecto">Código Interno de Proyecto</label>
-                            <input type="number" value="${proyecto.getIdProyecto()}" name="txtIdProyecto" id="txtIdProyecto" class="form-control" required="true">
+                            <input type="number" disabled="true" value="${proyecto.getIdProyecto()}" name="txtIdProyecto" id="txtIdProyecto" class="form-control" required="true">
+                            <input type="hidden" value="${proyecto.getIdProyecto()}" name="txtIdProyecto" id="txtIdProyecto" class="form-control" required="true">
                             <label for="txtNombreHito">Nombre de Hito</label>
                             <input type="text" name="txtNombreHito" id="txtNombreHito" placeholder="Nombre de Hito" class="form-control" required="true">
                             <label for="txtFechaHito">Fecha de Hito</label>
@@ -145,53 +157,64 @@
                 </div>
             </div>
         </form>
-        <form action="modificar-proyecto" method="POST">
-            <div class="container col-12">
-                <br/><br/>
-            </div>
-            <div class="container col-11">
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="txtNombreProyecto">Nombre Proyecto</label>
-                        <input type="text" value="${proyecto.getNombreProyecto()}" name="txtNombreProyecto" id="txtNombreProyecto" class="form-control" placeholder="Nombre Proyecto" required="true">
-                        <input type="hidden" value="${proyecto.getIdProyecto()}" name="txtIdProyecto" id="txtIdProyecto" class="form-control">
+        <c:if test="${empty proyecto.getIdProyecto()}">
+            <h1>CONSTRUCTORA VIALIS</h1>
+        </c:if>
+        <c:if test="${not empty proyecto.getIdProyecto()}">
+            <form action="modificar-proyecto" method="POST">
+                <div class="container col-12">
+                    <br/><br/>
+                </div>
+                <div class="container col-11">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtNombreProyecto">Nombre Proyecto</label>
+                            <input type="text" value="${proyecto.getNombreProyecto()}" name="txtNombreProyecto" id="txtNombreProyecto" class="form-control" placeholder="Nombre Proyecto" required="true">
+                            <input type="hidden" value="${proyecto.getIdProyecto()}" name="txtIdProyecto" id="txtIdProyecto" class="form-control">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtTipoProyecto">Tipo de Proyecto</label>
+                            <input type="text" value="${proyecto.getTipoProyecto()}" name="txtTipoProyecto" id="txtTipoProyecto" placeholder="Tipo de Proyecto" class="form-control">
+                        </div>
                     </div>
-                    <div class="form-group col-6">
-                        <label for="txtTipoProyecto">Tipo de Proyecto</label>
-                        <input type="text" value="${proyecto.getTipoProyecto()}" name="txtTipoProyecto" id="txtTipoProyecto" placeholder="Tipo de Proyecto" class="form-control">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtEstadoProyecto">Estado de Proyecto</label>
+                            <input type="text" value="${proyecto.getEstadoProyecto()}" name="txtEstadoProyecto" id="txtTipoProyecto" placeholder="Estado de Proyecto" class="form-control">             
+                        </div>
+                        <div class="col-6">
+                            <label for="txtEncargadoProyecto">Encargado de Proyecto</label>
+                            <input type="text" value="${proyecto.getEncargadoProyecto()}" name="txtEncargadoProyecto" id="txtEncargadoProyecto" class="form-control" placeholder="Encargado de Proyecto" required="true">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="txtDireccionProyecto">Direccion Proyecto</label>
+                            <input type="text" value="${proyecto.getDireccionProyecto()}" name="txtDireccionProyecto" id="txtDireccionProyecto" class="form-control" placeholder="Direccion Proyecto" required="true">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <button type="submit" Style="background-color: #28a745; font-weight: bold;" class="btn btn-primary btn-block">Modificar Proyecto</button>
+                        </div>
+                        <div class="form-group col-6">
+                            <button type="button"  Style="background-color: #007bff; font-weight: bold;" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">Ingresar Hito</button>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label for="txtEstadoProyecto">Estado de Proyecto</label>
-                        <input type="text" value="${proyecto.getEstadoProyecto()}" name="txtEstadoProyecto" id="txtTipoProyecto" placeholder="Estado de Proyecto" class="form-control">             
-                    </div>
-                    <div class="col-6">
-                        <label for="txtEncargadoProyecto">Encargado de Proyecto</label>
-                        <input type="text" value="${proyecto.getEncargadoProyecto()}" name="txtEncargadoProyecto" id="txtEncargadoProyecto" class="form-control" placeholder="Encargado de Proyecto" required="true">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label for="txtDireccionProyecto">Direccion Proyecto</label>
-                        <input type="text" value="${proyecto.getDireccionProyecto()}" name="txtDireccionProyecto" id="txtDireccionProyecto" class="form-control" placeholder="Direccion Proyecto" required="true">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <button type="submit" Style="background-color: #28a745; font-weight: bold;" class="btn btn-primary btn-block">Modificar Proyecto</button>
-                    </div>
-                    <div class="form-group col-6">
-                        <button type="button"  Style="background-color: #007bff; font-weight: bold;" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalCenter">Ingresar Hito</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
+        </c:if>
         <script src="js/jquery-3.2.1.min.js"></script>	
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
                 loop: true,

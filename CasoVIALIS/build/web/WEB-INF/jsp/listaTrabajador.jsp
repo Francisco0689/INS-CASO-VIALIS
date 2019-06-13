@@ -113,12 +113,24 @@
         <div class="container col-12">
             <br/><br/><br/>
         </div>
+        <c:if test="${not empty mensaje}">
+            <div class="container col-12">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
+            </div>
+        </c:if>
         <div class="container col-11">
             <div id="div1" class="table100 ver5 m-b-110">
                 <table data-vertable="ver5">
                     <thead>
                         <tr class="row100 head">
                             <th Style="background-color: #167890;" class="column100 column1" data-column="column1">Código Interno</th>
+                            <th Style="background-color: #167890;" class="column100 column1" data-column="column1"></th>
                             <th Style="background-color: #167890;" class="column100 column2" data-column="column2"> Nombres</th>
                             <th Style="background-color: #167890;" class="column100 column3" data-column="column3">Apellidos</th>
                             <th Style="background-color: #167890;" class="column100 column4" data-column="column4">Rut</th>
@@ -129,8 +141,8 @@
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Nacionalidad</th>
                             <th Style="background-color: #167890;" class="column100 column10" data-column="column10">Condicion Extranjero</th>
                             <th Style="background-color: #167890;" class="column100 column11" data-column="column11">Especialidad</th>
-                            <th Style="background-color: #167890;" class="column100 column12" data-column="column12"></th>
-                            <th Style="background-color: #167890;" class="column100 column13" data-column="column13"></th>
+                            <th Style="background-color: #167890;" class="column100 column12" data-column="column12">Editar Trabajador</th>
+                            <th Style="background-color: #167890;" class="column100 column13" data-column="column13">Eliminar Trabajador</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,6 +151,7 @@
                                    varStatus="status">
                             <tr class="row100">
                                 <td class="column100 column1" data-column="column1">${tra.idTrabajador}</td>
+                                <td class="column100 column1" data-column="column1"><img src="img/man.png" alt=""/></td>
                                 <td class="column100 column2" data-column="column2">${tra.nombreTrabajador}</td>
                                 <td class="column100 column3" data-column="column3">${tra.apellidoTrabajador}</td>
                                 <td class="column100 column4" data-column="column4">${tra.rutTrabajador} - ${tra.dvTrabajador}</td>
@@ -149,8 +162,8 @@
                                 <td class="column100 column9" data-column="column9">${tra.nacionalidadTrabajador}</td>
                                 <td class="column100 column10" data-column="column10">${tra.condicionExtranjeroTrabajador}</td>
                                 <td class="column100 column11" data-column="column11">${tra.especialidadTrabajador}</td>
-                                <td class="column100 column12" data-column="column12"><a href="eliminar-trabajador?rutTrabajador=${tra.rutTrabajador}">Eliminar</a></td>
-                                <td class="column100 column13" data-column="column13"><a href="modificarTrabajadorDesdeListar?txtBuscarRut=${tra.rutTrabajador}">Modificar</a></td>
+                                <td class="column100 column13" data-column="column13"><a href="modificarTrabajadorDesdeListar?txtBuscarRut=${tra.rutTrabajador}"><img src="img/edit.png" alt=""/></a></td>
+                                <td class="column100 column12" data-column="column12"><a href="eliminar-trabajador?rutTrabajador=${tra.rutTrabajador}"><img src="img/remove.png" alt=""/></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -163,19 +176,24 @@
         <script src="js/owl.carousel.min.js"></script>
 
         <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
-            loop: true,
+                loop: true,
                 margin: 10,
                 nav: false,
                 startPosition: 1,
                 responsiveClass: true,
-                responsive: {
-                0: {
-            items: 1
+                responsive: {0: {
+                        items: 1
                     }
                 }
-                });
+            });
 
             var dropToggle = $('.menu_right > li').has('ul').children('a');
             dropToggle.on('click', function () {

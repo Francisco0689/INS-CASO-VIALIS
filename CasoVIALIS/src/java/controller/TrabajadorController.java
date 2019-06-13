@@ -5,18 +5,26 @@
  */
 package controller;
 
+import DAO.DocumentoDAO;
+import DAO.ProyectoDAO;
 import DAO.TrabajadorDAO;
+import Entidades.Documento;
+import Entidades.FileService;
 import Entidades.Trabajador;
 import Entidades.Usuario;
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.springframework.stereotype.Controller;
+import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -26,6 +34,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TrabajadorController {
 
     private TrabajadorDAO traDAO = new TrabajadorDAO();
+    private FileService fileService = new FileService();
+    private DocumentoDAO docuDAO = new DocumentoDAO();
+    private ProyectoDAO proDAO = new ProyectoDAO();
 
     @RequestMapping(value = "/trabajador", method = RequestMethod.GET)
     public String trabajador(Model model, HttpServletRequest request) {
@@ -95,7 +106,7 @@ public class TrabajadorController {
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
 
         if (trabajadorExistente == null) {
-            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            ra.addFlashAttribute("mensaje", "NO Exite trabajador ingresado con ese rut. Favor ingrese rut válido.");
             return "redirect:modificarTrabajador";
         }
 
@@ -111,7 +122,7 @@ public class TrabajadorController {
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
 
         if (trabajadorExistente == null) {
-            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            ra.addFlashAttribute("mensaje", "NO Exite trabajador ingresado con ese rut. Favor ingrese rut válido.");
             return "redirect:modificarTrabajador";
         }
 
@@ -127,11 +138,13 @@ public class TrabajadorController {
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
 
         if (trabajadorExistente == null) {
-            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            ra.addFlashAttribute("mensaje", "NO Exite trabajador ingresado con ese rut. Favor ingrese rut válido.");
             return "redirect:gestionarContrato";
         }
 
         ra.addFlashAttribute("trabajador", trabajadorExistente);
+        ra.addFlashAttribute("documentos", docuDAO.ListarDocumentoAsociados(trabajadorExistente.getIdTrabajador()));
+        ra.addFlashAttribute("proyectos", proDAO.ListarProyectos());
 
         return "redirect:gestionarContrato";
     }
@@ -152,7 +165,7 @@ public class TrabajadorController {
 
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rut);
         if (trabajadorExistente != null) {
-            ra.addFlashAttribute("mensaje", "Trabajador Ya Exite en la Base de Datos");
+            ra.addFlashAttribute("mensaje", "YA Exite trabajador ingresado con ese rut. Favor ingrese rut válido.");
             return "redirect:trabajador";
         }
 
@@ -171,10 +184,10 @@ public class TrabajadorController {
 
         String agregado = traDAO.agregarTrabajador(trabajadorNuevo);
         if (agregado == null) {
-            ra.addFlashAttribute("mensaje", "No se ah podido agregar Trabajador");
+            ra.addFlashAttribute("mensaje", "NO se pudo ingresar trabajador al sistema. Favor, verifique los datos ingresados.");
             return "redirect:trabajador";
         } else {
-            ra.addFlashAttribute("mensaje", "Trabajador Agregado Exitosamente");
+            ra.addFlashAttribute("mensaje", agregado);
         }
 
         return "redirect:trabajador";
@@ -187,7 +200,7 @@ public class TrabajadorController {
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rutTrabajador);
 
         if (trabajadorExistente == null) {
-            re.addFlashAttribute("mensaje", "El Trabajador no Existe");
+            re.addFlashAttribute("mensaje", "NO Exite trabajador ingresado con ese rut. Favor ingrese rut válido.");
             return "redirect:listaTrabajador";
         }
 
@@ -214,7 +227,7 @@ public class TrabajadorController {
 
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rut);
         if (trabajadorExistente == null) {
-            ra.addFlashAttribute("mensaje", "Trabajador NO Exite en la Base de Datos");
+            ra.addFlashAttribute("mensaje", "NO Exite trabajador ingresado con ese rut. Favor ingrese rut válido.");
             return "redirect:modificarTrabajador";
         }
 
@@ -233,13 +246,52 @@ public class TrabajadorController {
 
         String agregado = traDAO.modificarEmpleado(trabajadorNuevo);
         if (agregado == null) {
-            ra.addFlashAttribute("mensaje", "No se ah podido modificar Trabajador");
+            ra.addFlashAttribute("mensaje", "NO se pudo modificar trabajador seleccionado. Favor ingrese datos correctos.");
             return "redirect:trabajador";
         } else {
-            ra.addFlashAttribute("mensaje", "Trabajador modificado Exitosamente");
+            ra.addFlashAttribute("mensaje", agregado);
         }
 
         return "redirect:modificarTrabajador";
+    }
+
+    @Bean(name = "multipartResolver")
+    @RequestMapping(value = "/gestionar-contrato", method = RequestMethod.POST)
+    public String gestionarContrato(Model model, RedirectAttributes ra,
+            HttpServletRequest request,
+            @RequestParam("txtNombreDocumento") String nombreDocumento,
+            @RequestParam("txtTipoDocumento") String tipoDocumento,
+            @RequestParam("txtIdTrabajador") int idTrabajador,
+            @RequestParam("cboProyecto") int idProyecto,
+            @RequestParam("txtDocumento") MultipartFile multipartFile) throws ServletException, IOException {
+
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajadorPorCodigoInterno(idProyecto);
+        DocumentoDAO docDAO = new DocumentoDAO();
+        Documento doc = new Documento();
+        doc.setTipoDocumento(tipoDocumento);
+        doc.setIdTrabajador(idTrabajador);
+        doc.setNombreDocumento(nombreDocumento);
+        doc.setIdProyecto(idProyecto);
+
+        String agregado = null;
+        String addFile = fileService.saveFile(multipartFile);
+
+        if (addFile != null) {
+            doc.setRutadocumento(addFile);
+            agregado = docDAO.agregarDocumento(doc);
+        }
+
+        if (agregado == null) {
+            ra.addFlashAttribute("mensaje", "No se pudo Gestionar Contrato");
+            return "redirect:gestionarContrato";
+        } else {
+            ra.addFlashAttribute("mensaje", "Documento Agregado Exitosamente");
+            ra.addFlashAttribute("documentos", docuDAO.ListarDocumentoAsociados(idTrabajador));
+            ra.addFlashAttribute("trabajador", trabajadorExistente);
+        }
+
+        return "redirect:gestionarContrato";
+
     }
 
 }

@@ -49,9 +49,9 @@ public class ProyectoDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = " *Proyecto Agregado Correctamente ";
+                respuesta = " *Proyecto Agregado Correctamente al Sistema VIALIS ";
             } else {
-                respuesta = " *No se pudo agregar Hito ";
+                respuesta = " *NO se pudo agregar Hito en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
@@ -186,12 +186,11 @@ public class ProyectoDAO {
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
-                respuesta = "Proyecto Modificado Correctamente";
+                respuesta = "Proyecto Modificado Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            String error = ex.getMessage();
-            System.out.println(error);
+            System.out.println(ex.getMessage());
         }
 
         return respuesta;

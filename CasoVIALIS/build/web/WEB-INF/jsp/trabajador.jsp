@@ -100,11 +100,21 @@
         </div>
         <!--================End Canvus Menu Area =================-->
         <h1>INGRESAR TRABAJADOR</h1>
-        ${mensaje}
-        <form action="agregar-trabajador" method="POST">
+        <div class="container col-12">
+            <br/><br/><br/>
+        </div>
+        <c:if test="${not empty mensaje}">
             <div class="container col-12">
-                <br/><br/><br/>
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
             </div>
+        </c:if>
+        <form action="agregar-trabajador" method="POST">
             <div class="container col-11">
                 <div class="row">
                     <div class="form-group col-6">
@@ -182,6 +192,12 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
                 loop: true,

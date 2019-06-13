@@ -93,7 +93,7 @@ public class ReunionController {
         String mensaje = reuDAO.agendarReunion(reu);
 
         if (mensaje == null) {
-            mensaje = "No se ah podido agendar Reunión.";
+            mensaje = "NO se pudo agendar reunión. Favor, verifique los datos ingresados.";
         }
 
         List<Proyecto> proyectos = proDAO.ListarProyectos();
@@ -129,7 +129,7 @@ public class ReunionController {
         Reunion reunionAgendada = reuDAO.buscarReunion(codigoReunion);
 
         if (reunionAgendada == null) {
-            ra.addFlashAttribute("mensaje", "NO Exite reunión con ese código en la Base de Datos");
+            ra.addFlashAttribute("mensaje", "NO Exite reunión agendada con el código ingresado. Favor intente otro código.");
             return "redirect:modificarReunion";
         }
 
@@ -168,7 +168,7 @@ public class ReunionController {
         String mensaje = reuDAO.modificarReunion(reu);
 
         if (mensaje == null) {
-            mensaje = "No se ah podido MODIFICAR Reunión.";
+            mensaje = "NO se pudo modificar reunión agendada. Favor verifique datos ingresados.";
         }
 
         model.addAttribute("mensaje", mensaje);
@@ -200,7 +200,7 @@ public class ReunionController {
         Reunion reunionExistente = reuDAO.buscarReunion(idReunion);
 
         if (reunionExistente == null) {
-            re.addFlashAttribute("mensaje", "Reunión no Existe");
+            re.addFlashAttribute("mensaje", "NO existe reunión agendada. Favor, ingrese código válido.");
             return "redirect:listaReunion";
         }
 
@@ -225,7 +225,7 @@ public class ReunionController {
         Reunion reunionExistente = reuDAO.buscarReunion(codigoReunion);
 
         if (reunionExistente == null) {
-            ra.addFlashAttribute("mensaje", "Reunión NO Exite en la Base de Datos");
+            ra.addFlashAttribute("mensaje", "NO Exite reunión agendada con el código ingresado. Favor intente otro código.");
             return "redirect:modificarReunion";
         }
 
@@ -242,7 +242,7 @@ public class ReunionController {
         List<Reunion> reunionesAgendadas = reuDAO.buscarReunionesPorProyecto(codigoProyecto);
 
         if (reunionesAgendadas.size()< 1) {
-            model.addAttribute("mensaje", "NO Exiten reuniones con ese código en la Base de Datos");
+            model.addAttribute("mensaje", "NO Exite reunión agendada con el código ingresado. Favor intente otro código.");
             List<Reunion> reuniones = reuDAO.ListarReuniones();
             model.addAttribute("reuniones", reuniones);
             return "listaReunion";

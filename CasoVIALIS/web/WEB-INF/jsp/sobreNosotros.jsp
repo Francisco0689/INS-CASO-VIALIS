@@ -115,7 +115,7 @@
                     <div class="col-md-5">
                         <div class="about__img text-center text-md-left mb-5 mb-md-0">
                             <img class="img-fluid" src="img/about.png" alt="">
-                            <a href="#/" class="about__img__date text-center">
+                            <a href="/CasoVIALIS/sobreNosotros" class="about__img__date text-center">
                                 <h3>26</h3>
                                 <p>Años <br> de Creatividad</p>
                             </a>

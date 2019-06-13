@@ -106,7 +106,7 @@
                                 <h1>CONSTRUCTORA VIALIS</h1>
                                 <p>Trabajando constantemente, con la finalidad de
                                     proporcionar vías urbanas de CALIDAD.</p>
-                                <a class="btn btn--leftBorder btn--rightBorder" href="#/">Sobre Nosotros</a>
+                                <a class="btn btn--leftBorder btn--rightBorder" href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                                 <span class="hero__slideContent--right"></span>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                     <div class="col-md-5">
                         <div class="about__img text-center text-md-left mb-5 mb-md-0">
                             <img class="img-fluid" src="img/about.png" alt="">
-                            <a href="#/" class="about__img__date text-center">
+                            <a href="/CasoVIALIS/sobreNosotros" class="about__img__date text-center">
                                 <h3>26</h3>
                                 <p>Años <br> de Creatividad</p>
                             </a>
@@ -139,7 +139,7 @@
                             a nivel gubernamental, pero de servicios de baja-mediana escala,
                             tales como reparación de calles y avenidas y construcción
                             de vías de menor tamaño.</p>
-                        <a class="btn btn--rightBorder mt-4" href="#/">Leer más +</a>
+                        <a class="btn btn--rightBorder mt-4" href="/CasoVIALIS/sobreNosotros">Leer más +</a>
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                             <span class="overview__single__icon"><i class="ti-crown"></i></span>
                             <div class="media-body">
                                 <h3>286+</h3>
-                                <p>Proyectos Completados</p>
+                                <p>Proyectos.</p>
                             </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                             situadas fuera de los límites urbanos de una población
                             y cuyas fajas son bienes nacionales de uso público.</p>
 
-                        <a class="btn btn--rightBorder mt-3" href="#/">Leer más +</a>
+                        <a class="btn btn--rightBorder mt-3" href="/CasoVIALIS/listaProyecto">Leer más +</a>
                     </div>
                 </div>
 
@@ -226,7 +226,7 @@
                             En el subsuelo de la calle generalmente se disponen
                             las redes de las instalaciones de servicios urbanos a las edificaciones. </p>
 
-                        <a class="btn btn--rightBorder mt-3" href="#/">Leer más +</a>
+                        <a class="btn btn--rightBorder mt-3" href="/CasoVIALIS/listaProyecto">Leer más +</a>
                     </div>
                     <div class="col-md-7 mb-4 mb-md-0 order-1 order-md-2">
                         <div class="portfolio__img">
@@ -248,12 +248,12 @@
                         <p>Esta es la verdadera revolución en el campo de la 
                             arquitectura y el mundo del arte de la Vías de tránsito.</p>
 
-                        <a class="btn btn--rightBorder mt-3" href="#/">Leer más +</a>
+                        <a class="btn btn--rightBorder mt-3" href="/CasoVIALIS/listaProyecto">Leer más +</a>
                     </div>
                 </div>
 
                 <div class="text-center pt-2">
-                    <button class="btn btn--rightBorder btn--leftBorder">Ver más Proyectos</button>
+                    <a href="/CasoVIALIS/listaProyecto"><button class="btn btn--rightBorder btn--leftBorder">Ver más Proyectos</button></a>
                 </div>
             </div>
         </section>
@@ -271,7 +271,7 @@
                             esté en la cubierta</p>
                     </div>
                     <div class="col-lg-5 text-center text-lg-right">
-                        <a class="btn btn-dark btn--leftBorder btn--rightBorder" href="#/">Obtener Presupuesto</a>
+                        <a class="btn btn-dark btn--leftBorder btn--rightBorder" href="#">Obtener Presupuesto</a>
                     </div>
                 </div>
             </div>

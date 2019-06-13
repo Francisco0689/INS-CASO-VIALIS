@@ -52,12 +52,11 @@ public class ProyectoController {
             @RequestParam("txtTipoProyecto") String tipoProyecto,
             @RequestParam("txtEstadoProyecto") String estadoProyecto,
             @RequestParam("txtEncargadoProyecto") String encargadoProyecto,
-            @RequestParam("txtDireccionProyecto") String direccionProyecto
-    ) {
+            @RequestParam("txtDireccionProyecto") String direccionProyecto) {
 
         Proyecto proyectoExistente = proDAO.mostrarProyectoPorNombre(nombreProyecto);
         if (proyectoExistente != null) {
-            model.addAttribute("mensaje", "Proyecto Ya Exite en la Base de Datos");
+            model.addAttribute("mensaje", "Ya existe un proyecto asociado al nombre ingresado. Favor, intente otro nombre.");
             return "proyecto";
         }
 
@@ -70,7 +69,7 @@ public class ProyectoController {
 
         String agregado = proDAO.agregarProyecto(nuevoProyecto);
         if (agregado == null) {
-            model.addAttribute("mensaje", "No se ah podido agregar Proyecto");
+            model.addAttribute("mensaje", "NO se pudo ingresar proyecto. Favor, verifique datos ingresados.");
             return "proyecto";
         } else {
             int codigoProyectoAgregado = proDAO.obtenerIdUltimoProyectoAgregado();
@@ -124,7 +123,7 @@ public class ProyectoController {
         Proyecto proyecto = proDAO.mostrarProyectoPorCodigo(codigoProyecto);
 
         if (proyecto == null) {
-            model.addAttribute("mensaje", "NO Exite proyecto con ese código en la Base de Datos");
+            model.addAttribute("mensaje", "NO exite proyecto asociado al código ingresado. Favor, intente otro código.");
             return "modificarProyecto";
         }
 
@@ -159,7 +158,7 @@ public class ProyectoController {
         String mensaje = proDAO.modificarProyecto(pro);
 
         if (mensaje == null) {
-            mensaje = "No se ah podido MODIFICAR Proyecto.";
+            mensaje = "NO se pudo modificar proyecto seleccionado. Favor, verifique datos ingresados.";
         }
 
         model.addAttribute("mensaje", mensaje);
@@ -172,11 +171,11 @@ public class ProyectoController {
             @RequestParam("txtIdProyecto") int codigoProyecto,
             @RequestParam("txtNombreHito") String nombreHito,
             @RequestParam("txtFechaHito") @DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date fechaHito) {
-        
+
         Proyecto pro = proDAO.mostrarProyectoPorCodigo(codigoProyecto);
-        if(pro == null){
-        model.addAttribute("mensaje", "Debe ingresar un código de proyecto válido");
-        return "modificarProyecto";
+        if (pro == null) {
+            model.addAttribute("mensaje", "Debe ingresar un código de proyecto válido");
+            return "modificarProyecto";
         }
 
         Hito hito = new Hito();
@@ -189,6 +188,22 @@ public class ProyectoController {
         String respuesta = hitoDAO.agregarHito(hito);
 
         model.addAttribute("mensaje", respuesta);
+
+        return "modificarProyecto";
+    }
+
+    @RequestMapping(value = "/modificarProyectoDesdeListar", method = RequestMethod.POST)
+    public String modificarProyectoDesdeListar(Model model, RedirectAttributes ra, HttpServletRequest request,
+            @RequestParam("txtBuscarProyecto") int codigoProyecto) {
+
+        Proyecto proyecto = proDAO.mostrarProyectoPorCodigo(codigoProyecto);
+
+        if (proyecto == null) {
+            model.addAttribute("mensaje", "NO exite proyecto asociado al código ingresado. Favor, intente otro código.");
+            return "modificarProyecto";
+        }
+
+        model.addAttribute("proyecto", proyecto);
 
         return "modificarProyecto";
     }

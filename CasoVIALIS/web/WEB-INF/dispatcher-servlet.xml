@@ -15,7 +15,7 @@
 
     <!--con esta linea le decimos a Spring donde se ubican nuestros controladores-->
     <context:component-scan base-package="controller"/>
-    
+
     <!--con esta linea le decimos que se utilizaran anotaciones dentro de los controller-->
     <mvc:annotation-driven/>
     <!--descomentar la linea siguiente si queremos agregar css a nuestra apliación,
@@ -29,4 +29,15 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
+    
+    <!--Spring File Upload properties. We defined here the maximum upload size-->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="268435456" /> 
+    </bean> -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="268435456"/>
+    </bean>
+    <!--<mvc:view-controller path="/file" view-name="file" />-->
+    <!-- End File -->
+    
 </beans>

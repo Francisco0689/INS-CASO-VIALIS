@@ -110,8 +110,20 @@
         </div>
         <!--================End Canvus Menu Area =================-->
         <h1>REUNIONES AGENDADAS</h1>
-        <br/>
-
+        <div class="container col-12">
+            <br/>
+        </div>
+        <c:if test="${not empty mensaje}">
+            <div class="container col-12">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
+            </div>
+        </c:if>
         <form action="buscar-reuniones-por-proyecto" method="POST">
             <div class="container col-11">
                 <div class="row">
@@ -123,12 +135,6 @@
                         <center>
                             <label for="btnBuscar">-</label>
                             <button style="background: #ffc107; font-weight: bold;" type="submit" name="btnBuscar" class="btn btn-primary btn-block">Buscar Reunión Agendada</button>
-                        </center>
-                    </div>
-                    <div class="form-group col-4">
-                        <center>
-                            <label for="">-</label>
-                            <h5><b Style="color: black;">${mensaje}</b></h5>
                         </center>
                     </div>
                 </div>
@@ -156,8 +162,8 @@
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9"></th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Proyecto Asociado</th>
                             <th Style="background-color: #167890;" class="column100 column4" data-column="column4">Código Proyecto Asociado</th>
-                            <th Style="background-color: #167890;" class="column100 column4" data-column="column4"></th>
-                            <th Style="background-color: #167890;" class="column100 column4" data-column="column4"></th>
+                            <th Style="background-color: #167890;" class="column100 column4" data-column="column4">Modificar Reunión</th>
+                            <th Style="background-color: #167890;" class="column100 column4" data-column="column4">Anular Reunión</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -174,8 +180,8 @@
                                 <td style="font-size: 13px;" class="column100 column9" data-column="column9" colspan="5">${reu.descripcionFinal}</td>
                                 <td style="font-size: 13px;" class="column100 column9" data-column="column9">${reu.nombreProyecto}</td>
                                 <td style="font-size: 13px;" class="column100 column4" data-column="column4">${reu.idProyecto}</td>
-                                <td style="font-size: 13px;" class="column100 column4" data-column="column4"><a href="eliminar-reunion?idReunion=${reu.idReunion}">Anular Reunión</a></td>
-                                <td style="font-size: 13px;" class="column100 column4" data-column="column4"><a href="modificarReunionDesdeListar?txtBuscarReunion=${reu.idReunion}">Modificar Reunión</a></td>
+                                <td style="font-size: 13px;" class="column100 column4" data-column="column4"><a href="modificarReunionDesdeListar?txtBuscarReunion=${reu.idReunion}"><img src="img/calendarEdit.png" alt=""/></a></td>
+                                <td style="font-size: 13px;" class="column100 column4" data-column="column4"><a href="eliminar-reunion?idReunion=${reu.idReunion}"><img src="img/calendarDelete.png" alt=""/></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -188,19 +194,25 @@
         <script src="js/owl.carousel.min.js"></script>
 
         <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
             var heroCarousel = $('.heroCarousel');
             heroCarousel.owlCarousel({
-            loop: true,
+                loop: true,
                 margin: 10,
                 nav: false,
                 startPosition: 1,
                 responsiveClass: true,
                 responsive: {
-                0: {
-            items: 1
+                    0: {
+                        items: 1
                     }
                 }
-                });
+            });
 
             var dropToggle = $('.menu_right > li').has('ul').children('a');
             dropToggle.on('click', function () {

@@ -79,7 +79,7 @@
                     </ul>
                 </li>
                 <li>
-                   <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
+                    <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>
                     <a href="/CasoVIALIS/login">Salir</a>
@@ -99,12 +99,25 @@
         </div>
         <!--================End Canvus Menu Area =================-->
         <h1>GESTIONAR TRABAJADOR</h1>
-        ${mensaje}
+        <div class="container col-12">
+            <br/>
+        </div>
+        <c:if test="${not empty mensaje}">
+            <div class="container col-12">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
+            </div>
+        </c:if>
         <form action="buscar-trabajador" method="POST">
             <div class="container col-11">
                 <div class="row">
                     <div class="form-group col-4">
-                        <center><label for="txtBuscarRut">Buscar Trabajador</label></center>
+                        <center><label for="txtBuscarRut">Buscar Trabajador (Ingrese rut sin DV)</label></center>
                         <input type="number" name="txtBuscarRut" id="txtBuscarRut" class="form-control" placeholder="Rut Trabajador sin DV" required="true">
                     </div>
                     <div class="form-group col-2">
@@ -119,93 +132,105 @@
         <div class="container col-12">
             <br/><br/>
         </div>
-        <form action="modificar-trabajador" method="POST">
-            <div class="container col-11">
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="txtNombre">Nombres Trabajador</label>
-                        <input type="text" value="${trabajador.nombreTrabajador}" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombres Trabajador" required="true">
+        <c:if test="${empty trabajador.rutTrabajador}">
+            <h1>Constructora VIALIS</h1>
+        </c:if>
+        <c:if test="${not empty trabajador.rutTrabajador}">
+            <form action="modificar-trabajador" method="POST">
+                <div class="container col-11">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtNombre">Nombres Trabajador</label>
+                            <input type="text" value="${trabajador.nombreTrabajador}" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombres Trabajador" required="true">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtApellido">Apellidos Trabajador</label>
+                            <input type="text" value="${trabajador.apellidoTrabajador}" name="txtApellido" id="txtApellido" class="form-control" placeholder="Apellidos Trabajador" required="true">
+                        </div>
                     </div>
-                    <div class="form-group col-6">
-                        <label for="txtApellido">Apellidos Trabajador</label>
-                        <input type="text" value="${trabajador.apellidoTrabajador}" name="txtApellido" id="txtApellido" class="form-control" placeholder="Apellidos Trabajador" required="true">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtRut">Rut Trabajador</label>
+                            <input type="number" disabled="true" value="${trabajador.rutTrabajador}" name="txtRut" id="txtRut" class="form-control" placeholder="Rut Trabajador">
+                            <input type="hidden" value="${trabajador.rutTrabajador}" name="txtRut" id="txtRut" class="form-control" placeholder="Rut Trabajador" required="true">
+                        </div>
+                        <div class="col-6">
+                            <label for="txtDv">-</label>
+                            <input type="text" disabled="true" value="${trabajador.dvTrabajador}" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador">
+                            <input type="hidden" value="${trabajador.dvTrabajador}" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador" required="true">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="cboEstadoCivil">Estado Civil</label>
+                            <input type="text" value="${trabajador.estadoCivilTrabajador}" name="cboEstadoCivil" id="cboEstadoCivil" class="form-control" placeholder="Estado Civil" required="true">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtDireccion">Direccion Trabajador</label>
+                            <input type="text" value="${trabajador.direccionTrabajador}" name="txtDireccion" id="txtDireccion" class="form-control" placeholder="Direccion Trabajador" required="true">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtTelefono">Telefono Trabajador</label>
+                            <input type="number" value="${trabajador.telefonoTrabajador}" name="txtTelefono" id="txtTelefono" class="form-control" placeholder="Telefono Trabajador" required="true">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtNacionalidad">Nacionalidad Trabajador</label>
+                            <input type="text" value="${trabajador.nacionalidadTrabajador}" name="txtNacionalidad" id="txtNacionalidad" class="form-control" placeholder="Nacionalidad Trabajador" required="true">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtEstadoExtranjero">Estado Trabajador Extranjero</label>
+                            <input type="text" value="${trabajador.condicionExtranjeroTrabajador}" name="txtEstadoExtranjero" id="txtEstadoExtranjero" class="form-control" placeholder="Estado Extranjero" required="true">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtEspecialidad">Especialidad Trabajador</label>
+                            <input type="text" value="${trabajador.especialidadTrabajador}" name="txtEspecialidad" id="txtEspecialidad" class="form-control" placeholder="Especialidad Trabajador" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <center>
+                            <button style="background: #ffc107; font-weight: bold;" type="submit" class="btn btn-primary btn-block">Modificar Trabajador</button>
+                        </center>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label for="txtRut">Rut Trabajador</label>
-                        <input type="number" disabled="true" value="${trabajador.rutTrabajador}" name="txtRut" id="txtRut" class="form-control" placeholder="Rut Trabajador">
-                        <input type="hidden" value="${trabajador.rutTrabajador}" name="txtRut" id="txtRut" class="form-control" placeholder="Rut Trabajador" required="true">
-                    </div>
-                    <div class="col-6">
-                        <label for="txtDv">-</label>
-                        <input type="text" disabled="true" value="${trabajador.dvTrabajador}" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador">
-                        <input type="hidden" value="${trabajador.dvTrabajador}" name="txtDv" id="txtDv" class="form-control" placeholder="DV Trabajador" required="true">
-                    </div>
+                <div class="container col-12">
+                    <br/><br/>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="cboEstadoCivil">Estado Civil</label>
-                        <input type="text" value="${trabajador.estadoCivilTrabajador}" name="cboEstadoCivil" id="cboEstadoCivil" class="form-control" placeholder="Estado Civil" required="true">
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="txtDireccion">Direccion Trabajador</label>
-                        <input type="text" value="${trabajador.direccionTrabajador}" name="txtDireccion" id="txtDireccion" class="form-control" placeholder="Direccion Trabajador" required="true">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="txtTelefono">Telefono Trabajador</label>
-                        <input type="number" value="${trabajador.telefonoTrabajador}" name="txtTelefono" id="txtTelefono" class="form-control" placeholder="Telefono Trabajador" required="true">
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="txtNacionalidad">Nacionalidad Trabajador</label>
-                        <input type="text" value="${trabajador.nacionalidadTrabajador}" name="txtNacionalidad" id="txtNacionalidad" class="form-control" placeholder="Nacionalidad Trabajador" required="true">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="txtEstadoExtranjero">Estado Trabajador Extranjero</label>
-                        <input type="text" value="${trabajador.condicionExtranjeroTrabajador}" name="txtEstadoExtranjero" id="txtEstadoExtranjero" class="form-control" placeholder="Estado Extranjero" required="true">
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="txtEspecialidad">Especialidad Trabajador</label>
-                        <input type="text" value="${trabajador.especialidadTrabajador}" name="txtEspecialidad" id="txtEspecialidad" class="form-control" placeholder="Especialidad Trabajador" required="true">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <center>
-                        <button style="background: #ffc107; font-weight: bold;" type="submit" class="btn btn-primary btn-block">Modificar Trabajador</button>
-                    </center>
-                </div>
-            </div>
-            <div class="container col-12">
-                <br/><br/>
-            </div>
-        </form>
+            </form>
+        </c:if>
         <script src="js/jquery-3.2.1.min.js"></script>	
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script>
-                var heroCarousel = $('.heroCarousel');
-                heroCarousel.owlCarousel({
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 4000);
+
+            var heroCarousel = $('.heroCarousel');
+            heroCarousel.owlCarousel({
                 loop: true,
                 margin: 10,
                 nav: false,
-                    startPosition: 1,
-                    responsiveClass: true,
+                startPosition: 1,
+                responsiveClass: true,
                 responsive: {
-            0: {
-            items: 1
+                    0: {
+                        items: 1
                     }
                 }
             });
 
-                var dropToggle = $('.menu_right > li').has('ul').children('a');
-                dropToggle.on('click', function () {
+            var dropToggle = $('.menu_right > li').has('ul').children('a');
+            dropToggle.on('click', function () {
                 dropToggle.not(this).closest('li').find('ul').slideUp(200);
-                $(this).closest('li').children('ul').slideToggle(200);                 return false;
+                $(this).closest('li').children('ul').slideToggle(200);
+                return false;
             });
 
             $(".toggle_icon").on('click', function () {

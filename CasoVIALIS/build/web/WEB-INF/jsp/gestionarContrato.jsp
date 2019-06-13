@@ -4,8 +4,11 @@
     Author     : fmaldonc
 --%>
 
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.BufferedReader"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +18,7 @@
         <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
         <title>Modificar Trabajador</title>
         <style type="text/css">
-            h1,  h5 {
+            h1 {
                 font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
                 font-size: 45px;
                 padding-top: 25px;
@@ -99,7 +102,20 @@
         </div>
         <!--================End Canvus Menu Area =================-->
         <h1>GESTIONAR CONTRATO LABORAL</h1>
-        ${mensaje}
+        <div class="container col-12">
+            <br/><br/>
+        </div>
+        <c:if test="${not empty mensaje}">
+            <div class="container col-12">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <center><h3 class="alert-heading">CONSTRUCTORA VIALIS</h3></center>
+                    <hr>
+                    <center><p>${mensaje}</p></center>
+                    <hr>
+                </div>
+            </div>
+        </c:if>
         <form action="buscar-trabajador-contrato" method="POST">
             <div class="container col-11">
                 <div class="row">
@@ -115,7 +131,7 @@
                     </div>
                     <div class="form-group col-4">
                         <br/><br/>
-                        <label for="txtNombre">Gestionar Contrato Laboral a : ${trabajador.nombreTrabajador} ${trabajador.apellidoTrabajador}</label>
+                        <h5 for="txtNombre">Gestionar Contrato Laboral a : ${trabajador.nombreTrabajador} ${trabajador.apellidoTrabajador}</h5>
                     </div>
                 </div>
             </div>
@@ -123,47 +139,87 @@
         <div class="container col-12">
             <br/><br/>
         </div>
-        <form action="gestionar-contrato" method="POST">
-            <div class="container col-11">
-                <div class="form-group">
-                    <center>
-                        <button style="background: steelblue; font-weight: bold;" type="submit" class="btn btn-primary btn-block"><b style="color: white;">Gestionar Contrato Laboral</b></button>
-                    </center>
+
+        <c:if test="${empty trabajador.idTrabajador}">
+            <h1>INGRESE RUT DE TRABAJADOR PARA GESTIONAR CONTRATO LABORAL...</h1>
+        </c:if>
+        <c:if test="${not empty trabajador.idTrabajador}">
+            <form action="gestionar-contrato" method="POST" enctype="multipart/form-data">  <!--enctype="multipart/form-data"-->
+                <div class="container col-11">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtNombreDocumento">Nombre De Documento</label>
+                            <input type="text" name="txtNombreDocumento" id="txtNombreDocumento" class="form-control" placeholder="Nombre de Documento" required="true">
+                            <input type="hidden" name="txtIdTrabajador" value="${trabajador.idTrabajador}" id="txtIdTrabajador" class="form-control">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtTipoDocumento">Tipo de Documento</label>
+                            <input type="text" name="txtTipoDocumento" id="txtTipoDocumento" placeholder="Tipo de Documento" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtDocumento">Documento</label>
+                            <input type="file" size="50" name="txtDocumento" id="txtDocumento" placeholder="Documento" class="form-control" required="true">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="cboProyecto">Proyecto Asociado</label>
+                            <select class="form-control" name="cboProyecto" id="cboProyecto" required="true">
+                                <option value="0">SIN PROYECTO ASOCIADO</option>
+                                <c:forEach items="${proyectos}" var="pro">
+                                    <option value="${pro.getIdProyecto()}">${pro.getNombreProyecto()}</option>
+                                </c:forEach>
+                            </select>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <center>
+                            <button style="background: steelblue; font-weight: bold;" type="submit" class="btn btn-primary btn-block"><b style="color: white;">Gestionar Contrato Laboral</b></button>
+                        </center>
+                    </div>
                 </div>
-            </div>
-            <div class="container col-12">
-                <br/><br/>
-            </div>
-        </form>
-        <script src="js/jquery-3.2.1.min.js"></script>	
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script>
-            var heroCarousel = $('.heroCarousel');
-            heroCarousel.owlCarousel({
-                loop: true,
-                margin: 10,
-                nav: false,
-                startPosition: 1,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    }
-                }
-            });
+                <div class="container col-12">
+                    <br/><br/>
+                </div>
+            </form>
+        </c:if>
+    </div>
+</body>
+<script src="js/jquery-3.2.1.min.js"></script>	
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
 
-            var dropToggle = $('.menu_right > li').has('ul').children('a');
-            dropToggle.on('click', function () {
-                dropToggle.not(this).closest('li').find('ul').slideUp(200);
-                $(this).closest('li').children('ul').slideToggle(200);
-                return false;
-            });
+    var heroCarousel = $('.heroCarousel');
+    heroCarousel.owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        startPosition: 1,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1
+            }
+        }
+    });
 
-            $(".toggle_icon").on('click', function () {
-                $('body').toggleClass("open");
-            });
+    var dropToggle = $('.menu_right > li').has('ul').children('a');
+    dropToggle.on('click', function () {
+        dropToggle.not(this).closest('li').find('ul').slideUp(200);
+        $(this).closest('li').children('ul').slideToggle(200);
+        return false;
+    });
 
-        </script>
-    </body>
+    $(".toggle_icon").on('click', function () {
+        $('body').toggleClass("open");
+    });
+
+</script>
+</body>
 </html>
