@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /**
  *
@@ -39,16 +37,19 @@ public class DocumentoDAO {
         try {
 
             PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO DOCUMENTO (NOMBRE_DOCUMENTO, "
-                            + "TIPO_DOCUMENTO, RUTA_DOCUMENTO, ID_TRABAJADOR, ID_PROYECTO) "
-                            + "VALUES (?,?,?,?,?)");
+                    = acceso.prepareStatement("INSERT INTO DOCUMENTO "
+                            + "(NOMBRE_DOCUMENTO,TIPO_DOCUMENTO, RUTA_DOCUMENTO,"
+                            + " ID_TRABAJADOR, ID_PROYECTO, ID_COTIZACION) "
+                            + "VALUES (?,?,?,?,?,?)");
             ps.setString(1, documento.getNombreDocumento());
             ps.setString(2, documento.getTipoDocumento());
-            ps.setString(3, documento.getRutadocumento());
+            ps.setString(3, documento.getRutaDocumento());
             ps.setInt(4, documento.getIdTrabajador());
             ps.setInt(5, documento.getIdProyecto());
+            ps.setInt(6, documento.getIdCotizacion());
 
             int rs = ps.executeUpdate();
+
             if (rs > 0) {
                 respuesta = "* Documento Agregado Correctamente";
             }
@@ -61,7 +62,7 @@ public class DocumentoDAO {
     }
 
     public List<Documento> ListarDocumentoAsociados(int codigoTrabajador) {
-        
+
         Documento documento = null;
         List<Documento> listaDocumentos = new ArrayList();
 
@@ -69,9 +70,9 @@ public class DocumentoDAO {
 
         try {
             PreparedStatement ps = acceso.prepareStatement("SELECT * FROM DOCUMENTO"
-                    + " WHERE ID_TRABAJADOR = ?");
+                    + " WHERE ID_TRABAJADOR = ? ORDER BY ID ASC");
             ps.setInt(1, codigoTrabajador);
-            
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -79,9 +80,68 @@ public class DocumentoDAO {
                 documento.setIdDocumento(rs.getInt("ID"));
                 documento.setNombreDocumento(rs.getString("NOMBRE_DOCUMENTO"));
                 documento.setTipoDocumento(rs.getString("TIPO_DOCUMENTO"));
-                documento.setIdDocumento(rs.getInt("ID_TRABAJADOR"));
+                documento.setIdTrabajador(rs.getInt("ID_TRABAJADOR"));
                 documento.setIdProyecto(rs.getInt("ID_PROYECTO"));
-                documento.setRutadocumento(rs.getString("RUTA_DOCUMENTO"));
+                documento.setRutaDocumento(rs.getString("RUTA_DOCUMENTO"));
+                documento.setIdCotizacion(rs.getInt("ID_COTIZACION"));
+
+                listaDocumentos.add(documento);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TrabajadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listaDocumentos;
+    }
+
+    public String eliminarDocumento(int codigoDocumento) {
+
+        //Abrir Conexion
+        Connection acceso = conn.getCnn();
+        String respuesta = null;
+
+        try {
+
+            PreparedStatement ps = acceso.prepareStatement("DELETE DOCUMENTO WHERE ID = ?");
+            ps.setInt(1, codigoDocumento);
+
+            int rs = ps.executeUpdate();
+            if (rs > 0) {
+                respuesta = "Documento Eliminado Correctamente en Sistema VIALIS";
+            }
+            return respuesta;
+        } catch (SQLException ex) {
+            System.out.println("Error al MODIFICAR EMPLEADO" + ex.getMessage());
+        }
+
+        return respuesta;
+
+    }
+
+    public List<Documento> ListarDocumentoAsociadosPorCotizacion(int codigoCotizacion) {
+
+        Documento documento = null;
+        List<Documento> listaDocumentos = new ArrayList();
+
+        Connection acceso = conn.getCnn();
+
+        try {
+            PreparedStatement ps = acceso.prepareStatement("SELECT * FROM DOCUMENTO"
+                    + " WHERE ID_COTIZACION = ? ORDER BY ID ASC");
+            ps.setInt(1, codigoCotizacion);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                documento = new Documento();
+                documento.setIdDocumento(rs.getInt("ID"));
+                documento.setNombreDocumento(rs.getString("NOMBRE_DOCUMENTO"));
+                documento.setTipoDocumento(rs.getString("TIPO_DOCUMENTO"));
+                documento.setIdTrabajador(rs.getInt("ID_TRABAJADOR"));
+                documento.setIdProyecto(rs.getInt("ID_PROYECTO"));
+                documento.setRutaDocumento(rs.getString("RUTA_DOCUMENTO"));
+                documento.setIdCotizacion(rs.getInt("ID_COTIZACION"));
 
                 listaDocumentos.add(documento);
             }

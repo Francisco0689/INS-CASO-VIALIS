@@ -124,8 +124,8 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
 table {
-  width: 100%;
-  background-color: #fff;
+  width: 150%;
+  background-color: #d3f5da;
 }
 
 th, td {
@@ -143,16 +143,20 @@ th, td {
   padding-left: 15px;
   padding-right: 0px;
 }
-.column100.column1 {
-  width: 5px;
-  padding-left: 15px;
-  padding-right: 0px;
-}
 .column100.column2 {
   width: 100px;
   padding-left: 0px;
 }
 
+.column102 {
+  width: 130px;
+  padding-left: 25px;
+}
+.column102.column102 {
+  width: 20%;
+  padding-left: 15px;
+  padding-right: 0px;
+}
 .row100.head th {
   padding-top: 24px;
   padding-bottom: 20px;

@@ -250,6 +250,7 @@ public class TrabajadorController {
             return "redirect:trabajador";
         } else {
             ra.addFlashAttribute("mensaje", agregado);
+            ra.addFlashAttribute("trabajador", trabajadorNuevo);
         }
 
         return "redirect:modificarTrabajador";
@@ -265,7 +266,7 @@ public class TrabajadorController {
             @RequestParam("cboProyecto") int idProyecto,
             @RequestParam("txtDocumento") MultipartFile multipartFile) throws ServletException, IOException {
 
-        Trabajador trabajadorExistente = traDAO.mostrarTrabajadorPorCodigoInterno(idProyecto);
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajadorPorCodigoInterno(idTrabajador);
         DocumentoDAO docDAO = new DocumentoDAO();
         Documento doc = new Documento();
         doc.setTipoDocumento(tipoDocumento);
@@ -274,10 +275,11 @@ public class TrabajadorController {
         doc.setIdProyecto(idProyecto);
 
         String agregado = null;
+
         String addFile = fileService.saveFile(multipartFile);
 
         if (addFile != null) {
-            doc.setRutadocumento(addFile);
+            doc.setRutaDocumento(addFile);
             agregado = docDAO.agregarDocumento(doc);
         }
 
@@ -285,13 +287,39 @@ public class TrabajadorController {
             ra.addFlashAttribute("mensaje", "No se pudo Gestionar Contrato");
             return "redirect:gestionarContrato";
         } else {
-            ra.addFlashAttribute("mensaje", "Documento Agregado Exitosamente");
+            ra.addFlashAttribute("mensaje", agregado);
             ra.addFlashAttribute("documentos", docuDAO.ListarDocumentoAsociados(idTrabajador));
             ra.addFlashAttribute("trabajador", trabajadorExistente);
+            ra.addFlashAttribute("proyectos", proDAO.ListarProyectos());
         }
 
         return "redirect:gestionarContrato";
+    }
 
+    @RequestMapping(value = "/eliminar-documento", method = RequestMethod.GET)
+    public String eliminarDocumento(Model model, RedirectAttributes ra, HttpServletRequest request,
+            @RequestParam("idTrabajador") int idTrabajador,
+            @RequestParam("idDocumento") int idDocumento) {
+
+        Trabajador trabajadorExistente = traDAO.mostrarTrabajadorPorCodigoInterno(idTrabajador);
+        String mensaje = null;
+
+        if (trabajadorExistente == null) {
+            ra.addFlashAttribute("mensaje", "NO Exite trabajador ingresado con ese rut. Favor ingrese rut válido.");
+            return "redirect:gestionarContrato";
+        }
+
+        mensaje = docuDAO.eliminarDocumento(idDocumento);
+
+        if (mensaje == null) {
+            mensaje = "No se puedo eliminar documento en Sistema VIALIS. Favor intente más tarde.";
+        }
+        ra.addFlashAttribute("trabajador", trabajadorExistente);
+        ra.addFlashAttribute("documentos", docuDAO.ListarDocumentoAsociados(trabajadorExistente.getIdTrabajador()));
+        ra.addFlashAttribute("proyectos", proDAO.ListarProyectos());
+        ra.addFlashAttribute("mensaje", mensaje);
+
+        return "redirect:gestionarContrato";
     }
 
 }

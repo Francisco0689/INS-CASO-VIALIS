@@ -147,6 +147,7 @@ public class ReunionController {
             @RequestParam("txtMinutoReunion") int minutosReunion,
             @RequestParam("txtEncargado") String encargadoReunion,
             @RequestParam("txtAcuerdo") String acuerdoReunion,
+            @RequestParam("txtProyectoAsociado") String proyectoAsociado,
             @RequestParam("txtIdReunion") int idReunion) {
 
         HttpSession session = request.getSession();
@@ -164,6 +165,7 @@ public class ReunionController {
         reu.setDescripcionFinal(acuerdoReunion);
         reu.setHora(horaReunion);
         reu.setMin(minutosReunion);
+        reu.setNombreProyecto(proyectoAsociado);
 
         String mensaje = reuDAO.modificarReunion(reu);
 
@@ -172,6 +174,7 @@ public class ReunionController {
         }
 
         model.addAttribute("mensaje", mensaje);
+        model.addAttribute("reunion", reu);
 
         return "modificarReunion";
     }

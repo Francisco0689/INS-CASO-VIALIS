@@ -129,13 +129,13 @@
                 <table data-vertable="ver5">
                     <thead>
                         <tr class="row100 head">
-                            <th Style="background-color: #167890;" class="column100 column1" data-column="column1">Código Interno</th>
-                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Nombre Proyecto</th>
-                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Tipo Proyecto</th>
-                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Estado Proyecto</th>
-                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Encargado Proyecto</th>
-                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Dirección Proyecto</th>
-                            <th Style="background-color: #167890;" class="column100 column9" data-column="column9" colspan="2"><center>Hitos</center></th>
+                            <th Style="background-color: #167890;" width="2%"><center>Código Interno</center></th>
+                            <th Style="background-color: #167890;" width="3%">Nombre Proyecto</th>
+                            <th Style="background-color: #167890;" width="2%">Tipo Proyecto</th>
+                            <th Style="background-color: #167890;" width="2%">Estado Proyecto</th>
+                            <th Style="background-color: #167890;" width="3%">Encargado Proyecto</th>
+                            <th Style="background-color: #167890;" width="3%">Dirección Proyecto</th>
+                            <th Style="background-color: #167890;" width="6%"><center>Hitos</center></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -143,13 +143,13 @@
                                    items="${proyectos}"
                                    varStatus="status">
                             <tr class="row100">
-                                <td style="font-size: 13px;" class="column100 column1" data-column="column1">${pro.idProyecto}</td>
-                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${pro.nombreProyecto}</td>
-                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${pro.tipoProyecto}</td>
-                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${pro.estadoProyecto}</td>
-                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${pro.encargadoProyecto}</td>
-                                <td style="font-size: 13px;" class="column100 column9" data-column="column9">${pro.direccionProyecto}</td>
-                                <td style="font-size: 13px;" class="column100 column9" data-column="column9" colspan="2">
+                                <td style="font-size: 14px;"><center>${pro.idProyecto}</center></td>
+                                <td style="font-size: 14px;">${pro.nombreProyecto}</td>
+                                <td style="font-size: 14px;">${pro.tipoProyecto}</td>
+                                <td style="font-size: 14px;">${pro.estadoProyecto}</td>
+                                <td style="font-size: 14px;">${pro.encargadoProyecto}</td>
+                                <td style="font-size: 14px;">${pro.direccionProyecto}</td>
+                                <td style="font-size: 14px;" width="8%">
                                     <ul>
                                         <c:forEach var="hito" 
                                                    items="${pro.hitos}"

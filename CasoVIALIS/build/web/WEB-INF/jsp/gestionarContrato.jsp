@@ -16,6 +16,14 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/util.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/select2.min.css">
+        <link rel="stylesheet" href="css/perfect-scrollbar.css">
         <title>Modificar Trabajador</title>
         <style type="text/css">
             h1 {
@@ -144,7 +152,7 @@
             <h1>INGRESE RUT DE TRABAJADOR PARA GESTIONAR CONTRATO LABORAL...</h1>
         </c:if>
         <c:if test="${not empty trabajador.idTrabajador}">
-            <form action="gestionar-contrato" method="POST" enctype="multipart/form-data">  <!--enctype="multipart/form-data"-->
+            <form action="gestionar-contrato" method="POST" enctype="multipart/form-data">
                 <div class="container col-11">
                     <div class="row">
                         <div class="form-group col-6">
@@ -154,12 +162,23 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="txtTipoDocumento">Tipo de Documento</label>
-                            <input type="text" name="txtTipoDocumento" id="txtTipoDocumento" placeholder="Tipo de Documento" class="form-control">
+                            <select class="form-control" name="txtTipoDocumento" id="txtTipoDocumento" required="true">
+                                <option value="PDF">PDF</option>
+                                <option value="EXCEL">EXCEL</option>
+                                <option value="WORD">WORD</option>
+                                <option value="POWERPOINT">POWER POINT</option>
+                                <option value="TXT">TXT</option>
+                                <option value="JPG">JPG</option>
+                                <option value="PNG">PNG</option>
+                                <option value="OTRO">OTRO</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="txtDocumento">Documento</label>
+                            <img src="img/fileUp.png" alt=""/>
+                            <label for="txtDocumento">Subir Documento</label>
+                            <img src="img/fileUp.png" alt=""/>
                             <input type="file" size="50" name="txtDocumento" id="txtDocumento" placeholder="Documento" class="form-control" required="true">
                         </div>
                         <div class="form-group col-6">
@@ -178,6 +197,40 @@
                         </center>
                     </div>
                 </div>
+                <c:if test="${not empty documentos}">
+                    <div class="container col-9">
+                        <div id="div1" class="table100 ver5 m-b-110">
+                            <table data-vertable="ver5">
+                                <thead>
+                                    <tr class="row100 head">
+                                        <th Style="background-color: #167890;" class="column100 column1" data-column="column1">Nombre Documento</th>
+                                        <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Tipo Documento</th>
+                                        <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Descargar Documento</th>
+                                        <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Eliminar Documento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="doc" 
+                                               items="${documentos}"
+                                               varStatus="status">
+                                        <tr class="row100">
+                                            <td style="font-size: 13px;" class="column100 column1" data-column="column1">${doc.nombreDocumento}</td>
+                                            <td style="font-size: 13px;" class="column100 column9" data-column="column9">${doc.tipoDocumento}</td>
+                                            <td style="font-size: 13px;" class="column100 column9" data-column="column9">
+                                                <a href="http://localhost:8090/archivosVIALIS/${doc.rutaDocumento}" target="_blank"  download="download"><img src="img/fileDown.png" alt=""/></a>
+                                            </td>
+                                            <td style="font-size: 13px;" class="column100 column4" data-column="column4">
+                                                <a href="eliminar-documento?idDocumento=${doc.idDocumento}&idTrabajador=${doc.idTrabajador}">
+                                                    <img src="img/fileDelete.png" alt=""/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </c:if>
                 <div class="container col-12">
                     <br/><br/>
                 </div>

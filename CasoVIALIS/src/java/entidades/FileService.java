@@ -18,7 +18,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FileService {
 
-    public static final String SAVE_LOCATION = "C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/Uploads/";
+    public static final String SAVE_LOCATION = "C:/wamp64/www/archivosVIALIS/";
+    public static final String SAVE_LOCATION_COTIZACION = "C:/wamp64/www/archivosCotizacionVIALIS/";
 
     public String saveFile(MultipartFile multipartFile) {
 
@@ -43,11 +44,33 @@ public class FileService {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return result;
+        return fileName;
     }
 
-    public static File multipartToFile(String fileName) throws IllegalStateException, IOException {
-        File convFile = new File(fileName);
-        return convFile;
+    public String saveFileCotizacion(MultipartFile multipartFile) {
+
+        String result = null;
+
+        String fileName = multipartFile.getOriginalFilename();
+        String location = SAVE_LOCATION_COTIZACION;
+
+        File pathFile = new File(location);
+
+        if (!pathFile.exists()) {
+            pathFile.mkdir();
+        }
+
+        pathFile = new File(location + fileName);
+
+        try {
+
+            multipartFile.transferTo(pathFile);
+            result = pathFile.toString();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return fileName;
     }
+
 }

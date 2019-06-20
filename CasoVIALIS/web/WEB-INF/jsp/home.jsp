@@ -70,6 +70,20 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#">Gestión de Cotizaciones</a>
+                    <ul class="list">
+                        <li>
+                            <a href="/CasoVIALIS/cotizacion">Enviar Cotización</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/cotizacion">Modificar Cotización</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/listaCotizaciones">Lista de Cotizaciones</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>
@@ -271,7 +285,7 @@
                             esté en la cubierta</p>
                     </div>
                     <div class="col-lg-5 text-center text-lg-right">
-                        <a class="btn btn-dark btn--leftBorder btn--rightBorder" href="#">Obtener Presupuesto</a>
+                        <a class="btn btn-dark btn--leftBorder btn--rightBorder" href="/CasoVIALIS/cotizacion">Obtener Presupuesto</a>
                     </div>
                 </div>
             </div>

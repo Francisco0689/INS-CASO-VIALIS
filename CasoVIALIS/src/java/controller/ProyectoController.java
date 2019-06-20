@@ -162,6 +162,7 @@ public class ProyectoController {
         }
 
         model.addAttribute("mensaje", mensaje);
+        model.addAttribute("proyecto",pro);
 
         return "modificarProyecto";
     }
@@ -188,6 +189,7 @@ public class ProyectoController {
         String respuesta = hitoDAO.agregarHito(hito);
 
         model.addAttribute("mensaje", respuesta);
+        model.addAttribute("proyecto", pro);
 
         return "modificarProyecto";
     }

@@ -5,7 +5,6 @@
  */
 package Entidades;
 
-
 import java.io.Serializable;
 
 /**
@@ -17,20 +16,22 @@ public class Documento implements Serializable {
     private int idDocumento;
     private String nombreDocumento;
     private String tipoDocumento;
-    private String Rutadocumento;
+    private String rutaDocumento;
     private int idTrabajador;
     private int idProyecto;
+    private int idCotizacion;
 
     public Documento() {
     }
 
-    public Documento(int idDocumento, String nombreDocumento, String tipoDocumento, String Rutadocumento, int idTrabajador, int idProyecto) {
+    public Documento(int idDocumento, String nombreDocumento, String tipoDocumento, String rutaDocumento, int idTrabajador, int idProyecto, int idCotizacion) {
         this.idDocumento = idDocumento;
         this.nombreDocumento = nombreDocumento;
         this.tipoDocumento = tipoDocumento;
-        this.Rutadocumento = Rutadocumento;
+        this.rutaDocumento = rutaDocumento;
         this.idTrabajador = idTrabajador;
         this.idProyecto = idProyecto;
+        this.idCotizacion = idCotizacion;
     }
 
     public int getIdDocumento() {
@@ -57,12 +58,12 @@ public class Documento implements Serializable {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public String getRutadocumento() {
-        return Rutadocumento;
+    public String getRutaDocumento() {
+        return rutaDocumento;
     }
 
-    public void setRutadocumento(String Rutadocumento) {
-        this.Rutadocumento = Rutadocumento;
+    public void setRutaDocumento(String rutaDocumento) {
+        this.rutaDocumento = rutaDocumento;
     }
 
     public int getIdTrabajador() {
@@ -81,15 +82,21 @@ public class Documento implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    @Override
-    public String toString() {
-        return "Documento{" + "idDocumento=" + idDocumento + ", nombreDocumento=" +
-                nombreDocumento + ", tipoDocumento=" + tipoDocumento + 
-                ", Rutadocumento=" + Rutadocumento + ", idTrabajador=" + 
-                idTrabajador + ", idProyecto=" + idProyecto + '}';
+    public int getIdCotizacion() {
+        return idCotizacion;
     }
 
-   
+    public void setIdCotizacion(int idCotizacion) {
+        this.idCotizacion = idCotizacion;
+    }
 
+    @Override
+    public String toString() {
+        return "Documento{" + "idDocumento=" + idDocumento + ", nombreDocumento="
+                + nombreDocumento + ", tipoDocumento=" + tipoDocumento
+                + ", rutaDocumento=" + rutaDocumento + ", idTrabajador="
+                + idTrabajador + ", idProyecto=" + idProyecto + ", idCotizacion="
+                + idCotizacion + '}';
+    }
 
 }

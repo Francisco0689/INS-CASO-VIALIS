@@ -177,7 +177,8 @@
                     <div class="row">
                         <div class="form-group col-12">
                             <label for="txtProyectoAsociado">Proyecto Asociado</label>
-                            <input type="txtProyectoAsociado" disabled="true" value="${reunion.getNombreProyecto()}" name="txtProyectoAsociado" id="txtProyectoAsociado" class="form-control" placeholder="Proyecto Relacionado">
+                            <input type="text" disabled="true" value="${reunion.getNombreProyecto()}" name="txtProyectoAsociado" id="txtProyectoAsociado" class="form-control" placeholder="Proyecto Relacionado">
+                            <input type="hidden" value="${reunion.getNombreProyecto()}" name="txtProyectoAsociado" id="txtProyectoAsociado" class="form-control" placeholder="Proyecto Relacionado">
                         </div>
                     </div>
                     <div class="row">
