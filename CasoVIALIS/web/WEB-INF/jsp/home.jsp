@@ -76,7 +76,7 @@
                             <a href="/CasoVIALIS/cotizacion">Enviar Cotización</a>
                         </li>
                         <li>
-                            <a href="/CasoVIALIS/cotizacion">Modificar Cotización</a>
+                            <a href="/CasoVIALIS/modificarCotizacion">Modificar Cotización</a>
                         </li>
                         <li>
                             <a href="/CasoVIALIS/listaCotizaciones">Lista de Cotizaciones</a>

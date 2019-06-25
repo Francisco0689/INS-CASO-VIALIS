@@ -138,9 +138,9 @@
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Nombre Proyecto Relacionado</th>
                             <th Style="background-color: #167890;" class="column100 column9" data-column="column9">Estado Cotización</th>
                             <th Style="background-color: #167890;" class="column102 column102" data-column="column102"><center>Documentos Relacionados</center></th>
-                            <th Style="background-color: #167890;" class="column100 column1" data-column="column9">Aprobar Cotización</th>
-                            <th Style="background-color: #167890;" class="column100 column1" data-column="column9">Rechazar Cotización</th>
-                            <th Style="background-color: #167890;" class="column100 column1" data-column="column9">Modificar Cotización</th>
+                    <th Style="background-color: #167890;" class="column100 column1" data-column="column9">Aprobar Cotización</th>
+                    <th Style="background-color: #167890;" class="column100 column1" data-column="column9">Rechazar Cotización</th>
+                    <th Style="background-color: #167890;" class="column100 column1" data-column="column9">Modificar Cotización</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -169,7 +169,7 @@
                                 </td>
                                 <td style="font-size: 13px;" class="column100 column1" data-column="column9"><a href="aprobar-cotizacion?idCotizacion=${cot.idCotizacion}"><img src="img/acept.png" alt=""/></a></td>
                                 <td style="font-size: 13px;" class="column100 column1" data-column="column9"><a href="rechazar-cotizacion?idCotizacion=${cot.idCotizacion}"><img src="img/cancel.png" alt=""/></a></td>
-                                <td style="font-size: 13px;" class="column100 column1" data-column="column9"><a href="modificar-cotizacion?idCotizacion=${cot.idCotizacion}"><img src="img/edit.png" alt=""/></a></td>
+                                <td style="font-size: 13px;" class="column100 column1" data-column="column9"><a href="modificarCotizacionDesdeListar?idCotizacion=${cot.idCotizacion}"><img src="img/edit.png" alt=""/></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

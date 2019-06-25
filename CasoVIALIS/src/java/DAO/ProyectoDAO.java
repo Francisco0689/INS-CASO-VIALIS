@@ -197,7 +197,6 @@ public class ProyectoDAO {
     }
 
     public int obtenerIdUltimoProyectoAgregado() {
-        Proyecto proyecto = null;
         Connection acceso = conn.getCnn();
         int codigoUltimoProyecto = 0;
 
