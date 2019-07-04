@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/web/WEB-INF/jsp/listaCotizaciones.jsp</file>
-            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/DAO/CotizacionDAO.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/web/WEB-INF/jsp/modificarCotizacion.jsp</file>
-            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/Controller/CotizacionController.java</file>
+            <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/web/WEB-INF/jsp/home.jsp</file>
             <file>file:/C:/Users/Administrador/Desktop/INS-GIT/INS-CASO-VIALIS/CasoVIALIS/src/java/Entidades/Cotizacion.java</file>
         </group>
     </open-files>

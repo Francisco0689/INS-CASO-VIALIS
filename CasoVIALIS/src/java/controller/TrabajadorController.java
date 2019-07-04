@@ -7,9 +7,11 @@ package controller;
 
 import DAO.DocumentoDAO;
 import DAO.ProyectoDAO;
+import DAO.RolDAO;
 import DAO.TrabajadorDAO;
 import Entidades.Documento;
 import Entidades.FileService;
+import Entidades.Rol;
 import Entidades.Trabajador;
 import Entidades.Usuario;
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class TrabajadorController {
     private FileService fileService = new FileService();
     private DocumentoDAO docuDAO = new DocumentoDAO();
     private ProyectoDAO proDAO = new ProyectoDAO();
+    private RolDAO rolDAO = new RolDAO();
 
     @RequestMapping(value = "/trabajador", method = RequestMethod.GET)
     public String trabajador(Model model, HttpServletRequest request) {
@@ -161,6 +164,8 @@ public class TrabajadorController {
             @RequestParam("txtNacionalidad") String nacionalidad,
             @RequestParam("txtEstadoExtranjero") String estadoExtranjero,
             @RequestParam("txtEspecialidad") String especialidad,
+            @RequestParam("txtResponsabilidad") String responsabilidad,
+            @RequestParam("txtSueldo") int sueldo,
             HttpServletRequest request) {
 
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rut);
@@ -181,6 +186,8 @@ public class TrabajadorController {
         trabajadorNuevo.setEstadoTrabajador("ACTIVO");
         trabajadorNuevo.setCondicionExtranjeroTrabajador(estadoExtranjero);
         trabajadorNuevo.setEspecialidadTrabajador(especialidad);
+        trabajadorNuevo.setResponsabilidadTrabajador(responsabilidad);
+        trabajadorNuevo.setSueldoTrabajador(sueldo);
 
         String agregado = traDAO.agregarTrabajador(trabajadorNuevo);
         if (agregado == null) {
@@ -223,6 +230,8 @@ public class TrabajadorController {
             @RequestParam("txtNacionalidad") String nacionalidad,
             @RequestParam("txtEstadoExtranjero") String estadoExtranjero,
             @RequestParam("txtEspecialidad") String especialidad,
+            @RequestParam("txtResponsabilidad") String responsabilidad,
+            @RequestParam("txtSueldo") int sueldo,
             HttpServletRequest request) {
 
         Trabajador trabajadorExistente = traDAO.mostrarTrabajador(rut);
@@ -243,11 +252,13 @@ public class TrabajadorController {
         trabajadorNuevo.setEstadoTrabajador("ACTIVO");
         trabajadorNuevo.setCondicionExtranjeroTrabajador(estadoExtranjero);
         trabajadorNuevo.setEspecialidadTrabajador(especialidad);
+        trabajadorNuevo.setResponsabilidadTrabajador(responsabilidad);
+        trabajadorNuevo.setSueldoTrabajador(sueldo);
 
         String agregado = traDAO.modificarEmpleado(trabajadorNuevo);
         if (agregado == null) {
             ra.addFlashAttribute("mensaje", "NO se pudo modificar trabajador seleccionado. Favor ingrese datos correctos.");
-            return "redirect:trabajador";
+            return "redirect:modificarTrabajador";
         } else {
             ra.addFlashAttribute("mensaje", agregado);
             ra.addFlashAttribute("trabajador", trabajadorNuevo);
@@ -321,5 +332,6 @@ public class TrabajadorController {
 
         return "redirect:gestionarContrato";
     }
+
 
 }

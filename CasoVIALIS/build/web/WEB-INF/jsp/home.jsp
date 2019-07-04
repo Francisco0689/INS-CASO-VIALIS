@@ -84,6 +84,17 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#">Gestión de Usuario</a>
+                    <ul class="list">
+                        <li>
+                            <a href="/CasoVIALIS/usuario">Ingresar Usuario</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/modificarUsuario">Modificar Usuario</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>

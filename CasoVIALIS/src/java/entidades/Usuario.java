@@ -12,20 +12,22 @@ import java.io.Serializable;
  * @author fmaldonc
  */
 public class Usuario implements Serializable {
-    
+
     private int idUsuario;
     private String nombreUsuario;
     private String passwordUsuario;
     private int idTrabajador;
+    private int idRol;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String passwordUsuario, int idTrabajador) {
+    public Usuario(int idUsuario, String nombreUsuario, String passwordUsuario, int idTrabajador, int idRol) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.passwordUsuario = passwordUsuario;
         this.idTrabajador = idTrabajador;
+        this.idRol = idRol;
     }
 
     public int getIdUsuario() {
@@ -60,13 +62,19 @@ public class Usuario implements Serializable {
         this.idTrabajador = idTrabajador;
     }
 
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nombreUsuario=" + 
-                nombreUsuario + ", passwordUsuario=" + passwordUsuario +
-                ", idTrabajador=" + idTrabajador + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombreUsuario="
+                + nombreUsuario + ", passwordUsuario=" + passwordUsuario
+                + ", idTrabajador=" + idTrabajador + ", idRol=" + idRol + '}';
     }
-    
-    
-    
+
 }

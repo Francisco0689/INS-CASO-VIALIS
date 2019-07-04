@@ -130,12 +130,13 @@
                     <thead>
                         <tr class="row100 head">
                             <th Style="background-color: #167890;" width="2%"><center>Código Interno</center></th>
-                            <th Style="background-color: #167890;" width="3%">Nombre Proyecto</th>
-                            <th Style="background-color: #167890;" width="2%">Tipo Proyecto</th>
-                            <th Style="background-color: #167890;" width="2%">Estado Proyecto</th>
-                            <th Style="background-color: #167890;" width="3%">Encargado Proyecto</th>
-                            <th Style="background-color: #167890;" width="3%">Dirección Proyecto</th>
-                            <th Style="background-color: #167890;" width="6%"><center>Hitos</center></th>
+                    <th Style="background-color: #167890;" width="3%">Nombre Proyecto</th>
+                    <th Style="background-color: #167890;" width="2%">Tipo Proyecto</th>
+                    <th Style="background-color: #167890;" width="2%">Estado Proyecto</th>
+                    <th Style="background-color: #167890;" width="3%">Encargado Proyecto</th>
+                    <th Style="background-color: #167890;" width="3%">Dirección Proyecto</th>
+                    <th Style="background-color: #167890;" width="6%"><center>Hitos</center></th>
+                    <th Style="background-color: #167890;" width="1%"><center>Gestionar Recursos</center></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -144,24 +145,25 @@
                                    varStatus="status">
                             <tr class="row100">
                                 <td style="font-size: 14px;"><center>${pro.idProyecto}</center></td>
-                                <td style="font-size: 14px;">${pro.nombreProyecto}</td>
-                                <td style="font-size: 14px;">${pro.tipoProyecto}</td>
-                                <td style="font-size: 14px;">${pro.estadoProyecto}</td>
-                                <td style="font-size: 14px;">${pro.encargadoProyecto}</td>
-                                <td style="font-size: 14px;">${pro.direccionProyecto}</td>
-                                <td style="font-size: 14px;" width="8%">
-                                    <ul>
-                                        <c:forEach var="hito" 
-                                                   items="${pro.hitos}"
-                                                   varStatus="status">
-                                            <li>
-                                                * ${hito.nombreHito} | Día: ${hito.fechaHito}
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                        <td style="font-size: 14px;">${pro.nombreProyecto}</td>
+                        <td style="font-size: 14px;">${pro.tipoProyecto}</td>
+                        <td style="font-size: 14px;">${pro.estadoProyecto}</td>
+                        <td style="font-size: 14px;">${pro.encargadoProyecto}</td>
+                        <td style="font-size: 14px;">${pro.direccionProyecto}</td>
+                        <td style="font-size: 14px;" width="8%">
+                            <ul>
+                                <c:forEach var="hito" 
+                                           items="${pro.hitos}"
+                                           varStatus="status">
+                                    <li>
+                                        * ${hito.nombreHito} | Día: ${hito.fechaHito}
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </td>
+                        <td style="font-size: 14px;"><a href="#"><button type="submit" Style="background-color: #007bff; font-weight: bold;" class="btn btn-primary btn-block">Gestionar Recursos</button></a></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -183,8 +185,7 @@
                 loop: true,
                 margin: 10,
                 nav: false,
-                startPosition: 1,
-                responsiveClass: true,
+                startPosition: 1, responsiveClass: true,
                 responsive: {
                     0: {
                         items: 1

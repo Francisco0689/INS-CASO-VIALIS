@@ -191,6 +191,16 @@
                             <input type="text" value="${trabajador.especialidadTrabajador}" name="txtEspecialidad" id="txtEspecialidad" class="form-control" placeholder="Especialidad Trabajador" required="true">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="txtResponsabilidad">Responsabilidad Trabajador</label>
+                            <input type="text" name="txtResponsabilidad" value="${trabajador.responsabilidadTrabajador}" id="txtResponsabilidad" class="form-control" placeholder="Responsabilidad" required="true">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="txtSueldo">Sueldo Trabajador</label>
+                            <input type="text" name="txtSueldo" value="${trabajador.sueldoTrabajador}" id="txtSueldo" class="form-control" placeholder="Sueldo Trabajador" required="true">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <center>
                             <button style="background: #ffc107; font-weight: bold;" type="submit" class="btn btn-primary btn-block">Modificar Trabajador</button>

@@ -178,6 +178,16 @@
                         <input type="text" name="txtEspecialidad" id="txtEspecialidad" class="form-control" placeholder="Especialidad Trabajador" required="true">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="txtResponsabilidad">Responsabilidad Trabajador</label>
+                        <input type="text" name="txtResponsabilidad" id="txtResponsabilidad" class="form-control" placeholder="Responsabilidad" required="true">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtSueldo">Sueldo Trabajador</label>
+                        <input type="text" name="txtSueldo" id="txtSueldo" class="form-control" placeholder="Sueldo Trabajador" required="true">
+                    </div>
+                </div>
                 <div class="form-group">
                     <center>
                         <button type="submit" Style="background-color: #007bff; font-weight: bold;" class="btn btn-primary btn-block">Agregar Trabajador</button>

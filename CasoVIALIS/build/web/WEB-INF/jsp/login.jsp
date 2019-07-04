@@ -39,10 +39,11 @@
                             </div>
                             <div class="hr"></div>
                             <h4 Style="color: white;">${mensaje}</h4>
+                            <h5 Style="color: white"><b>${mensaje2}</b></h5>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+        </div>  
     </body>
 </html>

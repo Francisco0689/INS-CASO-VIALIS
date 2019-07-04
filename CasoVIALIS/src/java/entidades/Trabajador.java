@@ -11,8 +11,8 @@ import java.io.Serializable;
  *
  * @author fmaldonc
  */
-public class Trabajador implements Serializable{
-    
+public class Trabajador implements Serializable {
+
     private int idTrabajador;
     private String nombreTrabajador;
     private String apellidoTrabajador;
@@ -25,11 +25,13 @@ public class Trabajador implements Serializable{
     private String nacionalidadTrabajador;
     private String condicionExtranjeroTrabajador;
     private String especialidadTrabajador;
+    private String responsabilidadTrabajador;
+    private int sueldoTrabajador;
 
     public Trabajador() {
     }
 
-    public Trabajador(int idTrabajador, String nombreTrabajador, String apellidoTrabajador, int rutTrabajador, String dvTrabajador, String estadoCivilTrabajador, String direccionTrabajador, int telefonoTrabajador, String estadoTrabajador, String nacionalidadTrabajador, String condicionExtranjeroTrabajador, String especialidadTrabajador) {
+    public Trabajador(int idTrabajador, String nombreTrabajador, String apellidoTrabajador, int rutTrabajador, String dvTrabajador, String estadoCivilTrabajador, String direccionTrabajador, int telefonoTrabajador, String estadoTrabajador, String nacionalidadTrabajador, String condicionExtranjeroTrabajador, String especialidadTrabajador, String responsabilidadTrabajador, int sueldoTrabajador) {
         this.idTrabajador = idTrabajador;
         this.nombreTrabajador = nombreTrabajador;
         this.apellidoTrabajador = apellidoTrabajador;
@@ -42,6 +44,8 @@ public class Trabajador implements Serializable{
         this.nacionalidadTrabajador = nacionalidadTrabajador;
         this.condicionExtranjeroTrabajador = condicionExtranjeroTrabajador;
         this.especialidadTrabajador = especialidadTrabajador;
+        this.responsabilidadTrabajador = responsabilidadTrabajador;
+        this.sueldoTrabajador = sueldoTrabajador;
     }
 
     public int getIdTrabajador() {
@@ -140,19 +144,35 @@ public class Trabajador implements Serializable{
         this.especialidadTrabajador = especialidadTrabajador;
     }
 
+    public String getResponsabilidadTrabajador() {
+        return responsabilidadTrabajador;
+    }
+
+    public void setResponsabilidadTrabajador(String responsabilidadTrabajador) {
+        this.responsabilidadTrabajador = responsabilidadTrabajador;
+    }
+
+    public int getSueldoTrabajador() {
+        return sueldoTrabajador;
+    }
+
+    public void setSueldoTrabajador(int sueldoTrabajador) {
+        this.sueldoTrabajador = sueldoTrabajador;
+    }
+
     @Override
     public String toString() {
-        return "Trabajador{" + "idTrabajador=" + idTrabajador + ", nombreTrabajador=" 
-                + nombreTrabajador + ", apellidoTrabajador=" + apellidoTrabajador + ","
-                + " rutTrabajador=" + rutTrabajador + ", dvTrabajador=" + dvTrabajador 
-                + ", estadoCivilTrabajador=" + estadoCivilTrabajador + ", direccionTrabajador="
-                + direccionTrabajador + ", telefonoTrabajador=" + telefonoTrabajador + ", "
-                + "estadoTrabajador=" + estadoTrabajador + ", nacionalidadTrabajador=" + 
-                nacionalidadTrabajador + ", condicionExtranjeroTrabajador=" + condicionExtranjeroTrabajador 
-                + ", especialidadTrabajador=" + especialidadTrabajador + '}';
+        return "Trabajador{" + "idTrabajador=" + idTrabajador
+                + ", nombreTrabajador=" + nombreTrabajador + ", apellidoTrabajador="
+                + apellidoTrabajador + ", rutTrabajador=" + rutTrabajador
+                + ", dvTrabajador=" + dvTrabajador + ", estadoCivilTrabajador="
+                + estadoCivilTrabajador + ", direccionTrabajador=" + direccionTrabajador
+                + ", telefonoTrabajador=" + telefonoTrabajador + ", estadoTrabajador="
+                + estadoTrabajador + ", nacionalidadTrabajador=" + nacionalidadTrabajador
+                + ", condicionExtranjeroTrabajador=" + condicionExtranjeroTrabajador
+                + ", especialidadTrabajador=" + especialidadTrabajador
+                + ", responsabilidadTrabajador=" + responsabilidadTrabajador
+                + ", sueldoTrabajador=" + sueldoTrabajador + '}';
     }
-    
-    
-    
-    
+
 }

@@ -53,8 +53,8 @@ public class TrabajadorDAO {
                             + " (NOMBRE_TRABAJADOR, APELLIDO_TRABAJADOR, RUT_TRABAJADOR,"
                             + "DV_TRABAJADOR, ESTADO_CIVIL_TRABAJADOR, DIRECCION_TRABAJADOR,"
                             + "TELEFONO_TRABAJADOR, ESTADO_TRABAJADOR, NACIONALIDAD_TRABAJADOR,"
-                            + "CONDICION_EXTRANJERO_TRAB, ESPECIALIDAD_TRABAJADOR)"
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                            + "CONDICION_EXTRANJERO_TRAB, ESPECIALIDAD_TRABAJADOR, RESPONSABILIDAD, SUELDO)"
+                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, emp.getNombreTrabajador());
             ps.setString(2, emp.getApellidoTrabajador());
             ps.setInt(3, emp.getRutTrabajador());
@@ -66,6 +66,8 @@ public class TrabajadorDAO {
             ps.setString(9, emp.getNacionalidadTrabajador());
             ps.setString(10, emp.getCondicionExtranjeroTrabajador());
             ps.setString(11, emp.getEspecialidadTrabajador());
+            ps.setString(12, emp.getResponsabilidadTrabajador());
+            ps.setInt(13, emp.getSueldoTrabajador());
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
@@ -102,6 +104,8 @@ public class TrabajadorDAO {
                 trabajador.setNacionalidadTrabajador(rs.getString("NACIONALIDAD_TRABAJADOR"));
                 trabajador.setCondicionExtranjeroTrabajador(rs.getString("CONDICION_EXTRANJERO_TRAB"));
                 trabajador.setEspecialidadTrabajador(rs.getString("ESPECIALIDAD_TRABAJADOR"));
+                trabajador.setResponsabilidadTrabajador(rs.getString("RESPONSABILIDAD"));
+                trabajador.setSueldoTrabajador(rs.getInt("SUELDO"));
 
                 return trabajador;
             }
@@ -136,6 +140,8 @@ public class TrabajadorDAO {
                 trabajador.setNacionalidadTrabajador(rs.getString("NACIONALIDAD_TRABAJADOR"));
                 trabajador.setCondicionExtranjeroTrabajador(rs.getString("CONDICION_EXTRANJERO_TRAB"));
                 trabajador.setEspecialidadTrabajador(rs.getString("ESPECIALIDAD_TRABAJADOR"));
+                trabajador.setResponsabilidadTrabajador(rs.getString("RESPONSABILIDAD"));
+                trabajador.setSueldoTrabajador(rs.getInt("SUELDO"));
 
                 return trabajador;
             }
@@ -171,6 +177,8 @@ public class TrabajadorDAO {
                 trabajador.setNacionalidadTrabajador(rs.getString("NACIONALIDAD_TRABAJADOR"));
                 trabajador.setCondicionExtranjeroTrabajador(rs.getString("CONDICION_EXTRANJERO_TRAB"));
                 trabajador.setEspecialidadTrabajador(rs.getString("ESPECIALIDAD_TRABAJADOR"));
+                trabajador.setResponsabilidadTrabajador(rs.getString("RESPONSABILIDAD"));
+                trabajador.setSueldoTrabajador(rs.getInt("SUELDO"));
                 listaEmpleados.add(trabajador);
             }
 
@@ -193,7 +201,7 @@ public class TrabajadorDAO {
                     + "UPDATE TRABAJADOR SET NOMBRE_TRABAJADOR=?, APELLIDO_TRABAJADOR=?, "
                     + "ESTADO_CIVIL_TRABAJADOR=?, DIRECCION_TRABAJADOR=?, TELEFONO_TRABAJADOR=?,"
                     + "ESTADO_TRABAJADOR=?, NACIONALIDAD_TRABAJADOR=?, CONDICION_EXTRANJERO_TRAB=?,"
-                    + "ESPECIALIDAD_TRABAJADOR=?"
+                    + "ESPECIALIDAD_TRABAJADOR=?, RESPONSABILIDAD=?, SUELDO=?"
                     + " WHERE RUT_TRABAJADOR = ?");
             ps.setString(1, emp.getNombreTrabajador());
             ps.setString(2, emp.getApellidoTrabajador());
@@ -204,7 +212,9 @@ public class TrabajadorDAO {
             ps.setString(7, emp.getNacionalidadTrabajador());
             ps.setString(8, emp.getCondicionExtranjeroTrabajador());
             ps.setString(9, emp.getEspecialidadTrabajador());
-            ps.setInt(10, emp.getRutTrabajador());
+            ps.setString(10, emp.getResponsabilidadTrabajador());
+            ps.setInt(11, emp.getSueldoTrabajador());
+            ps.setInt(12, emp.getRutTrabajador());
 
             int rs = ps.executeUpdate();
             if (rs > 0) {
