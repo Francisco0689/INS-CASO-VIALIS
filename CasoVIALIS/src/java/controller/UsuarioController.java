@@ -40,6 +40,8 @@ public class UsuarioController {
 
         if (usu == null) {
             return "login";
+        }else if(usu.getIdRol() != 1){
+            return "home";
         }
 
         List<Trabajador> trabajadores = traDAO.ListarTrabajadores();
