@@ -7,6 +7,7 @@ package DAO;
 
 import Entidades.Reunion;
 import Modelo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -36,29 +37,25 @@ public class ReunionDAO {
         String respuesta = null;
 
         try {
+            String llamada = "{ call SP_AGENDAR_REUNION(?,?,?,?,?,?,?,?,?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO REUNION (ESTADO_REUNION, "
-                            + "FECHA_REUNION, LUGAR_REUNION, ENCARGADO_REUNION,"
-                            + "ID_PROYECTO, DESCRIPCION_INICIAL, HORA, MINUTO, DESCRIPCION_FINAL) "
-                            + "VALUES (?,?,?,?,?,?,?,?,?)");
-            ps.setString(1, reu.getEstadoReunion());
-            ps.setDate(2, reu.getFechaReunion());
-            ps.setString(3, reu.getLugarReunion());
-            ps.setString(4, reu.getEncargadoReunion());
-            ps.setInt(5, reu.getIdProyecto());
-            ps.setString(6, reu.getDescripcionInicial());
-            ps.setInt(7, reu.getHora());
-            ps.setInt(8, reu.getMin());
-            ps.setString(9, reu.getDescripcionFinal());
+            cstmt.setString(1, reu.getEstadoReunion());
+            cstmt.setDate(2, reu.getFechaReunion());
+            cstmt.setString(3, reu.getLugarReunion());
+            cstmt.setString(4, reu.getEncargadoReunion());
+            cstmt.setInt(5, reu.getIdProyecto());
+            cstmt.setString(6, reu.getDescripcionInicial());
+            cstmt.setInt(7, reu.getHora());
+            cstmt.setInt(8, reu.getMin());
+            cstmt.setString(9, reu.getDescripcionFinal());
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Reunión Agendada Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
-            System.out.println("Error al INGRESAR Reunión" + ex.getMessage());
+            System.out.println("Error al INGRESAR Reunión " + ex.getMessage());
         }
 
         return respuesta;
@@ -106,21 +103,19 @@ public class ReunionDAO {
 
         try {
 
-            PreparedStatement ps = acceso.prepareStatement("UPDATE REUNION SET "
-                    + "ESTADO_REUNION= ?, LUGAR_REUNION= ?, FECHA_REUNION= ?,"
-                    + " ENCARGADO_REUNION= ?, DESCRIPCION_FINAL= ?, HORA= ?, "
-                    + "MINUTO=? WHERE ID = ? ");
-            ps.setString(1, reu.getEstadoReunion());
-            ps.setString(2, reu.getLugarReunion());
-            ps.setDate(3, reu.getFechaReunion());
-            ps.setString(4, reu.getEncargadoReunion());
-            ps.setString(5, reu.getDescripcionFinal());
-            ps.setInt(6, reu.getHora());
-            ps.setInt(7, reu.getMin());
-            ps.setInt(8, reu.getIdReunion());
+            String llamada = "{ call SP_MODIFICAR_REUNION(?,?,?,?,?,?,?,?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            cstmt.setString(1, reu.getEstadoReunion());
+            cstmt.setString(2, reu.getLugarReunion());
+            cstmt.setDate(3, reu.getFechaReunion());
+            cstmt.setString(4, reu.getEncargadoReunion());
+            cstmt.setString(5, reu.getDescripcionFinal());
+            cstmt.setInt(6, reu.getHora());
+            cstmt.setInt(7, reu.getMin());
+            cstmt.setInt(8, reu.getIdReunion());
+
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Reunión Modificada Correctamente en Sistema VIALIS";
             }
 
@@ -195,7 +190,7 @@ public class ReunionDAO {
     }
 
     public List<Reunion> buscarReunionesPorProyecto(int codigoProyecto) {
-        
+
         List<Reunion> listaReunion = new ArrayList();
         Reunion reunion = null;
         Connection acceso = conn.getCnn();

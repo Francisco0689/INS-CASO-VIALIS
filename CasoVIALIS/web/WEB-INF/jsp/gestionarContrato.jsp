@@ -196,9 +196,7 @@
                             <button style="background: steelblue; font-weight: bold;" type="submit" class="btn btn-primary btn-block"><b style="color: white;">Gestionar Contrato Laboral</b></button>
                         </center>
                     </div>
-                </div>
-                <c:if test="${not empty documentos}">
-                    <div class="container col-9">
+                    <div class="form-group col-8">
                         <div id="div1" class="table100 ver5 m-b-110">
                             <table data-vertable="ver5">
                                 <thead>
@@ -229,6 +227,11 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+                <c:if test="${not empty documentos}">
+                    <div class="container col-6">
+
                     </div>
                 </c:if>
                 <div class="container col-12">

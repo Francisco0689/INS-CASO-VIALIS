@@ -43,6 +43,10 @@ public class Conexion {
 
     }
 
+    public Connection obtenerConexion() {
+        return cnn;
+    }
+
     public void desonectarBD() {
         try {
             this.getCnn().close();

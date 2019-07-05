@@ -7,6 +7,7 @@ package DAO;
 
 import Entidades.Trabajador;
 import Modelo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,42 +36,24 @@ public class TrabajadorDAO {
         String respuesta = null;
 
         try {
+            String llamada = "{ call SP_AGREGAR_TRABAJADOR(?,?,?,?,?,?,?,?,?,?,?,?,?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
 
-            /*BLOB - CLOB
-             String llamada = "{ call sp_agregar_trabajador(?, ?, ?, ?, ?) }";
-             CallableStatement cstmt = this.conexion.prepareCall(llamada);
+            cstmt.setString(1, emp.getNombreTrabajador());
+            cstmt.setString(2, emp.getApellidoTrabajador());
+            cstmt.setInt(3, emp.getRutTrabajador());
+            cstmt.setString(4, emp.getDvTrabajador());
+            cstmt.setString(5, emp.getEstadoCivilTrabajador());
+            cstmt.setString(6, emp.getDireccionTrabajador());
+            cstmt.setInt(7, emp.getTelefonoTrabajador());
+            cstmt.setString(8, emp.getEstadoTrabajador());
+            cstmt.setString(9, emp.getNacionalidadTrabajador());
+            cstmt.setString(10, emp.getCondicionExtranjeroTrabajador());
+            cstmt.setString(11, emp.getEspecialidadTrabajador());
+            cstmt.setString(12, emp.getResponsabilidadTrabajador());
+            cstmt.setInt(13, emp.getSueldoTrabajador());
 
-             cstmt.setString(1, emp.getNombreTrabajador());
-             cstmt.setString(2, emp.getApellidoTrabajador());
-             cstmt.setInt(3, emp.getRutTrabajador());
-             cstmt.setInt(4, emp.getDvTrabajador());
-
-             if (cstmt.executeUpdate() > 0) {
-             agregado = true;
-             }*/
-            PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO TRABAJADOR"
-                            + " (NOMBRE_TRABAJADOR, APELLIDO_TRABAJADOR, RUT_TRABAJADOR,"
-                            + "DV_TRABAJADOR, ESTADO_CIVIL_TRABAJADOR, DIRECCION_TRABAJADOR,"
-                            + "TELEFONO_TRABAJADOR, ESTADO_TRABAJADOR, NACIONALIDAD_TRABAJADOR,"
-                            + "CONDICION_EXTRANJERO_TRAB, ESPECIALIDAD_TRABAJADOR, RESPONSABILIDAD, SUELDO)"
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            ps.setString(1, emp.getNombreTrabajador());
-            ps.setString(2, emp.getApellidoTrabajador());
-            ps.setInt(3, emp.getRutTrabajador());
-            ps.setString(4, emp.getDvTrabajador());
-            ps.setString(5, emp.getEstadoCivilTrabajador());
-            ps.setString(6, emp.getDireccionTrabajador());
-            ps.setInt(7, emp.getTelefonoTrabajador());
-            ps.setString(8, emp.getEstadoTrabajador());
-            ps.setString(9, emp.getNacionalidadTrabajador());
-            ps.setString(10, emp.getCondicionExtranjeroTrabajador());
-            ps.setString(11, emp.getEspecialidadTrabajador());
-            ps.setString(12, emp.getResponsabilidadTrabajador());
-            ps.setInt(13, emp.getSueldoTrabajador());
-
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Trabajador Ingresado Correctamente al Sistema VIALIS";
             }
 
