@@ -2,4 +2,8 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/ProveedorWS/ProveedoresWS?WSDL" uri="src/conf/xml-resources/web-service-references/ProveedoresWS/wsdl/localhost_8080/ProveedorWS/ProveedoresWS.wsdl"/>
     <system systemId="http://localhost:8080/ProveedorWS/ProveedoresWS?xsd=1" uri="src/conf/xml-resources/web-service-references/ProveedoresWS/wsdl/localhost_8080/ProveedorWS/ProveedoresWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/INSPECCION_TECNICA/ProveedoresWS?WSDL" uri="src/conf/xml-resources/web-service-references/ProveedoresWS_1/wsdl/localhost_8080/INSPECCION_TECNICA/ProveedoresWS.wsdl"/>
+    <system systemId="http://localhost:8080/INSPECCION_TECNICA/ProveedoresWS?xsd=1" uri="src/conf/xml-resources/web-service-references/ProveedoresWS_1/wsdl/localhost_8080/INSPECCION_TECNICA/ProveedoresWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/INSPECCION_TECNICA/InspeccionWS?WSDL" uri="src/conf/xml-resources/web-service-references/InspeccionWS/wsdl/localhost_8080/INSPECCION_TECNICA/InspeccionWS.wsdl"/>
+    <system systemId="http://localhost:8080/INSPECCION_TECNICA/InspeccionWS?xsd=1" uri="src/conf/xml-resources/web-service-references/InspeccionWS/wsdl/localhost_8080/INSPECCION_TECNICA/InspeccionWS.xsd_1.xsd"/>
 </catalog>

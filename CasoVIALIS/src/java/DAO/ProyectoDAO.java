@@ -8,6 +8,7 @@ package DAO;
 import Entidades.Hito;
 import Entidades.Proyecto;
 import Modelo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,21 +38,17 @@ public class ProyectoDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO PROYECTO (NOMBRE_PROYECTO, "
-                            + "TIPO_PROYECTO, ESTADO_PROYECTO, ENCARGADO_PROYECTO, DIRECCION_PROYECTO) "
-                            + "VALUES (?,?,?,?,?)");
-            ps.setString(1, proyec.getNombreProyecto());
-            ps.setString(2, proyec.getTipoProyecto());
-            ps.setString(3, proyec.getEstadoProyecto());
-            ps.setString(4, proyec.getEncargadoProyecto());
-            ps.setString(5, proyec.getDireccionProyecto());
+            String llamada = "{ call SP_AGREGAR_PROYECTO(?,?,?,?,?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, proyec.getNombreProyecto());
+            cstmt.setString(2, proyec.getTipoProyecto());
+            cstmt.setString(3, proyec.getEstadoProyecto());
+            cstmt.setString(4, proyec.getEncargadoProyecto());
+            cstmt.setString(5, proyec.getDireccionProyecto());
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = " *Proyecto Agregado Correctamente al Sistema VIALIS ";
-            } else {
-                respuesta = " *NO se pudo agregar Hito en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {
@@ -173,19 +170,17 @@ public class ProyectoDAO {
 
         try {
 
-            PreparedStatement ps = acceso.prepareStatement("UPDATE PROYECTO SET "
-                    + "NOMBRE_PROYECTO =?, TIPO_PROYECTO =?, ESTADO_PROYECTO =?, "
-                    + "ENCARGADO_PROYECTO =?, DIRECCION_PROYECTO =?"
-                    + " WHERE ID = ?");
-            ps.setString(1, proyect.getNombreProyecto());
-            ps.setString(2, proyect.getTipoProyecto());
-            ps.setString(3, proyect.getEstadoProyecto());
-            ps.setString(4, proyect.getEncargadoProyecto());
-            ps.setString(5, proyect.getDireccionProyecto());
-            ps.setInt(6, proyect.getIdProyecto());
+            String llamada = "{ call SP_MODIFICAR_PROYECTO(?,?,?,?,?,?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, proyect.getNombreProyecto());
+            cstmt.setString(2, proyect.getTipoProyecto());
+            cstmt.setString(3, proyect.getEstadoProyecto());
+            cstmt.setString(4, proyect.getEncargadoProyecto());
+            cstmt.setString(5, proyect.getDireccionProyecto());
+            cstmt.setInt(6, proyect.getIdProyecto());
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Proyecto Modificado Correctamente en Sistema VIALIS";
             }
 

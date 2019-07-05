@@ -42,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/Servicio"/>
         <delete dir="${build.generated.dir}/jax-wsCache/ProveedoresWS"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-ProveedoresWS"/>
+    <target name="wsimport-client-InspeccionWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/InspeccionWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/InspeccionWS" destdir="${build.generated.dir}/jax-wsCache/InspeccionWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/InspeccionWS/wsdl/localhost_8080/INSPECCION_TECNICA/InspeccionWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/INSPECCION_TECNICA/InspeccionWS?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/InspeccionWS/wsdl/localhost_8080/INSPECCION_TECNICA/InspeccionWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/InspeccionWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/InspeccionWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-InspeccionWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/service"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/InspeccionWS"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-ProveedoresWS, wsimport-client-InspeccionWS"/>
 </project>

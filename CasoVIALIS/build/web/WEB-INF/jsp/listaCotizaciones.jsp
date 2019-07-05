@@ -90,6 +90,34 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#">Gestión de Cotizaciones</a>
+                    <ul class="list">
+                        <li>
+                            <a href="/CasoVIALIS/cotizacion">Enviar Cotización</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/modificarCotizacion">Modificar Cotización</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/listaCotizaciones">Lista de Cotizaciones</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Gestión de Usuario</a>
+                    <ul class="list">
+                        <li>
+                            <a href="/CasoVIALIS/usuario">Ingresar Usuario</a>
+                        </li>
+                        <li>
+                            <a href="/CasoVIALIS/modificarUsuario">Modificar Usuario</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/CasoVIALIS/inspeccionTecnica">Inspección Técnica</a>
+                </li>
+                <li>
                     <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>

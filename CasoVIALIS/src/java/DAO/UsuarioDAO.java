@@ -7,6 +7,7 @@ package DAO;
 
 import Entidades.Usuario;
 import Modelo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,17 +65,15 @@ public class UsuarioDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO USUARIO (NOMBRE_USUARIO, PASSWORD_USUARIO, ID_TRABAJADOR, ID_ROL)"
-                            + "VALUES (?,?,?,?)");
-            ps.setString(1, usuario.getNombreUsuario());
-            ps.setString(2, usuario.getPasswordUsuario());
-            ps.setInt(3, usuario.getIdTrabajador());
-            ps.setInt(4, usuario.getIdRol());
+            String llamada = "{ call SP_AGREGAR_USUARIO(?,?,?,?) }";   
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, usuario.getNombreUsuario());
+            cstmt.setString(2, usuario.getPasswordUsuario());
+            cstmt.setInt(3, usuario.getIdTrabajador());
+            cstmt.setInt(4, usuario.getIdRol());
 
-            int rs = ps.executeUpdate();
-
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "* Usuario Agregado Correctamente";
             }
 
@@ -115,14 +114,13 @@ public class UsuarioDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("UPDATE USUARIO SET PASSWORD_USUARIO = ? WHERE ID = ?");
-            ps.setString(1, password);
-            ps.setInt(2, IdUsuario);
+            String llamada = "{ call SP_MODIFICAR_USUARIO(?,?) }";   
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, password);
+            cstmt.setInt(2, IdUsuario);
 
-            int rs = ps.executeUpdate();
-
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "* Usuario Modificado Correctamente. Favor ingrese con sus nuevas credenciales.";
             }
 

@@ -7,6 +7,7 @@ package DAO;
 
 import Entidades.Documento;
 import Modelo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,21 +37,17 @@ public class DocumentoDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO DOCUMENTO "
-                            + "(NOMBRE_DOCUMENTO,TIPO_DOCUMENTO, RUTA_DOCUMENTO,"
-                            + " ID_TRABAJADOR, ID_PROYECTO, ID_COTIZACION) "
-                            + "VALUES (?,?,?,?,?,?)");
-            ps.setString(1, documento.getNombreDocumento());
-            ps.setString(2, documento.getTipoDocumento());
-            ps.setString(3, documento.getRutaDocumento());
-            ps.setInt(4, documento.getIdTrabajador());
-            ps.setInt(5, documento.getIdProyecto());
-            ps.setInt(6, documento.getIdCotizacion());
+            String llamada = "{ call SP_AGREGAR_DOCUMENTO(?,?,?,?,?,?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, documento.getNombreDocumento());
+            cstmt.setString(2, documento.getTipoDocumento());
+            cstmt.setString(3, documento.getRutaDocumento());
+            cstmt.setInt(4, documento.getIdTrabajador());
+            cstmt.setInt(5, documento.getIdProyecto());
+            cstmt.setInt(6, documento.getIdCotizacion());
 
-            int rs = ps.executeUpdate();
-
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "* Documento Agregado Correctamente";
             }
 
@@ -103,11 +100,12 @@ public class DocumentoDAO {
 
         try {
 
-            PreparedStatement ps = acceso.prepareStatement("DELETE DOCUMENTO WHERE ID = ?");
-            ps.setInt(1, codigoDocumento);
+            String llamada = "{ call SP_ELIMINAR_DOCUMENTO(?) }";   
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setInt(1, codigoDocumento);
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Documento Eliminado Correctamente en Sistema VIALIS";
             }
             return respuesta;

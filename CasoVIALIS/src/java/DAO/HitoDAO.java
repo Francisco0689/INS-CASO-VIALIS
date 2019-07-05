@@ -7,6 +7,7 @@ package DAO;
 
 import Entidades.Hito;
 import Modelo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -31,16 +32,14 @@ public class HitoDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO HITO (NOMBRE_HITO, "
-                            + "FECHA_HITO, ID_PROYECTO) "
-                            + "VALUES (?,?,?)");
-            ps.setString(1, hito.getNombreHito());
-            ps.setDate(2, hito.getFechaHito());
-            ps.setInt(3, hito.getIdProyecto());
+            String llamada = "{ call SP_AGREGAR_HITO(?,?,?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, hito.getNombreHito());
+            cstmt.setDate(2, hito.getFechaHito());
+            cstmt.setInt(3, hito.getIdProyecto());
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = " *Hito Agregado Correctamente en Sistema VIALIS";
             }
 

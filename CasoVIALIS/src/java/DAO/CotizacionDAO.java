@@ -8,6 +8,7 @@ package DAO;
 import Entidades.Cotizacion;
 import Entidades.Documento;
 import Modelo.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,22 +38,18 @@ public class CotizacionDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("INSERT INTO COTIZACION(PROVEEDOR,"
-                            + " HERRAMIENTAS, MATERIALES, MAQUINARIA,"
-                            + " SERVICIO_EXTERNO, ID_PROYECTO_RELACIONADO,"
-                            + " ESTADO_COTIZACION)"
-                            + " VALUES (?,?,?,?,?,?,?)");
-            ps.setString(1, cotizacion.getProveedor());
-            ps.setString(2, cotizacion.getHerramienta());
-            ps.setString(3, cotizacion.getMaterial());
-            ps.setString(4, cotizacion.getMaquinaria());
-            ps.setString(5, cotizacion.getServicioExterno());
-            ps.setInt(6, cotizacion.getIdProyectoRelacionado());
-            ps.setString(7, cotizacion.getEstadoCotizacion());
+            String llamada = "{ call SP_AGREGAR_COTIZACION(?,?,?,?,?,?,?) }";   
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, cotizacion.getProveedor());
+            cstmt.setString(2, cotizacion.getHerramienta());
+            cstmt.setString(3, cotizacion.getMaterial());
+            cstmt.setString(4, cotizacion.getMaquinaria());
+            cstmt.setString(5, cotizacion.getServicioExterno());
+            cstmt.setInt(6, cotizacion.getIdProyectoRelacionado());
+            cstmt.setString(7, cotizacion.getEstadoCotizacion());
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Cotización Enviada Correctamente.";
             }
 
@@ -71,22 +68,18 @@ public class CotizacionDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("UPDATE COTIZACION "
-                            + "SET PROVEEDOR = ?, HERRAMIENTAS = ?,"
-                            + " MATERIALES = ?, MAQUINARIA = ?, "
-                            + "SERVICIO_EXTERNO = ?, ID_PROYECTO_RELACIONADO = ?"
-                            + "WHERE ID = ?");
-            ps.setString(1, cotizacion.getProveedor());
-            ps.setString(2, cotizacion.getHerramienta());
-            ps.setString(3, cotizacion.getMaterial());
-            ps.setString(4, cotizacion.getMaquinaria());
-            ps.setString(5, cotizacion.getServicioExterno());
-            ps.setInt(6, cotizacion.getIdProyectoRelacionado());
-            ps.setInt(7, cotizacion.getIdCotizacion());
+            String llamada = "{ call SP_MODIFICAR_COTIZACION(?,?,?,?,?,?,?) }";   
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setString(1, cotizacion.getProveedor());
+            cstmt.setString(2, cotizacion.getHerramienta());
+            cstmt.setString(3, cotizacion.getMaterial());
+            cstmt.setString(4, cotizacion.getMaquinaria());
+            cstmt.setString(5, cotizacion.getServicioExterno());
+            cstmt.setInt(6, cotizacion.getIdProyectoRelacionado());
+            cstmt.setInt(7, cotizacion.getIdCotizacion());
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Cotización modificada Correctamente en Sistema VIALIS.";
             }
 
@@ -150,32 +143,6 @@ public class CotizacionDAO {
         return listaCotizaciones;
     }
 
-    public String eliminarCotizacion(int codigoCotizacion) {
-
-        //Abrir Conexion
-        Connection acceso = conn.getCnn();
-        String respuesta = null;
-
-        try {
-
-            PreparedStatement ps
-                    = acceso.prepareStatement("UPDATE COTIZACION SET"
-                            + "ESTADO_COTIZACION = ? WHERE ID = ?");
-
-            ps.setInt(1, codigoCotizacion);
-
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
-                respuesta = "Cotización ANULADA Correctamente en Sistema VIALIS.";
-            }
-
-        } catch (SQLException ex) {
-            System.out.println("Error al INGRESAR Proyecto" + ex.getMessage());
-        }
-
-        return respuesta;
-    }
-
     public int idMaxCotizacion() {
 
         int idCotizacion = 0;
@@ -208,12 +175,12 @@ public class CotizacionDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("UPDATE COTIZACION SET ESTADO_COTIZACION = 'APROBADA' WHERE ID = ?");
-            ps.setInt(1, idCotizacion);
+            String llamada = "{ call SP_APROBAR_COTIZACION(?) }";   
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setInt(1, idCotizacion);
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Cotización APROBADA en Sistema VIALIS.";
             }
 
@@ -232,12 +199,12 @@ public class CotizacionDAO {
 
         try {
 
-            PreparedStatement ps
-                    = acceso.prepareStatement("UPDATE COTIZACION SET ESTADO_COTIZACION = 'RECHAZADA' WHERE ID = ?");
-            ps.setInt(1, idCotizacion);
+            String llamada = "{ call SP_RECHAZAR_COTIZACION(?) }";   
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            
+            cstmt.setInt(1, idCotizacion);
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
+            if (cstmt.executeUpdate() > 0) {
                 respuesta = "Cotización RECHAZADA en Sistema VIALIS.";
             }
 

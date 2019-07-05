@@ -171,15 +171,12 @@ public class ReunionDAO {
 
         try {
 
-            PreparedStatement ps = acceso.prepareStatement(""
-                    + "UPDATE REUNION SET "
-                    + "ESTADO_REUNION= 'ANULADA' "
-                    + " WHERE ID = ?");
-            ps.setInt(1, codigoReunion);
+            String llamada = "{ call SP_ELIMINAR_REUNION(?) }";
+            CallableStatement cstmt = acceso.prepareCall(llamada);
+            cstmt.setInt(1, codigoReunion);
 
-            int rs = ps.executeUpdate();
-            if (rs > 0) {
-                respuesta = "Reunión Anulada Correctamente en Sistema VIALIS";
+            if (cstmt.executeUpdate() > 0) {
+                respuesta = "Reunión ANULADA Correctamente en Sistema VIALIS";
             }
 
         } catch (SQLException ex) {

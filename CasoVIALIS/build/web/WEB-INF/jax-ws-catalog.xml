@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/ProveedorWS/ProveedoresWS?WSDL" uri="wsdl/localhost_8080/ProveedorWS/ProveedoresWS.wsdl"/>
     <system systemId="http://localhost:8080/ProveedorWS/ProveedoresWS?xsd=1" uri="wsdl/localhost_8080/ProveedorWS/ProveedoresWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/INSPECCION_TECNICA/InspeccionWS?WSDL" uri="wsdl/localhost_8080/INSPECCION_TECNICA/InspeccionWS.wsdl"/>
+    <system systemId="http://localhost:8080/INSPECCION_TECNICA/InspeccionWS?xsd=1" uri="wsdl/localhost_8080/INSPECCION_TECNICA/InspeccionWS.xsd_1.xsd"/>
 </catalog>

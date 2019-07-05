@@ -95,6 +95,9 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="/CasoVIALIS/inspeccionTecnica">Inspección Técnica</a>
+                </li>
+                <li>
                     <a href="/CasoVIALIS/sobreNosotros">Sobre Nosotros</a>
                 </li>
                 <li>
